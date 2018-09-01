@@ -1,0 +1,147 @@
+<div style="margin-right: auto;margin-left: auto;margin-top: 5vh;width: 90%;" ng-init="onload()">
+
+	<!-- header -->
+	<div>
+		<div class="uk-text-center">
+			<h1 ng-if="device == 'web'" style="color: gray;">ผลงาน</h1>
+			<h2 ng-if="device == 'device'" style="color: gray">ผลงาน</h2>
+			
+		</div>
+	</div>
+	<!-- content -->
+
+	<!-- partition -->
+	<div style="margin-top: 5vh;"> 
+		<div>
+			<div >
+				<h2  ng-if="device == 'web'" style="color: gray;line-height: 0px">ฉากกั้นห้อง</h2>
+				<h3  ng-if="device == 'device'" style="color: gray;line-height: 0px">ฉากกั้นห้อง</h3>
+				<hr style="border-top: 3px solid #ddd;">
+			</div>
+		</div>
+		<div >
+			<div class="uk-text-center" ng-if="loading.partition == true">
+				<i class="uk-icon-spinner uk-icon-spin uk-icon-large" style="color: cadetblue"></i>
+			</div>
+			<div data-uk-slider="{center:true}" class="uk-slidenav-position">
+			    <div class="uk-slider-container">
+			        <ul class="uk-slider uk-grid-medium" >
+			            <div ng-repeat="data in partitionList" on-last-repeat>
+			        		 <a href="{{ data.img }}" data-uk-lightbox="{group:'data'}" >
+				           		 <li  class="uk-text-center">
+				            		<img class="uk-padding-remove uk-thumbnail-small" ng-src="{{ data.img }}">
+				           	    
+				            	</li>
+				        	</a>
+			        	</div>
+			        </ul>	       
+			     <a href="" class="uk-slidenav uk-slidenav-previous uk-slidenav-contrast " data-uk-slider-item="previous"></a>
+	        	 <a href="" class="uk-slidenav uk-slidenav-next uk-slidenav-contrast " data-uk-slider-item="next"></a>	
+			        
+			    </div> 
+			</div>
+		</div>
+	</div>
+
+	<!-- curtain -->
+	<div style="margin-top: 10%;">
+		<div >
+			<div>
+				<h2  ng-if="device == 'web'" style="color: gray;line-height: 0px">ม่าน/มู่ลี้</h2>
+				<h3  ng-if="device == 'device'" style="color: gray;line-height: 0px">ม่าน/มู่ลี้</h3>
+				<hr style="border-top: 3px solid #ddd;">
+			</div>
+		</div>
+		<div>
+			<div class="uk-text-center" ng-if="loading.curtain == true">
+				<i class="uk-icon-spinner uk-icon-spin uk-icon-large" style="color: cadetblue"></i>
+			</div>
+			<div data-uk-slider="{center:true}" class="uk-slidenav-position">
+			    <div class="uk-slider-container">
+			        <ul class="uk-slider uk-grid-medium" >
+			        	<div ng-repeat="data in curtainList" on-last-repeat>
+			        		 <a href="{{ data.img }}" data-uk-lightbox="{group:'data'}" >
+				           		 <li  class="uk-text-center">
+				            		<img class="uk-padding-remove uk-thumbnail-small" ng-src="{{ data.img }}">
+				           	    
+				            	</li>
+				        	</a>
+			        	</div>
+			          
+			        </ul>
+	        	<a href="" class="uk-slidenav uk-slidenav-previous uk-slidenav-contrast " data-uk-slider-item="previous"></a>
+	        	<a href="" class="uk-slidenav uk-slidenav-next uk-slidenav-contrast " data-uk-slider-item="next"></a>		       
+			    </div>
+			</div>
+		</div>
+	</div>
+
+	<!-- tile -->
+	<div style="margin-top: 10%;">
+		<div >
+			<div >
+				<h2  ng-if="device == 'web'" style="color: gray;line-height: 0px">กระเบื้ยงยาง</h2>
+				<h3  ng-if="device == 'device'" style="color: gray;line-height: 0px">กระเบื้ยงยาง</h3>
+				<hr style="border-top: 3px solid #ddd;">
+			</div>
+		</div>
+		<div >
+			<div class="uk-text-center" ng-if="loading.tile == true">
+				<i class="uk-icon-spinner uk-icon-spin uk-icon-large" style="color: cadetblue"></i>
+			</div>
+			<div data-uk-slider="{center:true}" class="uk-slidenav-position">
+			    <div class="uk-slider-container">
+			        <ul class="uk-slider uk-grid-medium">
+			        	<div ng-repeat="data in tileList" on-last-repeat>
+			        		 <a href="{{ data.img }}" data-uk-lightbox="{group:'data'}" >
+				           		 <li  class="uk-text-center">
+				            		<img class="uk-padding-remove uk-thumbnail-small" ng-src="{{ data.img }}">
+				           	    
+				            	</li>
+				        	</a>
+			        	</div>
+			        </ul>
+			       	<a href="" class="uk-slidenav uk-slidenav-previous uk-slidenav-contrast " data-uk-slider-item="previous"></a>
+	        		<a href="" class="uk-slidenav uk-slidenav-next uk-slidenav-contrast " data-uk-slider-item="next"></a>	    
+			    </div>
+			  
+			</div>
+		</div>
+	</div>
+
+	<!-- wallpaper -->
+	<div style="margin-top: 10%;">
+		<div>
+			<div >
+				<h2  ng-if="device == 'web'" style="color: gray;line-height: 0px">วอลเปเปอร์</h2>
+				<h3  ng-if="device == 'device'" style="color: gray;line-height: 0px">วอลเปเปอร์</h3>
+				<hr style="border-top: 3px solid #ddd;">
+			</div>
+		</div>
+		<div >
+			<div class="uk-text-center" ng-if="loading.wall == true">
+				<i class="uk-icon-spinner uk-icon-spin uk-icon-large" style="color: cadetblue"></i>
+			</div>
+			<div data-uk-slider="{center:true}" class="uk-slidenav-position">
+			    <div class="uk-slider-container">
+			        <ul class="uk-slider uk-grid-medium">
+			        	<div ng-repeat="data in wallList" on-last-repeat>
+			        		 <a href="{{ data.img }}" data-uk-lightbox="{group:'data'}" >
+				           		 <li  class="uk-text-center">
+				            		<img class="uk-padding-remove uk-thumbnail-small" ng-src="{{ data.img }}">
+				           	    
+				            	</li>
+				        	</a>
+			        	</div>
+			        </ul>
+			       	<a href="" class="uk-slidenav uk-slidenav-previous uk-slidenav-contrast " data-uk-slider-item="previous"></a>
+	        		<a href="" class="uk-slidenav uk-slidenav-next uk-slidenav-contrast " data-uk-slider-item="next"></a>	    
+			    </div>
+			  
+			</div>
+		</div>
+	</div>
+	
+
+
+</div>

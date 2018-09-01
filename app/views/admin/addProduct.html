@@ -1,0 +1,90 @@
+<div ng-controller="addProductCtrl">
+		<!-- <h1>{{ titlePage }}</h1> -->
+		<!-- <input type="file" name="file" ng-model="file" onchange="angular.element(this).scope().uploadFile(this.files)"> -->
+
+		<!-- <input type="file" fileread="uploadme" />
+	    <img src="{{uploadme}}" width="100" height="50" alt="Image preview...">
+	    <br/>
+	    <p>
+	      Image dataURI:
+	      <pre>{{uploadme}}</pre>
+	    </p>
+	    <br/>
+	    <button ng-click="uploadImage()">upload image</button> -->
+	    <div ng-init="onload()">
+	    	 <form name="add_product" class="uk-form form-input-with-auto">
+	            <fieldset data-uk-margin>
+	                <legend class="uk-text-muted">Add Product</legend>
+	                <div>
+	                	<div class="uk-form-row">
+	                    	 <div class="uk-grid">
+		                		<div class="uk-width-1-4">
+		                			<label>เลือกประเภท</label>
+	                			 	 <select ng-model="product.id_type" ng-change="selectType(product.id_type)">
+								     	 <option ng-repeat="data in typeProduct" ng-value="data.id">{{data.name}}</option>
+								    </select>
+		                		</div>
+		                		<div class="uk-width-1-4">
+		                			<label>ประเภทย่อย</label>
+								    <select ng-model="product.id_sub_type">
+								         <option ng-repeat="data in subType" ng-value="data.id_sub">{{data.name}}</option>
+								    </select>
+									
+		                		</div>
+		                	</div>
+	                    </div>
+	                	
+	                	<div class="uk-grid uk-grid-divider uk-margin-top">
+	                		<div class="uk-width-1-2">
+	                				<div class="uk-form-row">
+				                    	 <h4>ชื่อสินค้า</h4>
+				                    	 <input type="text" placeholder="ชื่อสินค้า" class="uk-form-large" ng-model="product.product_name" >
+				                    </div>
+				                    <div class="uk-form-row ">
+				                    	<h4>รหัสสินค้า</h4>
+				                    	<input type="text" placeholder="รหัส" class="uk-form-large" ng-model="product.product_key">
+				                    </div>
+				                    <div class="uk-form-row ">
+				                    	 <h4>รายละเอียดสินค้า</h4>
+				                    	 <textarea type="text" placeholder="รายละเอียด" class="uk-form-large " rows="5" ng-model="product.product_detail"></textarea>
+				                    </div>
+				                    <div class="uk-form-row ">
+				                    	 <h4>ราคา</h4>
+				                    	 <input type="number" placeholder="ราคา" class="uk-form-large " ng-model="product.price">
+				                    </div>
+				                     <div class="uk-form-row">
+				                    	 <h4>ราคา sale </h4>
+				                    	 <input type="number" placeholder="sale" class="uk-form-large " ng-model="product.price_sale"/>
+				                    </div>			                   
+	                		</div>
+	                		<div class="uk-width-1-2">
+	                				<div class="uk-form-row">
+				                    	 <h4>img1</h4>
+				                    	<input type="file" fileread ng-model="img1"/>
+				                    	
+				                    </div>
+				                    <div class="uk-form-row ">
+				                    	<h4>img2</h4>
+				                    	 <input type="file" fileread ng-model="img2" />
+				                    	
+				                    </div>
+				                    <div class="uk-form-row ">
+				                    	 <h4>img3</h4>
+				                    	<input type="file" fileread ng-model="img3" />
+				                    	
+				                    </div>
+				                     <div class="uk-form-row ">
+				                    	 <h4>img4</h4>
+				                    	<input type="file" fileread ng-model="img4"/>
+				                    	
+				                    </div>
+	                		</div>
+	                	</div>
+	                </div>
+	            </fieldset>
+	            <div class="uk-button uk-button-primary uk-margin-top" ng-click="add()">เพิ่มสินค้า</div>
+	        </form>
+	    </div>
+	   
+</div>
+	

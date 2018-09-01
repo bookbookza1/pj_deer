@@ -1,0 +1,16 @@
+<div ng-controller="covertDataURLCtrl">
+		<input type="file" fileread ng-model="dataURL"/><br>
+	    <img ng-src="{{dataURL}}" width="200"  alt="Image preview...">
+	    <br/>
+	    <p>
+	      Image dataURI:
+	      <pre>{{dataURL}}</pre>
+	    </p>
+	    <div class="uk-button uk-button-primary" ng-click="setBlobURL(dataURL)">convert to BlobURL</div>
+	      <p>
+	      show blob URL:
+	      <pre>{{imgBlobURL}}</pre>
+	    </p>
+	    <br/>
+	    <!-- <button ng-click="uploadImage()">upload image</button> -->
+</div>

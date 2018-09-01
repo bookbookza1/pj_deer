@@ -1,0 +1,793 @@
+<div ng-init="onload()" >
+	<!-- menu -->
+	<div> 
+		<div style="padding: 6px;background-color: #f7f7f7">
+			<div class="uk-grid uk-grid-collapse uk-text-center uk-text-bold">
+				<div class="uk-width-1-5 uk-width-medium-1-6 uk-width-large-1-6" ng-repeat="data in menu">
+					<div class="product-menu" ng-class="{'product-menu-active':checkOpen == data.id}">
+		    			<a ng-click="selectProduct(data)">{{ data.name }}</a>
+		    		</div>
+				</div>
+		    		
+			  </div>
+		</div>
+		<div style="padding: 6px;background-color: black;color: white;" ng-if="subOpen == true">
+		  	<div class="uk-grid uk-grid-collapse uk-text-center set-with-menu-sub-product uk-animation-fade">
+				<div class="uk-width-1-3 uk-width-large-1-4  uk-width-medium-1-4" ng-repeat="data in subMenu"  on-last-repeat>
+					<div class="product-menu-sub uk-animation-fade">
+		    			<a ng-click="selectProductSub(data)">{{ data.name }}</a>
+		    		</div>
+				</div>
+		  	</div>
+
+		</div>
+	</div>
+	
+	<!-- Header Name -->
+	<div class="uk-text-center uk-text-bold uk-animation-fade" style="margin-top: 2%;"> 
+		<h1 ng-if="device == 'web'" class="uk-animation-fade" style="color: #c0bbbb;font-size: 38px">{{ nameProduct }} </h1>
+		<h2 ng-if="device == 'device'" class="uk-margin-top uk-animation-fade" style="color: #c0bbbb;">{{ nameProduct  }} </h2>
+	</div>
+
+	<!-- Recommended -->
+	<div ng-if="setParamsSplitMenu == '0' " style="margin-top: 2%;width: 90%;margin-left: auto;margin-right: auto;">
+		<div class="uk-text-center" ng-if="loadingModeWall == true">
+			<i class="uk-icon-spinner uk-icon-spin uk-icon-large" style="color: cadetblue"></i>
+		</div>
+		<h4 class="uk-text-bold" >กระเบื้ยงยาง</h4>
+		<div  class="uk-grid uk-grid-collapse " style="width: 100%;"  ng-if="loadingModeWall == false">
+			<div class="uk-width-large-1-5 uk-width-medium-1-4 uk-width-1-3 uk-text-center uk-margin-bottom" ng-repeat="data in productList" on-last-repeat>
+				<div class="uk-thumbnail uk-padding-remove" style="border: none;">
+		    		<a ui-sref="layout.product_detail({data:data})">
+		    			<figure class="uk-overlay uk-overlay-hover">
+		    				<img  style="border-radius: 4px;width: 90%;"  ng-src="{{data.img1}}"  />
+		    				<img  style="border-radius: 4px;width: 90%;margin-left: 5%;" class="uk-overlay-fade uk-overlay-image uk-overlay-panel"  ng-src="{{data.img2}}"  />
+		    				<!-- <figcaption class="uk-overlay-panel uk-overlay-background uk-overlay-bottom uk-overlay-slide-bottom">คลิก</figcaption> -->
+		    			</figure>
+		    		</a>
+		             <div class="uk-thumbnail-caption uk-text-center set-text-device" >
+		             	<span >{{ data.type }}</span>
+						<span >{{ data.product_name }}</span><br>
+						<span class="uk-text-small" style="color: #ff5b5b">NO.{{ data.product_key }} </span>
+						<!-- <br> -->
+						
+					</div>
+				</div>	
+			</div>	
+		</div>
+		<hr>
+		<h4 class="uk-text-bold">วอลเปเปอร์</h4>
+		<div class="uk-grid" style="padding-left: 16px;padding-right: 16px" ng-if="loadingModeWall == false">	
+			<div class="uk-width-1-4 uk-width-medium-1-4 uk-width-large-1-6 uk-margin-bottom "  ng-repeat="data in recommendedWallList">
+				<div class="uk-thumbnail uk-padding-remove shadow uk-animation-fade" style="border: none;">
+					<a href="{{ data.img1 }}" data-uk-lightbox="{group:'data'}">
+						<figure class="uk-overlay uk-overlay-hover fix-overlay">
+		    				<img  class="uk-overlay-scale"  ng-src="{{ data.img1 }}">
+		    				<figcaption class="uk-overlay-panel uk-overlay-background uk-overlay-bottom uk-overlay-slide-bottom uk-text-center">คลิก</figcaption>
+		    			</figure>
+					</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Tile -->
+	<div style="margin-top: 2%;width: 90%;margin-left: auto;margin-right: auto;" ng-if="setParamsSplitMenu == '3'">
+		<div class="uk-text-center" ng-if="loadingModeWall == true">
+			<i class="uk-icon-spinner uk-icon-spin uk-icon-large" style="color: cadetblue"></i>
+		</div>
+		<h4 class="uk-text-bold" ng-if="id_sub == '0'">Smartmatt</h4>
+		<div>
+			<div  class="uk-grid uk-grid-collapse" style="width: 100%;" ng-if="loadingModeWall == false">
+				<div class="uk-width-large-1-5 uk-width-medium-1-4 uk-width-1-3 uk-text-center uk-margin-bottom" dir-paginate="data in productList | itemsPerPage: numPage.tile" pagination-id="productList-page"  on-last-repeat>
+					<div class="uk-thumbnail uk-padding-remove uk-animation-fade" style="border: none;">
+			    		<a ui-sref="layout.product_detail({data:data})">
+			    			<figure class="uk-overlay uk-overlay-hover">
+			    				<img  style="border-radius: 4px;width: 90%;"  ng-src="{{data.img1}}"  />
+			    				<img  style="border-radius: 4px;width: 90%;margin-left: 5%;" class="uk-overlay-fade uk-overlay-image uk-overlay-panel"  ng-src="{{data.img2}}"  />
+			    			
+			    			</figure>
+			    		</a>
+			             <div class="uk-thumbnail-caption uk-text-center set-text-device" >
+			             	<!-- <div ng-if="$index < 6" class="uk-badge" style="background-color: black">NEW</div> -->
+			             	<span >{{ data.type }}</span>
+							<span >{{ data.product_name }}</span><br>
+							<span class="uk-text-muted uk-text-small">NO.{{ data.product_key }} </span>
+							<!-- <br> -->
+							
+						</div>
+					</div>	
+				</div>	
+			</div>
+			<dir-pagination-controls  ng-if="loadingModeWall == false" pagination-id="productList-page" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" ></dir-pagination-controls>
+		</div>
+		<!-- <hr ng-if="id_sub == '0' ">
+		<h4 class="uk-text-bold" ng-if="id_sub == '0'">กระเบื้ยงปูนกาว</h4>
+		<div ng-if="id_sub == '0'   || id_sub == '3-3' ">
+			<div  class="uk-grid" ng-if="loadingModeWall == false">
+				<div class="uk-width-large-1-5 uk-width-medium-1-4 uk-width-1-3 uk-text-center uk-margin-bottom" dir-paginate="data in tileGuleList | itemsPerPage: numPage.tile" pagination-id="tileGule-page"  on-last-repeat>
+					<div class="uk-thumbnail uk-padding-remove shadow uk-animation-fade" style="border: none;">
+						<a href="{{ data.img1 }}" data-uk-lightbox="{group:'data'}">
+							<figure class="uk-overlay uk-overlay-hover fix-overlay">
+			    				<img  class="uk-overlay-scale"  ng-src="{{ data.img1 }}">
+			    				<figcaption class="uk-overlay-panel uk-overlay-background uk-overlay-bottom uk-overlay-slide-bottom uk-text-center">คลิก</figcaption>
+			    			</figure>
+						</a>
+					</div>
+				</div>	
+			</div>
+			<dir-pagination-controls  ng-if="loadingModeWall == false" pagination-id="tileGule-page" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" ></dir-pagination-controls>
+		</div> -->
+		
+	</div>
+
+	<!-- Tile 2-->
+	<div style="margin-top: 2%;width: 90%;margin-left: auto;margin-right: auto;" ng-if="setParamsSplitMenu == '11'">
+		<div class="uk-text-center" ng-if="loadingModeWall == true">
+			<i class="uk-icon-spinner uk-icon-spin uk-icon-large" style="color: cadetblue"></i>
+		</div>
+
+		<h4 class="uk-text-bold" ng-if="id_sub == '0'">กระเบื้ยงปูนกาว</h4>
+		<div ng-if="id_sub == '0'">
+			<div  class="uk-grid" ng-if="loadingModeWall == false">
+				<div class="uk-width-large-1-5 uk-width-medium-1-4 uk-width-1-3 uk-text-center uk-margin-bottom" dir-paginate="data in productList | itemsPerPage: numPage.tile" pagination-id="tileGule-page"  on-last-repeat>
+					<div class="uk-thumbnail uk-padding-remove shadow uk-animation-fade" style="border: none;">
+						<a href="{{ data.img1 }}" data-uk-lightbox="{group:'data'}">
+							<figure class="uk-overlay uk-overlay-hover fix-overlay">
+			    				<img  class="uk-overlay-scale"  ng-src="{{ data.img1 }}">
+			    				<figcaption class="uk-overlay-panel uk-overlay-background uk-overlay-bottom uk-overlay-slide-bottom uk-text-center">คลิก</figcaption>
+			    			</figure>
+						</a>
+					</div>
+				</div>	
+			</div>
+			<dir-pagination-controls  ng-if="loadingModeWall == false" pagination-id="tileGule-page" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" ></dir-pagination-controls>
+		</div>
+		
+	</div>
+
+	<!-- มุ้งลวด -->
+	<div ng-if="setParamsSplitMenu == '4'">
+		<div class="product-set-for-article" >
+			<h4 class="uk-text-bold" ng-if="id_sub == '0'">แบบจีบ</h4>
+			<!-- แบบจีบ -->
+			<div ng-if="id_sub == 0   || id_sub == '4-1'">
+				<div class="uk-grid uk-grid-collapse uk-text-center">
+					<div class="uk-width-1-1 uk-text-center" style="padding:16px">
+						<img  src="app/img/product/aluminum_insect_screens/1-1.jpg" alt="" >
+					</div>
+				</div>
+				
+				<div class="text-indent">เหมาะสำหรับห้องที่ต้องการความหรู เนื่องจากตัวมุ้งลวดมีการจับจีบอย่างสวยงาม ตัวมุ้งลวดมีความละเอียดทำให้ดูสวยงามไม่เหมือนมุ้งลวด แบบเดิมๆ ทั่วไปทางเคซีได้เลือกมุ้งลวดสีดำเพื่อให้เข้าได้ง่ายกับทุกการตกแต่ง โดยกรอบมีให้เลือกถึง 2 สี คือ สีขาว และสีน้ำตาลเพื่อให้เข้ากับ ความต้องการที่หลากหลายมุ้งลวดรุ่นนี้สามารถติดตั้งได้ทั้ง 2 แบบไม่ว่าจะเป็น แบบติดตั้งบนวงกบทับหน้าต่างหรือแบบติดในวงกบเพื่อซ่อนไว้ ด้านในให้ดูสวยงามยิ่งขึ้น ใช้งานง่ายขึ้น สามารถเปิด ปิดได้อิสระตามความต้องการ อีกทั้งยังสามารถเปิดไว้เพียงครึ่งเดียว หรือหยุดให้ที่ๆต้องการโดยไม่ต้องดึงให้สุด เหมือนมุ้งลวดม้วนเก็บทั่วไป <br>
+         		<span class="uk-text-muted">*สามารถทำความกว้าง x สูง ได้มากถึง 2.10 x 2.30 m. </span>
+				</div> 
+				
+			</div>
+			<hr ng-if="id_sub == 0">
+			<h4 class="uk-text-bold" ng-if="id_sub == '0'">แบบสปริงล๊อค</h4>
+			<!-- แบบสปริงล๊อค -->
+			<div ng-if="id_sub == 0 || id_sub == '4-2'" >
+				<div class="uk-grid uk-grid-collapse uk-text-center">
+					<div class="uk-width-1-1" style="padding: 16px">
+						<img  src="app/img/product/aluminum_insect_screens/2-1.jpg" alt="" >
+					</div>
+				</div>
+				
+				<div class="text-indent"> 
+					  เหมาะสำหรับลูกค้าที่ต้องการความสะดวกสบาย เนื่องจากใช้ได้ง่าย ด้วยระบบสปริงล๊อค เพียงกระตุกลงเบาๆ มุ้งลวดก็จะม้วนเก็บได้ อัตโนมัติเคซีได้เพิ่มตัวลดความเร็วเพื่อทำให้การม้วนเก็บมุ้งลวดของคุณนุ่มนวลยิ่งขึ้น นอกจะสามารถกันยุงได้เป็นอย่างดีแล้วยังสามารถช่วยกันแดดได้อีกด้วย เนื่องจากมีการเคลือบยูวีป้องกันทำให้สามารถช่วยลดความร้อนในห้อง แและระบายอากาศได้เป็นอย่างดี จึงเป็นสินค้าที่เหมาะกับประเทศไทยเป็นอย่างยิ่ง <br>
+         				<span class="uk-text-muted">*สามารถติดตั้งได้แบบบนวงกบเท่านั้นโดยมีกรอบให้เลือก 2 สีคือ สีขาวและสีน้ำตาล สำหรับมุ้งลวดมี 2 สี คือ สีดำ และสีเทา</span><br> 
+         				<span class="uk-text-muted">*สามารถทำความกว้าง x สูง ได้มากถึง 2.50 x 2.30 m.  </span>
+				</div> 
+				
+			</div>
+			<!-- ม้วนเก็บด้านข้าง -->
+			<hr ng-if="id_sub == 0" >
+			<h4 class="uk-text-bold" ng-if="id_sub == '0'">ม้วนเก็บด้านข้าง</h4>
+			<div ng-if="id_sub == 0 || id_sub == '4-3'" >
+				<div class="uk-grid uk-grid-collapse uk-text-center">
+					<div class="uk-width-1-1" style="padding: 16px">
+						<img  src="app/img/product/aluminum_insect_screens/3-1.jpg" alt="" >
+					</div>
+				</div>
+				
+				<div class="text-indent"> 
+					    เหมาะสำหรับทำประตู หรือ หน้าต่าง ใช้งานง่ายสามารถเลือกได้ทั้งปิดซ้าย ขวา หรือแม้แต่แยกกลาง มีติดตั้งระบบลดความเร็วเพื่อการ ใช้งานที่ลื่นมากขึ้น มุ้งลวดม้วนเก็บนอกจากจะสวยงามแล้ว ยังใช้ได้สะดวก เวลาเปิด ปิดไม่จำเป็นต้องเก็บม่าน หรือมู่ลี่ก่อน 
+         				มีสีให้เลือกถึง 2 สี คือ สีน้ำตาล และสีขาว สำหรับมุ้งลวดสามารถเลือกได้ 2 สี คือสีเทา และ สีดำ <br>
+         				<span class="uk-text-muted">*รุ่นเก็บข้าง 1.40 x 2.10 m. </span><br> 
+         				<span class="uk-text-muted">*รุ่นแยกกลาง 2.80 x 2.10 m.   </span>
+				</div> 
+			</div>
+		</div>
+	</div>
+
+	<!-- partition -->
+	<div ng-if="setParamsSplitMenu == '2'">
+		<div class="uk-panel uk-panel-box uk-panel-box-secondary set-product-partition " >
+			<h4 class="uk-text-bold" ng-if="id_sub == '0'">ฉากกั้นห้องแบบทึบ</h4>
+			<!-- partition1 -->
+			<div ng-if="id_sub == 0   || id_sub == '2-1'">
+				<div class="uk-grid uk-grid-collapse uk-text-center">
+					<div class="uk-width-1-1">
+						<img  class="shadow img-for-partition-header" src="app/img/product/partition/partition_dense/head1.jpg" alt="" >
+					</div>
+				</div>
+				<!-- <div class="uk-text-center" style="margin-top: 5%;"><h2>ฉากกั้นห้องแบบทึบ</h2></div> -->
+				<div class="uk-text-large" style="margin-top: 5%;"><span class="uk-text-bold">ฉากกั้นห้องแบบทึบ </span>เป็นฉากรุ่นมาตรฐานใบฉากมีขนาด 8.5 ซม. ผลิตจากพีวีซี(pvc) มีลักษณะทึบไม่มีช่องแสง สามารถใช้แบ่งห้องเป็นสัดส่วน หรือ ใช้ลดขนาดห้องเพื่อติดแอร์ช่วยลดการทำงานของแอร์ได้ เป็นฉากรุ่นที่ได้รับความนิยมมากที่สุดเนื่องจากมีราคาไม่แพงติดตั้งไม่ยาก มีสีให้เลือก5สี 
+				</div> 
+				<div class="uk-grid uk-margin-top uk-margin-bottom" >
+					<div class="uk-width-1-5" >
+						<img  class="shadow" src="app/img/product/partition/partition_dense/04.jpg" alt="">
+					</div>
+					<div class="uk-width-1-5" >
+						<img class="shadow" src="app/img/product/partition/partition_dense/05.jpg" alt="">
+					</div>
+					<div class="uk-width-1-5" >
+						<img class="shadow" src="app/img/product/partition/partition_dense/06.jpg" alt="">
+					</div>
+					<div class="uk-width-1-5" >
+						<img class="shadow" src="app/img/product/partition/partition_dense/08.jpg" alt="">
+					</div>
+					<div class="uk-width-1-5" >
+						<img class="shadow" src="app/img/product/partition/partition_dense/14.jpg" alt="">
+					</div>
+				</div>
+			</div>
+			<hr ng-if="id_sub == 0">
+			<h4 class="uk-text-bold" ng-if="id_sub == '0'">ฉากกั้นห้องแบบญี่ปุ่น</h4>
+			<!-- partition2 -->
+			<div ng-if="id_sub == 0 || id_sub == '2-3'" >
+				<div class="uk-grid uk-grid-collapse uk-text-center">
+					<div class="uk-width-1-1">
+						<img  class="shadow img-for-partition-header" src="app/img/product/partition/partition_japan/header.jpg" alt="" >
+					</div>
+				</div>
+				<!-- div class="uk-text-center" style="margin-top: 5%;"><h2>ฉากกั้นห้องแบบญี่ปุ่น</h2></div> -->
+				<div class="uk-text-large" style="margin-top: 5%;"><span class="uk-text-bold"> ฉากกั้นห้องแบบญี่ปุ่น </span> หรือฉากกั้นห้องสไตล์ญี่ปุ่น ผลิตจากพีวีซี โครงสร้างและน้ำหนักจะมากกว่าฉากฉากแบบทึบและแบบเจาะช่องแสง โดยตัวใบของฉากญี่ปุ่นจะมีขนาด 12.5 ซม. ข้อพับของแต่ละใบผลิตจากพีวีซีชนิดเดียวกับตัวใบ ช่องแสงมีให้เลือก2แบบคือ แบบใส และ ลายน้ำไหล สามารถใส่ช่องแสงให้เต็มทั้งตัวฉากได้ ใช้ลดขนาดห้องเพื่อลดการทำงานของเครื่องปรับอากาศได้ 
+				</div> 
+				<div class="uk-grid uk-grid-collapse uk-text-center">
+					<div class="uk-width-1-3" style="padding: 16px">
+						<img  class="shadow " src="app/img/product/partition/partition_japan/ex1.jpg"  alt="" >
+					</div>
+					<div class="uk-width-1-3" style="padding: 16px">
+						<img  class="shadow " src="app/img/product/partition/partition_japan/ex2.jpg"  alt="" >
+					</div>
+					<div class="uk-width-1-3" style="padding: 16px">
+						<img  class="shadow " src="app/img/product/partition/partition_japan/ex3.jpg"  alt="" >
+					</div>
+				</div>
+			</div>
+			<!-- ฉากยูโร -->
+			<hr ng-if="id_sub == 0" style="margin-top: 5vh;">
+			<h4 class="uk-text-bold" ng-if="id_sub == '0'">ฉากกั้นห้องยูโร</h4>
+			<div ng-if="id_sub == 0 || id_sub == '2-2'" ><!-- partition2 -->
+				<div class="uk-grid uk-grid-collapse uk-text-center">
+					<div class="uk-width-1-1">
+						<img  class="shadow img-for-partition-header" src="app/img/product/partition/partition_uro/header.jpg" alt="" >
+					</div>
+				</div>
+				<!-- div class="uk-text-center" style="margin-top: 5%;"><h2>ฉากกั้นห้องแบบญี่ปุ่น</h2></div> -->
+				<div class="uk-text-large" style="margin-top: 5%;"> 
+					ฉากกั้นห้องรุ่นใหม่ล่าสุด <span class="uk-text-bold">"ยูโรสไตล์"</span><br>
+					เกรดซูเปอร์พรีเมี่ยม ความกว้างแผ่น 12.3 ซม. <br>
+					ผลิตด้วยเครื่องจักรทันสมัย มีความแข็งแรงตามมาตรฐานยุโรป <br>
+					<span class="uk-text-bold">ฉากยูโรสไตล์มี 2 รุ่นด้วยกัน</span> <br>
+					1) รุ่น LA รุ่นกระจกยาวเต็มใบ สามารถใส่กระจกใสได้สูงสุดถึง 240 ซม. <br>
+					2) รุ่น LB รุ่นช่องกระจก มีความสูงของช่องกระจก 50 ซม. / ช่อง <br>
+					<span class="uk-text-muted">*กระจกสามารถเลือกได้ 2 รูปแบบ [ กระจกใส / กระจฝ้า ]</span> <br>
+					<span class="uk-text-muted">*สามารถผลิตทำความสูงได้สูงสุด 3.50 เมตร</span>  <br>
+				</div> 
+				<div class="uk-grid uk-grid-collapse uk-text-center">
+					<div class="uk-width-1-1 uk-width-medium-1-2 uk-width-large1-2" style="padding: 16px">
+						<img  class="shadow img-for-partition-header" src="app/img/product/partition/partition_uro/ex1.jpg" alt="" >
+					</div>
+					<div class="uk-width-1-1 uk-width-medium-1-2 uk-width-large1-2" style="padding: 16px">
+						<img  class="shadow img-for-partition-header" src="app/img/product/partition/partition_uro/ex2.jpg" alt="" >
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Wallerpaper -->
+	<div ng-if="setParamsSplitMenu == '1' " >
+		<div style="width: 80%;margin-left: auto;margin-right: auto;"  >
+			<!-- detail wallpaper -->
+			<div class="uk-grid">
+				<div class="uk-width-1-1" ng-if="device == 'web'" style="margin-top: 30px;">
+					<figure class="uk-overlay">
+					    <img src="app/img/abstract-architecture-art-221491.jpg"  alt="">
+					    <figcaption class="uk-overlay-panel uk-overlay-background uk-overlay-bottom">
+					    	<h3 >
+					    		การเลือกวอลเปเปอร์เปรียบเสมือนการเลือกเสื้อผ้าให้บ้าน ซึ่งเป็นสิ่งที่สะท้อนบุคคลิกของคุณ
+					    	</h3>
+					    	<div style="font-size: 16px;text-indent: 2em;">
+					    		กรณีลูกค้าเป็นนักออกแบบ หรือเจ้าของโครงการที่มีลวดลายที่ต้องการอยู่แล้ว เราสามารถผลิตแบบดังกล่าวให้ออกมาเป็นชิ้นงานวอลเปเปอร์ติดผนังได้   หร้อมผ่านกระบวนการผลิตคุณภาพมาตราฐานอุตสาหกรรมที่คุณวางใจได้
+					    	</div>
+					    </figcaption>
+					</figure>
+				</div>
+				<div class="uk-width-1-1" ng-if="device == 'device'">
+					    	<h3 >
+					    		การเลือกวอลเปเปอร์เปรียบเสมือนการเลือกเสื้อผ้าให้บ้าน ซึ่งเป็นสิ่งที่สะท้อนบุคคลิกของคุณ
+					    	</h3>
+					    	<div style="font-size: 16px;text-indent: 2em;">
+					    		กรณีลูกค้าเป็นนักออกแบบ หรือเจ้าของโครงการที่มีลวดลายที่ต้องการอยู่แล้ว เราสามารถผลิตแบบดังกล่าวให้ออกมาเป็นชิ้นงานวอลเปเปอร์ติดผนังได้   หร้อมผ่านกระบวนการผลิตคุณภาพมาตราฐานอุตสาหกรรมที่คุณวางใจได้
+					    	</div>
+				</div>
+			</div>
+			<div class="uk-text-center uk-margin-top ">
+				<div class="uk-text-bold" ng-class="{'uk-text-large' : device == 'web'}">ชมลายตัวอย่าง</div>
+				<i class="material-icons" style="color: pink">arrow_downward</i>
+			</div>
+
+			<div><!-- wallpaper product -->
+				
+
+				<div class="uk-text-center uk-margin-bottom" >
+					<div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}" >
+	                    <button class="uk-button" >เลือกประเภท <i class="uk-icon-caret-down"></i></button>
+	                    <span class="uk-text-small uk-text-muted">คลิก</span>
+	                    <div class="uk-dropdown uk-dropdown-scrollable uk-dropdown-bottom uk-dropdown-close">
+	                        <ul class="uk-nav uk-nav-dropdown">
+	                            <li ng-repeat="data in modeWallpaper " on-last-repeat><a ng-click="getWallpaperByMode(data.id_category,data.name)">{{ data.name }}</a></li>
+	                        </ul>
+	                    </div>
+	                </div>
+				</div>
+				<div class="uk-text-muted" style="margin-left: 16px;" ng-if="id_sub == 0 ||  id_sub == '1-1'">
+					วอลล์ม้วน : เป็นกระดาษผสมไวนิล กันน้ำได้ แบบหมาดๆ <br> ขนาด  : 0.50*10m / 1 ม้วน
+				</div>	
+				<div class="uk-accordion-content">
+					<h3 class="uk-text-bold" style="color: #ff7a50">{{ headerModeWallpaper }}</h3>	
+					<hr>
+					<div class="uk-text-center" ng-if="loadingModeWall == true">
+						<i class="uk-icon-spinner uk-icon-spin uk-icon-large" style="color: cadetblue"></i>
+					</div>
+					<div class="uk-grid" style="padding-left: 16px;padding-right: 16px" ng-if="loadingModeWall == false">
+						
+						<div class="uk-width-1-4 uk-width-medium-1-4 uk-width-large-1-6 uk-margin-bottom "  dir-paginate="dataWallpaper in productList | itemsPerPage: numPage.wall" pagination-id="wallpaperList-page">
+							<div class="uk-thumbnail uk-padding-remove shadow uk-animation-fade" style="border: none;">
+								<a href="{{ dataWallpaper.img1 }}" data-uk-lightbox="{group:'dataWallpaper'}">
+									<figure class="uk-overlay uk-overlay-hover fix-overlay">
+					    				<img  class="uk-overlay-scale"  ng-src="{{ dataWallpaper.img1 }}">
+					    				<figcaption class="uk-overlay-panel uk-overlay-background uk-overlay-bottom uk-overlay-slide-bottom uk-text-center">คลิก</figcaption>
+					    			</figure>
+								</a>
+							</div>
+						</div>
+						
+					</div>
+					<dir-pagination-controls  ng-if="loadingModeWall == false" pagination-id="wallpaperList-page" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" ></dir-pagination-controls>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ผ้าม่าน -->
+	<div ng-if="setParamsSplitMenu == '5' " >
+		<div class="product-set-for-article" >
+			<!-- หลุยส์ -->
+			<div ng-if="id_sub == '0' || id_sub == '5-1'">
+				<h4 class="uk-text-bold" ng-if="id_sub == '0'">หลุยส์</h4>
+				<div class="text-indent">
+					 เป็นผ้าม่านรูปแบบคลาสสิกรูปแบบหนึ่ง ที่มีมาตั้งแต่สมัยโบราณ ปกติผ้าม่านแบบหลุยส์จะเป็นที่นิยมมากในยุโรปมาก่อนและจะทำในสถานที่ที่ต้องการความหรูหรา รูปทรงของตัวผ้าม่านหลุยส์จะเป็นโค้งๆผ้ามีลักษณะทรงโค้งหลายๆช่อเพื่อปิดรางม่าน ตัวม่านจะมีรูปแบบที่หลากหลายตามดีไซน์ที่แตกต่างกันของแต่ละร้านและแตกต่างกันตามยุคสมัย ผ้าม่านหลุยส์จะมีหลายรูปแบบ เช่น หลุยส์ซ้อน  หลุยส์ปีกผีเสื้อ หลุยส์ลูกเดียว หลุยส์แบบมีหางปลาหน้า หางปลาหลัง หลุยส์พาดลาง ผ้าม่านหลุยส์แต่ละแบบมีรูปทรงที่แตกต่างกันแสดงถึงวิธีการออกแบบของผู้ออกแบบ และความสามารถของช่างโดยการทำให้ผ้าม่านออกมาสวยและเข้าทรงกับหน้าต่างได้เป็นอย่างดี ผ้าม่านหลุยส์บางครั้งใช้กับหน้าต่างทรงโค้ง หน้าต่างที่มีโถงสูงหรือหน้าต่างที่มีช่องแสงด้านบน ซึ่งจะมีความแตกต่างกันกับหน้าต่างทั่วๆไป ม่านหลุยส์นอกจากจะมีความสวยงาม ความคลาสสิกในตัวแล้ว ยังช่วยให้หน้าต่างที่ติดตั้งม่านแบบอื่นได้ยากหรือไม่สวย สามารถติดตั้งผ้าม่านที่มีความสวยงามและหรูหราอย่างม่านหลุยส์ได้
+					 ประโยชน์ของม่านหลุยส์
+				</div>
+				<div class="text-indent" class="uk-margin-top">
+     				 ผ้าม่านหลุยส์เหมาะอย่างยิ่งในการตกแต่งสไตล์คลาสสิก และสไตล์ Luxury ถ้าจะแต่งบ้าน2 สไตล์นี้แล้วม่านหลุยส์จะเป็นคำตอบที่ดีมาก เนื่องจากผ้าม่านหลุยส์มีรูปทรงที่โค้งมีชายล่างที่สามารถประดับลูกปัดให้มีความหรูหรา นอกจากนี้ยังมีการประดับอุปกรณ์เอ็กแซสเซอรี่ต่างๆไม่ว่าจะเป็นสายรวบม่านหรือเป็นตะขอม่านที่มีความหรูหราให้เข้ากับการตกแต่งบ้านแบบคลาสสิก และแบบ Luxury ได้เป็นอย่าง
+				</div >
+				<div class="uk-text-center">
+					<img  style="padding:16px" src="app/img/product/curtain/louis/1.jpg">
+				</div>
+				<div class="uk-text-bold">วิธีการดูแลรักษา</div>
+				<div class="text-indent">
+   					 ม่านหลุยส์เป็นผ้าม่านที่ซักค่อนข้างยากเนื่องจากตัวผ้าที่จับทรงโค้งแล้วจะไม่สามารถถอดมาซักเองได้ วิธีการซักที่ดีที่สุดของม่านหลุยส์เป็นวิธีการซักแห้งหรือการทำความสะอาดโดยการดูดฝุ่นต่างๆออก แต่ถ้ามีความจำเป็นต้องถอดมาซักจริงๆ ก็ต้องถอดมาซักกับร้านที่จับจุดได้ แล้วก็จับให้เป็นทรงใกล้เคียงกับเดิมได้ แต่เมื่อจับผ้าถอดมาซักอาจจะมีการย้วยการเปลี่ยนรูปทรงได้บ้าง
+
+				</div>
+				<div class="uk-grid uk-text-center uk-grid-collapse">
+					<div class="uk-width-1-3">
+							<a href="app/img/product/curtain/louis/2.jpg" data-uk-lightbox>
+								<img  style="padding:16px" src="app/img/product/curtain/louis/2.jpg">
+							</a>
+					</div>
+					<div class="uk-width-1-3">
+						<a href="app/img/product/curtain/louis/2.jpg" data-uk-lightbox>
+								<img  style="padding:16px" src="app/img/product/curtain/louis/3.jpg">
+							</a>
+					</div>
+					<div class="uk-width-1-3">
+						<a href="app/img/product/curtain/louis/2.jpg" data-uk-lightbox>
+								<img  style="padding:16px" src="app/img/product/curtain/louis/4.jpg">
+							</a>
+					</div>
+				</div>
+				<hr ng-if="id_sub == '0'" >
+			</div>
+			<!-- รางธรรมดา -->
+			<div ng-if="id_sub == '0' || id_sub == '5-2'">
+				<h4 class="uk-text-bold" ng-if="id_sub == '0'">รางธรรมดา</h4>
+				
+				<div class="text-indent">
+					เป็นผ้าม่านแบบมาตรฐาน เป็นแบบอลูมิเนียมขึ้นรูป มีหลายรูปแบบหลายรูปทรง เช่นตัว C ตัว M และรางแบบพิเศษ เช่นราง Micro หรือรางที่ลื่นพิเศษ รางที่นิยมมากที่สุดเนื่องจากมีราคาไม่แพงและมีมาตรฐานการใช้งานได้ดีคือราง M  ตัวผ้าม่านจะมีลักษณะเป็นลอนที่ทิ้งยาวลงมาจากด้านบนของรางลงมาถึงด้านล่าง ผ้าม่านรูปแบบนี้จะเปิดออกเป็น 2 ฝั่งโดยมีวิธีการเย็บหัวม่านหลายแบบ คือเย็บเป็นแบบกลีบ 3 กลีบซึ่งเป็นแบบที่นิยมที่สุด หรือแบบจีบประยุกต์ เช่น 2 จีบ หรือไร้จีบก็เป็นแบบที่มีความนิยมเช่นกัน ผ้าที่เหมาะกับการทำผ้าม่านรางธรรมดาคือ ผ้าที่มีโครงสร้างเส้นใยในแนวตั้งและผ้าที่มีความทิ้งตัวได้ดี 
+				</div>
+				<div class="uk-text-bold">วิธีการดูแลรักษา</div>
+				<div class="text-indent">
+					 การดูแลรักษาผ้าม่านรางธรรมดา ทำได้ง่าย คือการถอดม่านออกจากรางโดยวิธีการยกตะขอขึ้นจากลูกล้อของรางแล้วดึงตะขอและโซ่ออก จากนั้นก็สามารถนำผ้าออกไปซักได้ วิธีการซักมีทั้งการซักมือและซักเครื่อง
+				</div>
+				<div class="text-indent uk-margin-top">
+					ผ้าม่านรางธรรมดาเป็นผ้าม่านที่มีราคาไม่แพง ใช้งานได้ดีสามารถเลือกผ้าได้หลากหลาย เหมาะกับทุกสไตล์การตกแต่ง สิ่งสำคัญที่สุดสำหรับผ้าม่านรางธรรมดาคือระยะการติดตั้งถ้าติดตั้งผ้าม่านขึ้นลงและออกข้างจากหน้าต่างได้เหมาะสม สวยงามก็จะทำให้ผ้าม่านมีความสวยงามมากยิ่งขึ้น ทั้งนี้เซลล์ของ icurtain สามารถให้บริการและให้คำแนะนำในการทำผ้าม่านในไซด์ที่เหมาะสมกับบ้านของคุณได้
+				</div>
+				<hr ng-if="id_sub == 0" >
+			</div>
+			<!-- ม่านจีบรางโชว์ -->
+			<div ng-if="id_sub == '0' || id_sub == '5-3'">
+				<h4 class="uk-text-bold" ng-if="id_sub == '0'">ม่านจีบรางโชว์</h4>
+				
+				<div class="text-indent">
+					ม่านจีบรางโชว์เป็นม่านที่ได้รับความนิยมมากที่สุดก็่ว่าได้ ด้วยรูปแบบการตัดเย็บที่เรียบง่าย ความคงทนและความง่ายต่อการใช้งาน และยังดูทันสมัยอยู่เสมอๆ รูปแบบการตัดเย็บม่านจีบ ระยะห่างของจีบแต่ละจีบต้องห่างเท่าๆกันทุกช่วงตลอดแนว มีความคลาสสิค จึงเหมาะสมในการแต่งบ้านทุกแบบทุกสไตล์
+				</div>
+				<hr ng-if="id_sub == 0" >
+			</div>
+			<!-- ผ้าม่านหน้าม้า -->
+			<div ng-if="id_sub == '0' || id_sub == '5-4'">
+				<h4 class="uk-text-bold" ng-if="id_sub == '0'">ผ้าม่านหน้าม้า</h4>
+				
+				<div class="text-indent">
+					ผ้าม่านหน้าม้าเป็นผ้าม่านจีบหรือผ้าม่านแป๊บรูปแบบหนึ่ง ซึ่งจะมีผ้าม่านเล็กๆมาปิดบังด้านหน้าผ้าม่านชิ้นใน ผ้าม่านชิ้นเล็กๆที่อยู่ข้างหน้ามีลักษณะเหมือนหน้าม้า สำหรับปิดบังราง เป็นผ้าม่านที่มีความเรียบร้อยส่วนใหญ่ใช้เป็นการตกแต่งสไตล์คลาสสิกหรือสไตล์น่ารัก
+				</div>
+				<div class="uk-text-bold">วิธีการดูแลรักษา</div>
+				<div class="text-indent">
+					 ทำได้แบบเดียวกับผ้าม่านจีบเพียงแต่การถอดชิ้นส่วนหน้าม้าออกมาจากรางส่วนใหญ่จะต้องถอดรางออกมาด้วยซึ่งจะค่อนข้างยากในการดูแลรักษาเอง 
+				</div>
+				<div class="uk-text-bold uk-margin-top">ประโยชน์ของม่านหน้าม้า</div>
+				<div class="text-indent">
+					  ผ้าม่านหน้าม้าเป็นผ้าม่านที่มีผ้าบังรางดังนั้น เราจะสามารถใส่ลูกเล่นกับผ้าที่บังรางตรงนี้ได้เช่น อาจจะตัดเป็นอีกสีหนึ่ง อาจจะทำเป็นระบายโค้ง หรืออาจจะติดโบว์ เพื่อเพิ่มความน่ารักสวยงามเข้าไปหรืออาจจะทำเป็นลักษณะโค้งเป็นช่อๆ รูปแบบการทำผ้าม่านหน้าม้าสามารถทำได้หลากหลายเป็นวิธีการเพิ่มทางเลือกในการตกแต่งอีกรูปแบบหนึ่ง
+				</div>
+				<hr ng-if="id_sub == 0" >
+			</div>
+			<!-- ผ้าม่านกล่อง -->
+			<div ng-if="id_sub == '0' || id_sub == '5-5'">
+				<h4 class="uk-text-bold" ng-if="id_sub == '0'">ผ้าม่านกล่อง</h4>
+				
+				<div class="text-indent">
+					เป็นผ้าม่านที่ติดตั้งผ้าม่านจีบวนจากนั้นจึงติดกล่องผ้าม่านติดครอบรางม่าน ทำให้มีความเรียบร้อยในการทำงาน เป็นผ้าม่านที่มีความเรียบร้อยค่อนข้างสูง เนื่องจากมองไม่เห็นรางม่านและมีกล่องเป็นตัวบังราง วัสดุที่มาทำกล่องคือไม้อัดหุ้มด้วยฟองน้ำและหุ้มด้วยผ้าของตัวม่าน ทำให้สามารถทำงานได้ค่อนข้างเร็วในการเตรียมพื้นที่ไม่จำเป็นจะต้องเจาะฝ้า และตัวกล่องก็ยังสามารถออกแบบให้สามารถตัดสีเพิ่มลวดลาย และเป็นการเพิ่มลูกเล่นอีกทางหนึ่งได้
+				</div>
+				<div class="uk-text-bold">วิธีการดูแลรักษา</div>
+				<div class="text-indent">
+					 ตัวผ้าที่เป็นผ้าม่านจีบหรือผ้าม่านลอนพับที่อยู่หลังกล่องสามารถถอดมาซักได้ แต่ผ้าที่บุบกล่องการถอดมาซักค่อนข้างยากเนื่องจากวิธีการติดตั้งและการทำจะใช้วิธีการยิงผ้าให้ตึง ซึ่งถ้าเราถอดออกมาซักผ้าอาจจะยืดได้เราอาจต้องมายิงใหม่ดังนั้นจะต้องมีค่าแรงในการทำงาน 2 รอบและค่าซักก็จะมีราคาสูง ทั้งนี้วิธีการทำความสะอาดเนื่องจากกล่องเป็นผ้าที่ไม่ได้เป็นลอนเยอะ ดังนั้นฝุ่นจะไม่ถูกเก็บในลอนของผ้าม่านกล่องจึงสามารถปัดฝุ่น ดูดฝุ่นหรือแม้กระทั้งการใช้น้ำยาทำความสะอาดได้ แต่ทั้งนี้ต้องดูน้ำยาที่มีความเหมาะสม
+				</div>
+				<hr ng-if="id_sub == 0" >
+			</div>
+			<!-- ผ้าม่านผับ -->
+			<div ng-if="id_sub == '0' || id_sub == '5-6'">
+				<h4 class="uk-text-bold" ng-if="id_sub == '0'">ผ้าม่านผับ</h4>
+				
+				<div class="text-indent">
+					   มีลักษณะเป็นเหมือนผ้าผืนหนึ่งเต็มๆแล้วเราเย็บล่องเหล็กไว้ในแต่ละช่วงผ้าผืนนั้นซึ่งเมื่อดึงผ้าม่านพับหรือเปิดผ้าม่านพับจะยกจากด้านล่างขึ้นไปด้านบนโดย ผ้าจะซ้อนกันเป็นลำดับ เป็นรูปแบบผ้าม่านที่เหมาะกับการตกแต่งบ้านที่ทันสมัย เรียบง่าย นอกจากนั้น ผ้าม่านพับยังใช้ผ้าไม่เยอะทำให้สามารถเลือกผ้าที่มีราคาสูงได้โดยที่ได้ผ้าม่านออกมาราคาไม่แพง 
+				</div>
+				<div class="uk-text-bold">วิธีการดูแลรักษา</div>
+				<div class="text-indent">
+				      อันดับแรกต้องบอกว่าผ้าม่านแบบพับติดฝุ่นค่อนข้างยาก เนื่องจากผ้าแบบพับมีพื้นที่ในการติดฝุ่นน้อยกว่าผ้าม่านแบบลอน  สามารถทำความสะอาดผ้าม่านพับโดยวิธีการดูดฝุ่นหรือใช้ไม้ขนไก่ปัดออกในเบื้องต้นได้ แต่ในกรณีที่ผ้าม่านดำหรือผ้าม่านใช้งานเป็นระยะเวลานานแล้ว จะต้องถอดผ้าม่านออกมาซัก การถอดผ้าม่านแบบพับมาซักสามารถถอดได้ไม่ยาก แต่เวลาซักจำเป็นจะต้องเอาเหล็กแกนของม่านพับทุกอันออกแล้วใส่เข้าไปใหม่ให้อยู่ในรูปแบบเดิม รวมทั้งผูกม่านพับให้ดึงขึ้นลงได้ตึงในระดับเดิม ในจุดนี้ถือว่าเป็น Skill ที่ค่อนข้างยากมาก ถ้าผู้ใช้งานทั่วไปจะทำงานในจุดนี้เอง เพราะการจะผูกให้ตัวผ้าม่านพับดึงขึ้นลงได้ตรงนั้นจะต้องมีความชำนาญในการผูกพอสมควร 
+				</div>
+				<div class="uk-text-bold uk-margin-top">ประโยชน์ของม่านผับ</div>
+				<div class="text-indent">
+					ในกรณีที่ต้องการคุมงบประมาณโดยต้องการเลือกผ้าที่มีราคาแพง ผ้าม่านพับจะช่วยคุมงบประมาณได้ผ้าม่านพับเป็นผ้าม่านที่เปิดขึ้นลงในแนวตั้งจะไม่เปลืองพื้นที่และม่านจะทำให้หน้าต่างดูโล่งและกว้างขึ้น
+				</div>
+				<hr ng-if="id_sub == 0" >
+			</div>
+		</div>
+	</div>
+
+	<!-- มู่ลี่ -->
+	<div ng-if="setParamsSplitMenu == '6' " >
+		<div class="product-set-for-article"  >
+			<!-- ทั้งหมด -->
+			<div ng-if="id_sub == '0'">
+				<h4 class="uk-text-bold">ลักษณะทั่วไปของมู่ลี่</h4>
+				<div class="text-indent">
+					มู่ลี่เป็นม่านชนิดหนึ่งที่ใช้ทดแทนผ้าม่าน มู่ลี่จะสามารถปรับแสงได้โดยการพลิกใบมู่ลี่อีกทั้งมู่ลี่ยังสามารถเก็บขึ้นลงได้ตามความต้องการของผู้ใช้ วัสดุที่ทำมู่ลี่ได้มีหลายชนิด ดังนี้ 
+				</div>
+				<div>
+     				1. มู่ลี่พลาสติก  เป็นมู่ลี่สำเร็จรูปขายตามห้างสรรพสินค้าต่างๆเป็นมู่ลี่ที่มีราคาถูกที่สุดแต่การใช้งานไม่คงทนเนื่องจากไม่สามารถโดนความร้อนได้เพราะจะทำให้มู่ลี่งอ <br>
+					2. มู่ลี่อลูมิเนียม  เป็นมู่ลี่ที่มีราคาไม่แพงสามารถใช้งานได้ดีในการพลิกใบเปิดปิดขึ้นลง แต่มีข้อเสียก็คือใบมู่ลี่ถ้าถูกชนแรงๆอาจมีโอกาสใบยับทำให้ไม่สวยงามได้ง่าย <br>
+					3. มู่ลี่ไม้  เป็นสินค้าที่มีความนิยมสูงมากเนื่องจากไม้เป็นวัสดุที่เป็นธรรมชาติ เหมาะกับการใช้งานภายในบ้านและเข้ากับเฟอร์นิเจอร์ต่างๆได้เป็นอย่างดี ให้ความรู้สึกที่เป็นธรรมชาติและมีความหรูหราได้ในเวลาเดียวกัน  ทั้งนี้มู่ลี่ไม้ก็ยังมีประเภทต่างๆอีก ดังนี้<br>
+					• มู่ลี่ไม้ที่ทำจากไม้รามิน ซึ่งมีความแข็งแรงคงทนมีข้อเสียคือมีน้ำหนักมาก และราคาสูงเหมาะกับการติดตั้งในทิศตะวันตก <br>
+					• มู่ลี่ไม้ที่ทำจากไม้บาสบูด  เป็นมู่ลี่ไม้ที่เนียนสวย มีน้ำหนักเบาราคาไม่แพง ถ้าเลือกไม้บาสบูดที่มีคุณภาพดีมีความหนาเพียงพอจากโรงงานที่มีคุณภาพดีก็มีความทนทานพอสมควรและใช้งานได้ดีทีเดียว <br>
+					• มู่ลี่ไม้ที่ทำจากไม้ไผ่  เป็นมู่ลี่ไม้ที่ไม่ได้มีความนิยมมาก แต่มีลายที่ค่อนข้างเยอะแต่ก็เหมาะกับการใช้งานในบางกรณีเท่านั้น <br>
+					• มู่ลี่พลาสติก หรือมู่ลี่พีวีซี มู่ลี่ชนิดนี้เหมาะกับการใช้งานในห้องน้ำ ทำสีเลียนแบบไม้ ใช้ทดแทนไม่ที่อยู่ในห้องน้ำได้เป็นอย่างดี
+				</div >
+				
+				<div class="uk-text-bold uk-margin-top"> ประโยชน์ของมู่ลี่</div>
+				<div>
+				• มู่ลี่อลูมิเนียม ขนาด 25  มิลลิเมตรสามารถใช้ติดตั้งไปในหน้าต่างได้ ทำให้ไม่เปลืองพื้นที่ใช้ในการติดตั้งมาก <br>
+				• มู่ลี่อลูมิเนียม ขนาด 35 มิลลิเมตรหรือ  55  มิลลิเมตร เป็นมู่ลี่อลูมิเนียมที่มีความทันสมัยและเก๋ไปอีกแบบ <br>เนื่องจากมีใบที่มีลักษณะใหญ่ขึ้นใกล้เคียงมู่ลี่ไม้แต่มีน้ำหนักเบากว่า ได้ความรู้สึกที่ทันสมัยและดูดีในส่วนของราคาก็แพงจากมู่ลี่ 25 มิลลิเมตรไม่มาก แต่ที่แตกต่างคือเทปผ้าจะมีรูปแบบเดียวกับมู่ลี่ไม้ซึ่งเป็นจุดที่สามารถเล่นลูกเล่นได้เป็นอย่างดี ในส่วนของมู่ลี่ไม้เป็นวัสดุตกแต่งที่มีความสวยงามเหมาะกับการตกแต่งทั้งสไตล์ออเร้นทอล โมเดิร์น  คลาสสิกได้ในเวลาเดียวกัน ทั้งนี้เนื่องจากไม้มีความเรียบหรูและทันสมัยเป็นตัวของมันเอง
+				</div>
+				<div class="uk-text-bold uk-margin-top">ข้อแนะนำเพิ่มเติมของมู่ลี่</div>
+				<div class="text-indent">
+					 สำหรับการเลือกมู่ลี่อลูมิเนียมอยากให้ดูที่ความยืดหยุ่นของใบอลูมิเนียมว่ามีความยืดหยุ่นมากน้อยเพียงใด ถ้าใบยืดหยุ่นมากจะทำให้ใบงอน้อยเนื่องจากมู่ลี่อลูมิเนียมที่มีใบยับหรือใบงอจะดูไม่สวยเหมือนกับมู่ลี่เสียแต่ถ้าเราดูยี่ห้อที่สามารถงอใบแล้วใบคืนรูปกลับมาแบบเดิมได้ง่าย ตรงนี้เมื่อเราเกิดพลาดพลั้งไปชนก็จะไม่ทำให้มู่ลี่เสียได้มาก ทาง  icurtain  มีบริการที่มีความยืดหยุ่นสูง ในส่วนของมู่ลี่ไม้ให้เลือกเพื่อให้เหมาะสมกับการใช้งานในเรื่องของ <br>
+					 1.  ความสม่ำเสมอของสี <br>
+					 2. ความหนาของมู่ลี่ไม้ <br>
+					 3.  ระบบโซ่วนหรือเชือกดึงที่มีผลต่อน้ำหนักการดึงอย่างมาก 
+				</div>
+			</div>
+			<!-- มู่ลี่พลาสติก -->
+			<div ng-if="id_sub == '6-1'">			
+				<div class="text-indent">
+					มู่ลี่พลาสติก  เป็นมู่ลี่สำเร็จรูปขายตามห้างสรรพสินค้าต่างๆเป็นมู่ลี่ที่มีราคาถูกที่สุดแต่การใช้งานไม่คงทนเนื่องจากไม่สามารถโดนความร้อนได้เพราะจะทำให้มู่ลี่งอ
+				</div>
+			</div>
+			<!-- มู่ลี่อลูมิเนียม -->
+			<div ng-if="id_sub == '6-2'">
+				<div class="text-indent">
+					มู่ลี่อลูมิเนียม  เป็นมู่ลี่ที่มีราคาไม่แพงสามารถใช้งานได้ดีในการพลิกใบเปิดปิดขึ้นลง แต่มีข้อเสียก็คือใบมู่ลี่ถ้าถูกชนแรงๆอาจมีโอกาสใบยับทำให้ไม่สวยงามได้ง่าย
+				</div>
+			</div>
+			<!-- ผ้าม่านหน้าม้า -->
+			<div ng-if="id_sub == '6-3'">	
+				<div class="text-indent">
+					มู่ลี่ไม้  เป็นสินค้าที่มีความนิยมสูงมากเนื่องจากไม้เป็นวัสดุที่เป็นธรรมชาติ เหมาะกับการใช้งานภายในบ้านและเข้ากับเฟอร์นิเจอร์ต่างๆได้เป็นอย่างดี ให้ความรู้สึกที่เป็นธรรมชาติและมีความหรูหราได้ในเวลาเดียวกัน  ทั้งนี้มู่ลี่ไม้ก็ยังมีประเภทต่างๆอีก ดังนี้<br>
+					• มู่ลี่ไม้ที่ทำจากไม้รามิน ซึ่งมีความแข็งแรงคงทนมีข้อเสียคือมีน้ำหนักมาก และราคาสูงเหมาะกับการติดตั้งในทิศตะวันตก <br>
+					• มู่ลี่ไม้ที่ทำจากไม้บาสบูด  เป็นมู่ลี่ไม้ที่เนียนสวย มีน้ำหนักเบาราคาไม่แพง ถ้าเลือกไม้บาสบูดที่มีคุณภาพดีมีความหนาเพียงพอจากโรงงานที่มีคุณภาพดีก็มีความทนทานพอสมควรและใช้งานได้ดีทีเดียว <br>
+					• มู่ลี่ไม้ที่ทำจากไม้ไผ่  เป็นมู่ลี่ไม้ที่ไม่ได้มีความนิยมมาก แต่มีลายที่ค่อนข้างเยอะแต่ก็เหมาะกับการใช้งานในบางกรณีเท่านั้น <br>
+					• มู่ลี่พลาสติก หรือมู่ลี่พีวีซี มู่ลี่ชนิดนี้เหมาะกับการใช้งานในห้องน้ำ ทำสีเลียนแบบไม้ ใช้ทดแทนไม่ที่อยู่ในห้องน้ำได้เป็นอย่างดี
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ม่านม้วน -->
+	<div ng-if="setParamsSplitMenu == '7' " >
+		<div class="product-set-for-article"  >
+			<!-- ทั้งหมด -->
+			<div ng-if="id_sub == '0'">
+				<h4 class="uk-text-bold">ลักษณะทั่วไปของม่านม้วน</h4>
+				<div class="text-indent">
+					ม่านม้วนเป็นผ้าม่านบังแสงแบบใหม่แบบหนึ่งที่มีความเรียบง่าย ลักษณะของตัวม่านเป็นแผ่นที่ทำมาจากผ้า ทำจากพีวีซี หรือเกรตเตอร์แล้วนำมาเคลือบให้เนื้อมีความคงรูปเหมาะที่จะเอามาม้วนเก็บไว้ในรางของม่านม้วน โดยปกติการทำงานของม่านม้วนจะเลื่อนขึ้นลงในแนวตั้งและเวลาบังแสงก็จะบังแสงได้หลายรูปแบบตามประเภทของม่านม้วน ม่านม้วนมีทั้งหมด 3 ประเภท  ดังนี้
+				</div>
+				<div>
+     				1. แบบ  Block out  หรือม่านม้วนแบบทึบแสงจะมี 2 ประเภทหลักๆคือทึบแสงแบบใช้ผ้าทึบแสง หรือทึบแสงแบบใช้ผ้าธรรมดาแล้วมาเคลือบโฟมทึบแสง จะเป็นม่านม้วนที่มีคุณสมบัติช่วยลดความร้อนได้มากขึ้นกว่าม่านม้วนแบบใช้ผ้าทึบแสง และยังมีการใช้เทคโนโลยีอลูมิเนียมทึบแสง ตรงนี้จะยิ่งช่วยลดความร้อนได้ดียิ่งขึ้นไปอีก แต่ข้อเสียคือ มีราคาที่ค่อนข้างสูง <br>
+ 
+					2. แบบ Sunscreen  คือม่านม้วนที่สามารถมองเห็นด้านนอกโดยที่ด้านนอกมองเข้ามาด้านในไม่เห็นในเวลากลางวันหรืออาจจะเห็นลางๆ แต่ถ้าเป็นเวลากลางคืนด้านที่สว่างกว่าจะถูกมองเห็น ม่านม้วนSunscreen จะเหมาะกับออฟฟิต และบ้านที่มีการตกแต่งภายนอกสวย เนื่องจากม่านม้วน Sunscreen เป็นม่านที่สามารถปิดลงมาแล้วมองออกไปด้านนอกได้ ช่วยลดความร้อนและรังสียูวีที่เข้ามาในห้อง และช่วยลดอุณหภูมิภายในห้องได้ <br>
+					 
+					3. แบบ Dim  out หรือแบบไม่ทึบแสง เป็นม่านม้วนที่เวลาปิดลงมาแสงยังสามารถส่องผ่านเข้ามาในห้องได้บ้างแต่ไม่สามารถมองเห็นด้านนอกห้องได้ในขนาดที่ปิดม่านม้วนลงมา ม่านม้วนประเภทนี้เป็นม่านม้วนที่มีราคาถูกที่สุดในบรรดาม่านม้วนทั้ง 3 แบบ <br>
+				</div >
+				
+				<div class="uk-text-bold uk-margin-top"> วิธีการใช้งานของม่านม้วน ม่านม้วนมี 2 ระบบ ดังนี้</div>
+				<div>
+				1. ระบบแบบธรรมดา ซึ่งจะมีเชือกดึงด้านข้างเมื่อดึงลงมาม่านม้วนจะเปิดขึ้น ถ้าเราดึงขึ้นม่านม้วนก็จะเปิดลง โดยรูปแบบนี้เป็นแบบที่นิยมและราคาไม่แพง  <br>
+				2. ม่านม้วนระบบมอเตอร์ ม่านม้วนประเภทนี้เหมาะกับชุดที่มีชุดใหญ่ๆหรือบ้านที่เน้นความหรูหรา เน้นความสะดวกสบายในการใช้งานคู่กับระบบ Automation ของบ้าน ม่านม้วนระบบมอเตอร์เป็นม่านม้วนที่สามารถบังคับการทำงานด้วยสวิตส์ หรือรีโมต ในปัจจุบันราคาม่านม้วนมอเตอร์ก็ได้ปรับลดลงจากอดีตเป็นอย่างมาก 
+				</div>
+				<div class="uk-text-bold uk-margin-top"> ประโยชน์ของม่านม้วน </div>
+				<div>
+					• เป็นม่านอีกรูปแบบหนึ่งที่ช่วยบังแสงได้เป็นอย่างดี และสามารถเลือกผ้าแต่ละประเภทให้เหมาะสมกับการใช้งานได้ <br>
+					• ทำความสะอาดได้ง่าย  <br>
+					• ม่านม้วนประเภททึบแสงสามารถช่วยลดอุณหภูมิในห้องได้ มากถึง 2-4 องศา <br>
+					• ม่านม้วนแบบ Sunscreen สามารถมองเห็นภายนอกของห้องได้ แต่ข้างนอกไม่สามารถมองเห็นได้ 
+				</div>
+				<div class="uk-text-bold uk-margin-top">วิธีการดูแลรักษาม่านม้วน</div>
+				<div class="text-indent">
+       				 ม่วนม้วนสามารถทำความสะอาดได้ง่าย ๆโดยวิธีการปัดฝุ่น ม่านม้วนที่มีคุณภาพดีจะมีการเคลือบสารป้องกันไฟฟ้าสถิต ทำให้ฝุ่นไม่เกาะตัวมาก เมื่อปัดฝุ่นแล้วฝุ่นจะตกลงมาที่พื้นโดยไม่วนกลับไปติดบนม่านอีกครั้ง ถ้าม่านม้วนมีความสกปรกมากขึ้น ก็สามารถใช้ผ้าชุบน้ำเช็ดรอยฝุ่นออก หรือสามารถใช้สบู่อ่อนๆเช็ดทำความสะอาดได้
+
+				</div>
+				<div class="uk-text-bold uk-margin-top">ข้อแนะนำเพิ่มเติม</div>
+				<div class="text-indent">
+       				 ม่วนม้วนสามารถทำความสะอาดได้ง่าย ๆโดยวิธีการปัดฝุ่น ม่านม้วนที่มีคุณภาพดีจะมีการเคลือบสารป้องกันไฟฟ้าสถิต ทำให้ฝุ่นไม่เกาะตัวมาก เมื่อปัดฝุ่นแล้วฝุ่นจะตกลงมาที่พื้นโดยไม่วนกลับไปติดบนม่านอีกครั้ง ถ้าม่านม้วนมีความสกปรกมากขึ้น ก็สามารถใช้ผ้าชุบน้ำเช็ดรอยฝุ่นออก หรือสามารถใช้สบู่อ่อนๆเช็ดทำความสะอาดได้
+				</div>
+
+				<div class="uk-margin-top"><img src="app/img/product/roll_curtain/2.jpg" alt=""></div>
+				<div class="uk-text-center"><img src="app/img/product/roll_curtain/1.jpg" alt=""></div>
+			</div>
+
+			<!-- Block out -->
+			<div ng-if="id_sub == '7-1'">			
+				<div class="text-indent">
+					แบบ  Block out  หรือม่านม้วนแบบทึบแสงจะมี 2 ประเภทหลักๆคือทึบแสงแบบใช้ผ้าทึบแสง หรือทึบแสงแบบใช้ผ้าธรรมดาแล้วมาเคลือบโฟมทึบแสง จะเป็นม่านม้วนที่มีคุณสมบัติช่วยลดความร้อนได้มากขึ้นกว่าม่านม้วนแบบใช้ผ้าทึบแสง และยังมีการใช้เทคโนโลยีอลูมิเนียมทึบแสง ตรงนี้จะยิ่งช่วยลดความร้อนได้ดียิ่งขึ้นไปอีก แต่ข้อเสียคือ มีราคาที่ค่อนข้างสูง 
+				</div>
+				<div class="uk-grid uk-margin-top">
+					<div class="uk-width-1-3">
+						<div ><img src="app/img/product/roll_curtain/block_out/1.jpg" alt=""></div>
+					</div>
+					<div class="uk-width-1-3">
+						<div ><img src="app/img/product/roll_curtain/block_out/2.jpg" alt=""></div>
+					</div>
+					<div class="uk-width-1-3">
+						<div ><img src="app/img/product/roll_curtain/block_out/3.jpg" alt=""></div>
+					</div>
+				</div>
+				
+				
+				
+			</div>
+			<!-- Sunscreen -->
+			<div ng-if="id_sub == '7-2'">
+				<div class="text-indent">
+					แบบ Sunscreen  คือม่านม้วนที่สามารถมองเห็นด้านนอกโดยที่ด้านนอกมองเข้ามาด้านในไม่เห็นในเวลากลางวันหรืออาจจะเห็นลางๆ แต่ถ้าเป็นเวลากลางคืนด้านที่สว่างกว่าจะถูกมองเห็น ม่านม้วนSunscreen จะเหมาะกับออฟฟิต และบ้านที่มีการตกแต่งภายนอกสวย เนื่องจากม่านม้วน Sunscreen เป็นม่านที่สามารถปิดลงมาแล้วมองออกไปด้านนอกได้ ช่วยลดความร้อนและรังสียูวีที่เข้ามาในห้อง และช่วยลดอุณหภูมิภายในห้องได้
+				</div>
+				<div class="uk-grid uk-margin-top">
+					<div class="uk-width-1-1">
+						<div ><img src="app/img/product/roll_curtain/sunscreen/1.jpg" alt=""></div>
+					</div>
+					
+				</div>
+			</div>
+			<!-- Dim  out -->
+			<div ng-if="id_sub == '7-3'">	
+				<div class="text-indent">
+					แบบ Dim  out หรือแบบไม่ทึบแสง เป็นม่านม้วนที่เวลาปิดลงมาแสงยังสามารถส่องผ่านเข้ามาในห้องได้บ้างแต่ไม่สามารถมองเห็นด้านนอกห้องได้ในขนาดที่ปิดม่านม้วนลงมา ม่านม้วนประเภทนี้เป็นม่านม้วนที่มีราคาถูกที่สุดในบรรดาม่านม้วนทั้ง 3 แบบ
+				</div>
+				<div class="uk-grid uk-margin-top">
+					<div class="uk-width-1-1">
+						<div ><img src="app/img/product/roll_curtain/dim_out/1.jpg" alt=""></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ม่านมอเตอร์ -->
+	<div ng-if="setParamsSplitMenu == '8' " >
+		<div class="product-set-for-article"  >
+			<!-- ทั้งหมด -->
+			<div ng-if="id_sub == '0'">
+				<h4 class="uk-text-bold">ลักษณะทั่วไปของม่านมอเตอร์</h4>
+				<div class="text-indent">
+					 ม่านมอเตอร์เป็นม่านที่ใช้ในการควบคุมโดยไฟฟ้าซึ่งจะบังคับให้ม่านดึงขึ้น ดึงลงและออกข้าง เปิดปิดผ้าม่านด้วยระบบไฟฟ้าที่มีทั้งระบบรีโมทและระบบสวิตส์ในส่วนของม่านมอเตอร์แบ่งออกเป็น  2  แบบใหญ่ๆ คือ 
+				</div>
+				<div>
+     				1. มอเตอร์ม่านม้วน <br>
+					2. มอเตอร์แบบท่อต่างๆ มอเตอร์แบบนี้จะเป็นการบังคับผ้าม่านขึ้นลงในแนวตั้ง นิยมใช้กับม่านม้วนซึ่งม่านม้วนจะมีมอเตอร์ให้เลือกหลายออฟชั่นด้วยกัน ออฟชั่นที่นิยมมากจะมีมอเตอร์เกรดพรีเมียมของ  Somfy เป็นมอเตอร์ที่ได้รับความนิยมจากทั่วโลกมีมาตรฐานการทำงานที่สูง อีกออฟชั่นคือมอเตอร์เกรดเทียบเท่า โดย  icurtain  เลือกใช้มอเตอร์ของ biw  เป็นมอเตอร์ที่มีการทำงานต่อเนื่องและคงทนแข็งแรงสามารถรับน้ำหนักผ้าได้เยอะ มอเตอร์ม่านม้วนและมอเตอร์ผ้าม่านเป็นสินค้าที่มีราคาสูง ดังนั้นสิ่งสำคัญที่สุดคือการเลือกสเป็กของมอเตอร์และการวางแผนการใช้งานของมอเตอร์ให้เหมาะสมและเต็มประสิทธิภาพ ถ้าเราวางแผนการใช้งานของมอเตอร์ได้อย่างดีจะทำให้เราประหยัดค่ามอเตอร์ไปได้มาก อีกทั้งยังสามารถใช้งานได้ตรงตามความต้องการ บางครั้งความเข้าใจในเรื่องของมอเตอร์ถ้าไม่มากเพียงพอจะทำให้ต้นทุนค่ามอเตอร์สูงเป็นอย่างมาก
+					ประโยชน์ของม่านมอเตอร์
+				</div >
+				
+				<div class="uk-text-bold uk-margin-top">ประโยชน์ของม่านมอเตอร์</div>
+				<div class="text-indent">			
+      				ม่านมอเตอร์จะสามารถบังคับผ้าม่านชุดที่อยู่สูง ผ้าม่านชุดที่มีขนาดใหญ่ ผ้าม่านที่อยู่ในจุดที่ดึงไม่ถึงหรือผ้าม่านที่หลายๆชุดในเวลาเดียวกันได้ดีกว่าระบบเชือกเป็นอย่างมาก ในกรณีที่เราต้องการความหรูหรา ต้องการความสะดวกสบายจากการใช้งานระบบมอเตอร์ๆก็จะเป็นอีกหนึ่งในคำตอบที่ช่วยตอบสนองความต้องการในจุดนี้ได้เนื่องจากผ้าม่านที่มีระบบมอเตอร์นอกจากเป็นผ้าม่านในบ้านของคุณแล้วยังเป็นเฟอร์นิเจอร์อีกชนิดหนึ่งที่สำคัญ บ่งบอกถึงรสนิยมและฐานะของผู้ใช้ได้เป็นอย่างดี
+				</div>
+				<div class="uk-text-bold uk-margin-top"> วิธีการดูแลรักษาม่านมอเตอร์</div>
+				<div class="text-indent">
+       				 ปกติผ้าม่านมอเตอร์จะถอดซักได้เหมือนผ้าม่านจีบปกติหรือในกรณีที่เป็นม่านม้วนมอเตอร์ก็สามารเช็ดทำความสะอาดและใช้สบู่ทำความสะอาดได้เป็นปกติเพียงแต่ในตัวระบบไฟฟ้าหรือระบบรางของมอเตอร์โดยปกติแล้วไม่ต้องทำอะไรเป็นพิเศษ ม่านมอเตอร์แต่ละยี่ห้อจะมีการรับประกันมากพอสมควร กรณีของ somfy จะมีการรับประกันอยู่  5  ปีซึ่งอายุการใช้งานของรางม่านมอเตอร์ก็จะอยู่ที่ประมาณ 10 ปีบวกลบนิดหน่อยตามการใช้งาน
+
+
+				</div>
+				<div class="uk-text-bold uk-margin-top">ข้อแนะนำเพิ่มเติมเกี่ยวกับม่านมอเตอร์</div>
+				<div class="text-indent">
+       				   การเลือกใช้ม่านมอเตอร์สิ่งสำคัญที่สุดคือการวางจำนวน และวางสเป็กของมอเตอร์ได้ตรงตามความต้องการของลูกค้า ตามความต้องการของการใช้งาน ถ้าเราใช้มอเตอร์ที่มีขนาดใหญ่เกินไปถ้าเราใช้มอเตอร์โดยที่ไม่ทราบถึงข้อมูลในฟังก์ชั้นการใช้งานหรือประโยชน์ต่างๆของมันโดยละเอียดแล้วอาจจะใช้งานได้ไม่เต็มที่หรืออาจต้องจ่ายเงินในจำนวนที่มาก ทั้งนี้ icurtain ได้ประกาศนียบัตรการอบรมจากบริษัท Somfy ในหลักสูตรExpert  Somfy ซึ่งทำให้เซลล์ของ icurtain มีความเข้าใจในการกำหนดสเป็กมอเตอร์ที่มีความเหมาะสมได้เป็นอย่างดี
+
+				</div>
+			</div>
+
+			<!-- มอเตอร์ม่านม้วน -->
+			<div ng-if="id_sub == '8-1'">			
+				<div class="text-indent">
+		 
+				</div>
+			</div>
+			<!-- มอเตอร์แบบท่อต่างๆ -->
+			<div ng-if="id_sub == '8-2'">
+				<div class="text-indent">
+					มอเตอร์แบบท่อต่างๆ มอเตอร์แบบนี้จะเป็นการบังคับผ้าม่านขึ้นลงในแนวตั้ง นิยมใช้กับม่านม้วนซึ่งม่านม้วนจะมีมอเตอร์ให้เลือกหลายออฟชั่นด้วยกัน ออฟชั่นที่นิยมมากจะมีมอเตอร์เกรดพรีเมียมของ  Somfy เป็นมอเตอร์ที่ได้รับความนิยมจากทั่วโลกมีมาตรฐานการทำงานที่สูง อีกออฟชั่นคือมอเตอร์เกรดเทียบเท่า โดย  icurtain  เลือกใช้มอเตอร์ของ biw  เป็นมอเตอร์ที่มีการทำงานต่อเนื่องและคงทนแข็งแรงสามารถรับน้ำหนักผ้าได้เยอะ มอเตอร์ม่านม้วนและมอเตอร์ผ้าม่านเป็นสินค้าที่มีราคาสูง ดังนั้นสิ่งสำคัญที่สุดคือการเลือกสเป็กของมอเตอร์และการวางแผนการใช้งานของมอเตอร์ให้เหมาะสมและเต็มประสิทธิภาพ ถ้าเราวางแผนการใช้งานของมอเตอร์ได้อย่างดีจะทำให้เราประหยัดค่ามอเตอร์ไปได้มาก อีกทั้งยังสามารถใช้งานได้ตรงตามความต้องการ บางครั้งความเข้าใจในเรื่องของมอเตอร์ถ้าไม่มากเพียงพอจะทำให้ต้นทุนค่ามอเตอร์สูงเป็นอย่างมาก
+					ประโยชน์ของม่านมอเตอร์
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+	<!-- ม่านไม้ไผ่ -->
+	<div ng-if="setParamsSplitMenu == '9' " >
+		<div class="product-set-for-article"  >
+			<!-- ทั้งหมด -->
+			<div ng-if="id_sub == '0'">
+				<h4 class="uk-text-bold">ลักษณะของม่านไม้ไผ่</h4>
+				<div class="text-indent">
+					  ม่านไม้ไผ่เป็นม่านชนิดหนึ่งที่ทำมาจากไม้ไผ่ มีวิธีการใช้งาน  2  แบบ  คือ <br>
+					  1. แบบม้วน <br>
+					  2. แบบพับ <br>
+					  ม่านไม่ไผ่จะเอาไม้ไผ่เป็นซี่ๆมาสานต่อกันเป็นลวดลายต่างๆโดยปกติจะนิยมใช้ทั้งภายในและภายนอก และให้ความรู้สึกที่มีความเป็นธรรมชาติสูง
+				</div>
+				
+				<div class="uk-text-bold uk-margin-top">ประโยชน์ของม่านไม้ไผ่</div>
+				<div class="text-indent">			
+      				ม่านไม้ไผ่เหมาะกับการตกแต่งในสไตล์ รีสอร์ท สามารถใช้งานในการตกแต่งภายนอกได้ เนื่องจากวัสดุทำมาจากไม้ไผ่ แต่การติดตั้งภายนอกอาจจะมีปัญหาเรื่องความชื้นที่ทำให้เกิดเชื้อราได้ ม่านไม้ไผ่สามารถทากันเชื้อราซึ่งก็จะช่วยป้องกันเชื้อราได้ในระดับหนึ่งแต่อาจจะเกิดเชื้อราได้อีก สามารถขัดออกและทาสีใหม่ได้เหมือนเฟอร์นิเจอร์ไม้ชนิดอื่น
+				</div>
+				<div class="uk-text-bold uk-margin-top"> ข้อแนะนำเพิ่มเติมเกี่ยวกับม่านไม้ไผ่</div>
+				<div class="text-indent">
+       				 การเลือกใช้ม่านไม้ไผ่จะต้องดูพื้นที่ที่ใช้งานให้เหมาะสมเนื่องจาก ม่านไม้ไผ่เป็นวัสดุที่มีกลไกแบบง่ายๆ คือ ดึงขึ้นม้วนเก็บตามลอกและลักษณะของตัวโรวไม้ไผ่อาจจะมีการเอียงหรือมีน้ำหนักในการดึง ซึ่งทำให้การใช้งานไม่สะดวกอยู่บ้าง ดังนั้นการใช้งานม่านไม้ไผ่ควรจะเปรียบเทียบข้อดีข้อเสียก่อนตัดสินใจเลือกใช้
+
+
+				</div>
+			
+			</div>
+
+			<!-- แบบม้วน -->
+			<div ng-if="id_sub == '9-1'">			
+				<div class="text-indent">
+		 
+				</div>
+			</div>
+			<!-- แบบผับ -->
+			<div ng-if="id_sub == '9-2'">
+				<div class="text-indent">
+					
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+	<!-- ม่านปรับแสง -->
+	<div ng-if="setParamsSplitMenu == '10' " >
+		<div class="product-set-for-article"  >
+			<!-- ทั้งหมด -->
+			<div ng-if="id_sub == '0'">
+				<h4 class="uk-text-bold">ลักษณะทั่วไปของม่านปรับแสง</h4>
+				<div class="text-indent">
+					  ม่านปรับแสงเป็นลักษณะม่านที่ใช้บังแสงในแนวตั้ง มีทั้งวัสดุที่ทำจากผ้ามาเคลือบโค้ดติ้ง  หรือวัสดุที่ทำจากพีวีซี ม่านปรับแสงเป็นม่านชนิดหนึ่งที่ได้รับความนิยมอย่างมาก นิยมติดตั้งที่ออฟฟิตเนื่องจากสามารถปรับใบให้มองเห็นด้านนอกได้ และสามารถเปิดปิดด้านข้างได้ แต่ทั้งนี้ม่านปรับแสงก็มีข้อเสียอยู่บ้างในเรื่องการใช้งานเมื่อใช้ไปนานๆอาจจะมีปัญหาในเรื่องของใบบางใบที่ไม่พลิกและ อาจจะมีปัญหาในเรื่องของการดูแลรักษาทำความสะอาด ม่านปรับแสงมี 3 ประเภทหลักๆ <br>
+					  1. Block  out  ม่านปรับแสงแบบ Block out คือม่านปรับแสงที่ผ้าทึบแสงแบบ 100%  แสงไม่สามารถผ่านเข้ามาในห้องในกรณีที่ปิดม่าน <br>
+					  2. Dim out  ม่านปรับแสงแบบ  Dim out คือม่านปรับแสงที่ แสงสามารถผ่านเข้ามาในห้องได้ แต่ไม่สามารถมองเห็นด้านนอกห้องได้ <br>
+					  3. Sunscreen  เป็นม่านปรับแสงที่มองทะลุออกไปด้านนอกได้ โดยที่ด้านนอกมองไม่เห็นด้านใน ในเวลากลางวันและเวลากลางคืนด้านที่สว่างกว่าจะถูกมองเห็น <br>
+				</div>
+				
+				<div class="uk-text-bold uk-margin-top">ประโยชน์ของม่านปรับแสง</div>
+				<div class="text-indent">			
+      				 ม่านปรับแสงสามารถปรับพลิกใบทำให้มองด้านนอกได้โดยที่ให้ด้านนอกสามารถมองเห็นด้านในได้โดยยาก อีกทั้งม่านปรับแสงยังสามารถปรับแสงได้หลายแบบทั้งการปรับมุมมองของใบที่พลิก ปรับองศาของใบที่พลิกหรือเปิดปิดม่านได้ตามความต้องการ
+				</div>
+				<div class="uk-text-bold uk-margin-top"> วิธีการดูแลรักษาม่านปรับแสง</div>
+				<div class="text-indent">
+       				  ม่านปรับแสงเป็นวัสดุตกแต่งที่ดูแลรักษาที่ค่อนข้างยากเนื่องจากม่านปรับแสงมีใบเป็นเส้นๆ ทำให้ม่านปรับแสงเวลาทำความสะอาดต้องทำความสะอาดทีละเส้น ทำให้เกิดความไม่สะดวกในการเช็ดและการดูแลรักษาเป็นอย่างมาก อีกทั้งการพลิกใบบางครั้งม่านปรับแสงอาจจะเสียหายได้ นี่เป็นจุดเสียที่สำคัญ แต่ม่านปรับแสงก็มีราคาไม่แพงถ้าไม่คาดหวังอายุการใช้งานในระยะเวลายาว ม่านปรับแสงก็จะเป็นหนึ่งในวัสดุตกแต่งที่ทำให้คุ้มค่ามากที่สุดตัวหนึ่ง
+
+				</div>
+				<div class="uk-text-bold uk-margin-top"> ข้อแนะนำเพิ่มเติมเกี่ยวกับม่านปรับแสง</div>
+				<div class="text-indent">
+					ม่านปรับแสงที่มีอยู่ในตลาดมีอยู่หลายชนิด ทีได้รับความนิยมมากที่สุดในตลาดคือม่านปรับแสงรุ่นถูก คือมีราคาที่ถูกมากๆถูกกว่าผ้าม่านหลายตัว ถ้าต้องการวัสดุตกแต่งที่ราคาไม่แพงเหมาะกับการติดตั้งที่ออฟฟิตม่านปรับแสงก็เป็นอีกทางเลือกหนึ่งได้
+
+				</div>
+			
+			</div>
+
+			<!-- Block  out -->
+			<div ng-if="id_sub == '10-1'">			
+				<div class="text-indent">
+		 			ม่านปรับแสงแบบ Block out คือม่านปรับแสงที่ผ้าทึบแสงแบบ 100%  แสงไม่สามารถผ่านเข้ามาในห้องในกรณีที่ปิดม่าน
+				</div>
+			</div>
+			<!-- Dim out -->
+			<div ng-if="id_sub == '10-2'">
+				<div class="text-indent">
+					ม่านปรับแสงแบบ  Dim out คือม่านปรับแสงที่ แสงสามารถผ่านเข้ามาในห้องได้ แต่ไม่สามารถมองเห็นด้านนอกห้องได้
+				</div>
+			</div>
+
+				<!-- Sunscreen -->
+			<div ng-if="id_sub == '10-3'">
+				<div class="text-indent">
+					เป็นม่านปรับแสงที่มองทะลุออกไปด้านนอกได้ โดยที่ด้านนอกมองไม่เห็นด้านใน ในเวลากลางวันและเวลากลางคืนด้านที่สว่างกว่าจะถูกมองเห็น
+				</div>
+			</div>
+			
+			
+		</div>
+	</div>
+
+	<!-- อุปกรณ์ราง -->
+	<div ng-if="setParamsSplitMenu == '12' " style="margin-top: 2%;width: 90%;margin: auto;">
+		<h4 class="uk-text-bold">อุปกรณ์ราง</h4>
+	<!-- 	<div class="uk-text-center">
+			<img src="app/img/product/rail/1-fix.jpg" alt="">
+		</div> -->
+		<div class="uk-grid uk-margin-top uk-grid-collapse">
+			<div class="uk-width-1-2"  dir-paginate="data in railList | itemsPerPage: 4" pagination-id="productList-rail" >
+				<!-- <img src="app/img/product/rail/1-1d.jpg" style="width: 60%"> -->
+				<img class="uk-animation-fade" ng-src="{{ data.img }}" >
+			</div>
+		</div>
+		<dir-pagination-controls  ng-if="loadingModeWall == false" pagination-id="productList-rail" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" ></dir-pagination-controls>
+		
+	</div>
+
+
+	
+	
+</div>

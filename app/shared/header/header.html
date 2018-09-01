@@ -1,0 +1,40 @@
+<div class="uk-cover-background header-background" style=" background-image: url('app/img/all/header.jpg');" ng-init="onload()">
+	<!-- <img src="app/img/all/header.jpg" alt="" width="300"> -->
+	<div class="uk-grid uk-grid-collapse">
+			<div class="uk-width-1-2">
+					<div class="header-logo shadow">
+						<div class="uk-cover-background" >
+							<img src="app/img/all/logo.png" alt="">
+						</div>
+					</div>
+			</div>
+			<div class="uk-width-1-2">
+					<nav class="uk-navbar-flip header-menu" style="margin-top: 15px;margin-right: 60px;" ng-if="device == 'web' ">
+					    <ul class="uk-navbar-nav" ng-repeat="menu in sections">
+					        <li ui-sref-active="header-menu-active"><a ui-sref="{{ menu.link }}" ui-sref-opts="{reload: menu.link}">{{ menu.title | translate }}</a></li>
+					    </ul>
+					</nav>
+					<div ng-if="device == 'device' ">
+						<div style="position: relative" data-uk-dropdown="{mode:'click'}">
+
+						    <!-- This is the element toggling the dropdown -->
+						    <div class="uk-text-right">
+						    	 <div class="uk-badge" style="background: none;color: #a8a8a8;margin-right: 15px;border: 1px solid #a8a8a8;margin-top: 15px;"><i class="material-icons">dehaze</i></div>
+
+						    </div>
+						  	<div class="uk-dropdown uk-dropdown-close" style="padding: 10px">
+						  		<ul class="uk-nav uk-nav-dropdown" style="margin:0" ng-repeat="menu in sections">
+                                    <li><a ui-sref="{{ menu.link }}" ui-sref-opts="{reload: menu.link }">{{ menu.title | translate }}</a></li>
+                                </ul>
+						  	</div>
+
+						    <!-- This is the dropdown -->
+						</div>
+						<div class="uk-text-bold uk-text-small uk-text-right" style="margin-right: 17px;margin-top: 2px;">MENU</div>
+					</div>
+			</div>
+	</div>
+</div>
+
+
+

@@ -1,0 +1,68 @@
+<div style="padding: 20px;margin-top: 5vh">
+	<div>
+		<h2>ADMIN</h2>
+		<hr style="margin-top: 0px">
+	</div>
+	<div style="padding: 20px">
+		<div class="uk-grid ">
+			<div class="uk-width-1-4 uk-panel">
+				<div class="uk-panel-box">
+					<ul class="uk-nav" ng-repeat="menu in menuAdmin">
+					    <li><a ng-click="setpage(menu.link)">{{ menu.title }}</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="uk-width-3-4 uk-panel">
+				<!-- -------------add portfolio---------- -->
+				<div class="uk-panel-box">
+					<h1 ng-if="pageMenu.link == null">สวัสดี admin ท่านต้องการทำรายการใด</h1>
+					<div ng-include="pageMenu.link"></div>
+
+					<!-- <form class="uk-form form-input-with-auto">
+		                 <div class="input-group">
+					        <label for="file">Select Files</label>
+						        <span class="help-block">
+						          <ul>
+						            <li>required</li>
+						            <li>minsize = 500</li>
+						            <li>accept = image/*, .zip</li>
+						            <li>minnum = 2</li>
+						          </ul>
+						        </span>
+					       		 <input type="file" ng-model="files" name="files" base-sixty-four-input multiple accept="image/*, .zip" minsize="500" required minnum="2">
+					      </div>
+					    <table class="uk-table">
+					    	 <caption>img base64</caption>
+						      <tr>
+							        <th>filename</th>
+							        <th>filetype</th>
+							        <th>filesize (<i><small>KB</small></i>)</th>
+							        <th>base64</th>
+						      </tr>
+						      <tr ng-repeat="file in files">
+							        <td>{{file.filename}}</td>
+							        <td>{{file.filetype}}</td>
+							        <td>{{file.filesize / 1000}}</td>
+							        <td>{{file.base64.substring(0, 30)}}...</td>
+						      </tr>
+				     		  <tr>
+							        <td colspan="4" ng-show="files.length == 0">
+							          <small><i>No file selected.</i></small>
+							        </td>
+						      </tr>
+					    </table>
+					   <div class="uk-button uk-button-primary" ng-click="portfolio_upload()">upload</div>
+				    </form> -->
+				</div>
+				
+
+
+
+				<!-- ----------add product------ -->
+			</div>
+		</div>
+
+	</div>
+	
+	
+</div>

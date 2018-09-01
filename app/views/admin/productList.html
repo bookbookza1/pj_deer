@@ -1,0 +1,139 @@
+<div ng-controller="productListCtrl">
+	<div ng-init="onload()">
+		<div class="uk-panel-box uk-panel-box-secondary">
+			<h4>รายการ</h4>	
+			<hr>
+			<ul class="uk-list uk-list-line">
+				
+				<li>
+					<div class="uk-grid uk-text-center">
+						<div class="uk-width-1-10">
+							ID
+						</div>
+						<div class="uk-width-2-10">
+							รูป
+						</div>
+						<div class="uk-width-3-10">
+							ชื่อ
+						</div>
+						<div class="uk-width-2-10">
+							ราคา
+						</div>
+						<div class="uk-width-1-10">
+							แก้ไข
+						</div>
+						<div class="uk-width-1-10">
+							ลบ
+						</div>
+					</div>
+				</li>
+				<li ng-repeat="data in product">
+					<div class="uk-grid uk-text-center">
+						<div class="uk-width-1-10">
+							{{ data.id}}
+						</div>
+						<div class="uk-width-2-10">
+							<img src="app/img/product/{{ data.img1 }}" alt="" width="50">
+						</div>
+						<div class="uk-width-3-10">
+							{{ data.product_name}}
+						</div>
+						<div class="uk-width-2-10">
+							{{ data.price}}
+						</div>
+						<div class="uk-width-1-10">
+							<a ng-click="setEdit(data)"><i class="material-icons">edit</i></a>
+						</div>
+						<div class="uk-width-1-10">
+							<a ng-click="delete(data.id)"> <i class="material-icons">delete</i></a>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>	
+		<div class="uk-panel-box uk-panel-box-secondary uk-margin-top">
+			<form name="add_product" class="uk-form form-input-with-auto">
+		            <fieldset data-uk-margin>
+		                <legend class="uk-text-muted">Edit Product</legend>
+		                <div>
+		                	<div class="uk-form-row">
+		                    	 <div class="uk-grid">
+			                		<div class="uk-width-1-4">
+			                			<label>เลือกประเภท</label>
+			                				*{{  nameShowType }}
+		                			 	 <select ng-model="editProduct.id_type" ng-change="selectType(editProduct.id_type)">
+									     	 <option ng-repeat="data in typeProduct" ng-value="data.id">{{data.name}}</option>
+									    </select>
+			                		</div>
+			                		<div class="uk-width-1-4">
+			                			<label>ประเภทย่อย</label>
+			                				*{{  nameShowType2 }}
+									    <select ng-model="editProduct.id_sub_type">
+									         <option ng-repeat="data in subType" ng-value="data.id_sub">{{data.name}}</option>
+									    </select>
+										
+			                		</div>
+			                	</div>
+		                    </div>
+		                	
+		                	<div class="uk-grid uk-grid-divider uk-margin-top">
+		                		<div class="uk-width-1-2">
+		                				<div class="uk-form-row">
+					                    	 <h4>ชื่อสินค้า</h4>
+					                    	 <input type="text" placeholder="ชื่อสินค้า" class="uk-form-large" ng-model="editProduct.product_name" >
+					                    </div>
+					                    <div class="uk-form-row ">
+					                    	<h4>รหัสสินค้า</h4>
+					                    	<input type="text" placeholder="รหัส" class="uk-form-large" ng-model="editProduct.product_key">
+					                    </div>
+					                    <div class="uk-form-row ">
+					                    	 <h4>รายละเอียดสินค้า</h4>
+					                    	 <textarea type="text" placeholder="รายละเอียด" class="uk-form-large " rows="5" ng-model="editProduct.product_detail"></textarea>
+					                    </div>
+					                    <div class="uk-form-row ">
+					                    	 <h4>ราคา</h4>
+					                    	 <input type="number" placeholder="ราคา" class="uk-form-large " ng-model="editProduct.price">
+					                    </div>
+					                     <div class="uk-form-row">
+					                    	 <h4>ราคา sale </h4>
+					                    	 <input type="number" placeholder="sale" class="uk-form-large " ng-model="editProduct.price_sale"/>
+					                    </div>			                   
+		                		</div>
+		                		<div class="uk-width-1-2">
+		                				<div class="uk-form-row">
+		                					
+					                    	 <h4>img1</h4>
+					                    	 <img src="app/img/product/{{ img1 }}" alt="" width="100">
+					                    	<input type="file" fileread ng-model="img1"/>
+					                    	
+					                    </div>
+					                    <div class="uk-form-row ">
+					                    	
+					                    	<h4>img2</h4>
+					                    	<img src="app/img/product/{{ img2 }}" alt="" width="100">
+					                    	 <input type="file" fileread ng-model="img2" />
+					                    	
+					                    </div>
+					                    <div class="uk-form-row ">
+					                    	 <h4>img3</h4>
+					                    	<img src="app/img/product/{{ img3 }}" alt="" width="100">
+					                    	<input type="file" fileread ng-model="img3" />
+					                    	
+					                    </div>
+					                     <div class="uk-form-row ">
+					                    	 <h4>img4</h4>
+					                    	 <img src="app/img/product/{{ img4 }}" alt="" width="100">
+					                    	<input type="file" fileread ng-model="img4"/>
+					                    	
+					                    </div>
+		                		</div>
+		                	</div>
+		                </div>
+		            </fieldset>
+		            <div class="uk-button uk-button-primary uk-margin-top" ng-click="update()">บันทึก</div>
+		     </form>
+		</div>	
+	</div>
+	
+	
+</div>

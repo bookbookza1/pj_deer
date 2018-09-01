@@ -1,0 +1,38 @@
+[
+	{
+		"type":"curtain",
+		"img" : "app/img/portfolio/curtain/1.jpg"
+	},
+	{
+		"type":"curtain",
+		"img" : "app/img/portfolio/curtain/2.jpg"
+	},
+	{
+		"type":"curtain",
+		"img" : "app/img/portfolio/curtain/3.jpg"
+	},
+	{
+		"type":"curtain",
+		"img" : "app/img/portfolio/curtain/4.jpg"
+	},
+	{
+		"type":"curtain",
+		"img" : "app/img/portfolio/curtain/5.jpg"
+	},
+	{
+		"type":"curtain",
+		"img" : "app/img/portfolio/partition/6.jpg"
+	},
+	{
+		"type":"partition",
+		"img" : "app/img/portfolio/partition/1.jpg"
+	},
+	{
+		"type":"partition",
+		"img" : "app/img/portfolio/partition/2.jpg"
+	},
+	{
+		"type":"partition",
+		"img" : "app/img/portfolio/partition/3.jpg"
+	}
+]

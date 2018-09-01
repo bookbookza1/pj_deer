@@ -1,0 +1,171 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta charset="TIS-620">
+    <title page-title ng-bind="page_title"></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="true" />
+
+     <!-- no-cache -->
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+
+
+    <!-- front -->
+    <link href="app/css/font-prompt.css" rel="stylesheet">
+   <!--  <style>
+        @import url('https://fonts.googleapis.com/css?family=Prompt');
+    </style> -->
+
+
+
+    <!-- icon -->
+    <!-- <link href="bower_components/material-design-icons/"> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- uikit -->
+
+    <!-- css -->
+    <link rel="stylesheet" href="app/css/uikit.almost-flat.min.css" />
+    <link rel="stylesheet" href="app/css/components/accordion.almost-flat.min.css">
+    <link rel="stylesheet" href="app/css/components/slideshow.almost-flat.min.css">
+    <link rel="stylesheet" href="app/css/components/slidenav.almost-flat.min.css">
+    <link rel="stylesheet" href="app/css/components/dotnav.almost-flat.min.css">
+    <link rel="stylesheet" href="app/css/components/slider.almost-flat.min.css">
+    <link rel="stylesheet" href="app/css/components/placeholder.almost-flat.min.css">
+    <link rel="stylesheet" href="app/css/components/search.almost-flat.min.css">
+    <link rel="stylesheet" href="app/css/components/form-select.almost-flat.min.css">
+    
+
+    <!-- js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="app/js/uikit.min.js"></script>
+   <!--  componet -->
+    <script src="app/js/components/slideshow.js"></script>
+    <script src="app/js/components/lightbox.js"></script>
+    <script src="app/js/components/pagination.js"></script>
+    <script src="app/js/components/accordion.js"></script>
+    <script src="app/js/components/parallax.js"></script>
+    <script src="app/js/components/slider.js"></script>
+    <script src="app/js/components/slideset.js"></script>
+    <script src="app/js/components/search.js"></script>
+    <script src="app/js/components/form-select.js"></script>
+    <script src="app/js/core/scrollspy.js"></script>
+    <script src="app/js/components/grid.js"></script>
+   <!--  <script src="app/js/components/slideshow-fx.js"></script> -->
+
+
+
+
+    <!-- angularJS -->
+   
+    <!-- ui-router -->
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+      <!-- angular-translate -->
+    <script src="bower_components/angular-translate/angular-translate.min.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+    <script src="bower_components/angular-base64-upload/src/angular-base64-upload.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-filter/dist/angular-filter.min.js"></script>
+    
+     
+      <!-- angular-selectize -->
+    <script src="app/js/selectize/selectize.js"></script>
+    <script src="app/js/selectize/angular-selectize.js"></script> 
+
+    <!-- pagining -->
+    <script src="bower_components/angularUtils-pagination/dirPagination.js"></script> 
+
+       <!--  <script src="app/js/components/slider.js"></script>
+         
+        <script src="app/js/components/slideset.js"></script>
+        <link rel="stylesheet" href="app/css/components/slideshow.almost-flat.css">
+        <script src="app/js/components/slideshow-fx.js"></script> -->
+
+    
+
+  
+ 
+        
+    <!-- ocLazyLoad -->
+    <script src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+    <link rel="stylesheet" href="app/css/master.css">
+
+
+    <!-- app -->
+    <script src="app/app.js"></script>
+    <script src="app/app.states.js"></script>
+    <script src="app/app.oc_lazy_load.js"></script>
+    <script src="app/app.directive.js"></script>
+    <script src="app/app.service.js"></script>
+
+
+
+
+
+</head>
+
+<body  class="deerd" >
+    
+
+         <!--  <div ng-if="promotion == false" id="popup-promotion" class="uk-modal ">
+              <div class="uk-modal-dialog uk-modal-dialog-lightbox promotion-center">
+                  <a href="" class="uk-modal-close uk-close uk-close-alt "></a>
+                  <img src="app/img/promotion/sale.jpg" alt="">
+              </div>
+          </div> -->
+         <loading-model ng-if="loadingPage == true"></loading-model>
+    
+       
+       <div ng-show="loadingPage == false">
+            <div ui-view="header"></div>
+            <div ui-view></div>
+            <div ui-view="footer" ng-if="showFooter == true"></div>
+       </div>
+        
+           
+        
+         <script>
+
+           
+
+         function load_cordova() {
+            bootstrapAngular();
+        }
+        function bootstrapAngular() {
+            console.log("Bootstrapping AngularJS");
+
+            // This assumes your app is named "app" and is on the body tag: <body ng-app="app">
+            // Change the selector from "body" to whatever you need
+            var domElement = document.querySelector('html');
+            // Change the application name from "app" if needed
+            angular.bootstrap(domElement, ['app']);
+        }
+        var app = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+
+        try {
+            if (app) {
+                window.cordovaStatus = true;
+                console.log("UA: Running in Cordova/PhoneGap");
+                document.addEventListener("deviceready", load_cordova, false);
+            } else {
+                window.cordovaStatus = false;
+                console.log("UA: Running in browser");
+                bootstrapAngular();
+            }
+        }
+        catch(err) {
+            console.log(err.message);
+        }
+      
+    </script>
+     	
+	
+</body>
+
+</html>
