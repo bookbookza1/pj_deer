@@ -35,7 +35,7 @@
 		<div class="uk-text-center">
 			<div style="margin-top: 6px;" class="uk-text-large"><span class="uk-text-bold" style="color: #f58426">A</span>mornp<span class="uk-text-bold" style="color: #f58426">a</span>n Decor</div>
 			<div style="position: absolute;top: 0px;right: 0;">
-				<div data-uk-dropdown="{mode:'click'}" ng-click="setDropdown(dropdownOpen)">
+				<div data-uk-dropdown="{mode:'click'}" >
 
 				    <!-- This is the element toggling the dropdown -->
 				    <div >
@@ -50,7 +50,8 @@
 	                        	
 	                        </li>
 	                      <!--   <li class="uk-nav-divider"></li> -->
-	                      <li class="uk-text-bold uk-text-center" style="background-color: black;color: white;border-radius: 4px">Menu</li>
+	                      <li class="uk-text-bold uk-text-center" style="background-color: black;color: white;border-radius: 4px">Menu
+	                      	<i class="uk-icon-caret-up"></i></li>
 	                        <li ng-repeat="menu in sections">
 	                        	<i class="material-icons" style="float: left;margin-right: 10px;margin-top: 5px;color: #f58426">{{ menu.icon }}</i>
 	                        	<a ui-sref="{{ menu.link }}" ui-sref-opts="{reload: menu.link }">{{ menu.title | translate }}</a>
