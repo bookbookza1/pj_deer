@@ -26,7 +26,7 @@ app
         '$anchorScroll',
         '$timeout',
             function ($rootScope, $state, $stateParams,$templateCache,$window,$translate,$anchorScroll,$timeout) {
-             //$templateCache.removeAll();
+             $templateCache.removeAll();
             //console.log("test");
              $rootScope.language = 'th' ;
              $rootScope.showFooter = true;
