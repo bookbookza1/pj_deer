@@ -19,10 +19,7 @@
                   $state.go('layout.product');
 
                 }
-                $scope.subOpen = false ;
-                $scope.subMenu = [];
-                $scope.checkOpen = $rootScope.checkOpen;
-                $scope.menu = []
+  
                 $scope.device;
              
                 $scope.$on('window_resize', function () {
@@ -38,7 +35,7 @@
                 });
 
                  $scope.onload = function(){
-                    getMenu();
+            
                     checkWith();
                     getRelatedProducts();
                     
@@ -70,57 +67,7 @@
                           $scope.device = 'device' ;
                       }
                 }
-                var getMenu = function(){
-                     $http.get('app/data/menu_product.json')
-                      .then(function(response) {
-                          //console.log(response.data);
-                          //$scope.imgPort = response.data ;
-                          $scope.menu = response.data ;
-
-                            var length = angular.copy($scope.menu);
-                            if($rootScope.checkOpen != null){
-                                $scope.subOpen = true ;
-                                for(var i=0;i<length.length;i++){
-                                    if(length[i].id == $scope.checkOpen){
-                                           $scope.subMenu = length[i].sub
-                                           break;
-                                    }
-                                }
-                            }
-
-                      },
-                         function(error,status) {
-                            // $scope.data.error = { message: error, status: status};
-                             console.log(error); 
-                         }
-                      ); 
-                }
-
-
-                $scope.openSub = function(data){
-                    console.log(data.id);
-                    if($scope.checkOpen == data.id){
-                         $scope.subOpen = false ;
-                         $scope.checkOpen  = null;
-                    }
-                    else{
-                         $scope.subOpen = true ;
-                         $scope.checkOpen  = data.id;
-                         $rootScope.checkOpen = data.id;
-                         $scope.subMenu = data.sub
-                    }
-                    
-                    //console.log(sub)
-                }
-
-                $scope.selectProduct = function(data){
-                    $state.go('layout.product',{id: $scope.checkOpen , id_sub : data }) 
-                }
-                
-                $scope.length = []
-                for(var i=0;i<8;i++){
-                   $scope.length[i] = i ;
-                }
+               
 
                $scope.$on('onLastRepeat', function (scope, element, attrs) {
                   $(window).trigger("resize");  

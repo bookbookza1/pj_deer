@@ -37,11 +37,34 @@
                 };
                $scope.collectionsShow ={
                   imgSelect : [
-                    {img1:'app/img/product/asphalt/stone/2.jpg',img2:'app/img/product/asphalt/stone/2sub.jpg',img3:'app/img/product/asphalt/stone/2-2.jpg'},
-                    {img1:'app/img/product/asphalt/stone/5.jpg',img2:'app/img/product/asphalt/stone/5sub.jpg',img3:'app/img/product/asphalt/stone/5-1.jpg'},
-                    {img1:'app/img/product/asphalt/wood/5.jpg',img2:'app/img/product/asphalt/wood/5sub.jpg',img3:'app/img/product/asphalt/wood/5-1.jpg'},
-                  ],
-                  imgExample : 'app/img/product/asphalt/stone/2-2.jpg'
+                    {
+                      img1:'app/img/product/asphalt/stone/2.jpg',
+                      img2:'app/img/product/asphalt/stone/2sub.jpg',
+                      img3 :'app/img/product/asphalt/stone/2-1.jpg',
+                      img4 :'app/img/product/asphalt/stone/2-2.jpg',
+                      img5 :'app/img/product/asphalt/stone/2-3.jpg',
+                      name: 'CALA MARBLE',
+                      number : 'NO.WST0002'
+                    },
+                    {
+                      img1:'app/img/product/asphalt/stone/3.jpg',
+                      img2:'app/img/product/asphalt/stone/3sub.jpg',
+                      img3:'app/img/product/asphalt/stone/3-1.jpg',
+                      img4 :'app/img/product/asphalt/stone/3-2.jpg',
+                      img5 :'app/img/product/asphalt/stone/3-3.jpg',
+                      name: 'GRAND CASA',
+                      number : 'NO.WST5003'
+                    },
+                    {
+                      img1:'app/img/product/asphalt/wood/5.jpg',
+                      img2:'app/img/product/asphalt/wood/5sub.jpg',
+                      img3:'app/img/product/asphalt/wood/5-1.jpg',
+                      img4:'app/img/product/asphalt/wood/5-2.jpg',
+                      img5:'app/img/product/asphalt/wood/5-3.jpg',
+                      name: "CLASSIC OAK",
+                      number:"NO.YOT2009"
+                    }
+                  ]
                }
                
                 var getProduct = function(){
@@ -158,6 +181,16 @@
                   {img : 'app/img/product/asphalt/icon11.jpg',name: "นำมารีไซเคิ้ลได้100%",delay:4400}
                  
                 ] ;
+
+                $scope.dataSmartmatt ={
+                    id: 3,
+                    name: "กระเบื้ยงยาง Smartmatt",
+                    sub: [
+                          {id_sub: "0", name: "ทั้งหมด"},
+                          {id_sub: "3-1", name: "Wood Texture"},
+                          {id_sub: "3-2", name: "Stone Texture"}
+                        ]
+                }
 
 
 

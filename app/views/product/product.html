@@ -1,6 +1,6 @@
 <div ng-init="onload()" >
 	<!-- menu -->
-	<div> 
+	<!-- <div> 
 		<div style="padding: 6px;background-color: #f7f7f7">
 			<div class="uk-grid uk-grid-collapse uk-text-center uk-text-bold">
 				<div class="uk-width-1-5 uk-width-medium-1-6 uk-width-large-1-6" ng-repeat="data in menu">
@@ -21,16 +21,18 @@
 		  	</div>
 
 		</div>
-	</div>
+	</div> -->
 	
 	<!-- Header Name -->
 	<div class="uk-text-center uk-text-bold uk-animation-fade" style="margin-top: 2%;"> 
 		<h1 ng-if="device == 'web'" class="uk-animation-fade" style="color: #c0bbbb;font-size: 38px">{{ nameProduct }} </h1>
 		<h2 ng-if="device == 'device'" class="uk-margin-top uk-animation-fade" style="color: #c0bbbb;">{{ nameProduct  }} </h2>
 	</div>
+	<hr>
+
 
 	<!-- Recommended -->
-	<div ng-if="setParamsSplitMenu == '0' " style="margin-top: 2%;width: 90%;margin-left: auto;margin-right: auto;">
+	<div ng-if="dataProduct == null " style="margin-top: 2%;width: 90%;margin-left: auto;margin-right: auto;">
 		<div class="uk-text-center" ng-if="loadingModeWall == true">
 			<i class="uk-icon-spinner uk-icon-spin uk-icon-large" style="color: cadetblue"></i>
 		</div>
@@ -73,11 +75,18 @@
 	</div>
 
 	<!-- Tile -->
-	<div style="margin-top: 2%;width: 90%;margin-left: auto;margin-right: auto;" ng-if="setParamsSplitMenu == '3'">
+	<div style="margin-top: 2%;width: 90%;margin-left: auto;margin-right: auto;" ng-if="dataProduct.id == '3'">
+		<div class="uk-button-dropdown uk-margin-bottom" data-uk-dropdown="{mode:'click'}" >
+			<button class="uk-button uk-button-amornpan" >เลือกแบบ <i class="uk-icon-caret-down"></i></button>
+	        <div class="uk-dropdown uk-dropdown-scrollable uk-dropdown-bottom uk-dropdown-close">
+	            <ul class="uk-nav uk-nav-dropdown">
+	                <li ng-repeat="dataSub in dataProduct.sub"><a ng-click="selectProductSub(dataProduct,dataSub)">{{dataSub.name}}</a></li>
+	            </ul>
+	        </div>
+	    </div>
 		<div class="uk-text-center" ng-if="loadingModeWall == true">
 			<i class="uk-icon-spinner uk-icon-spin uk-icon-large" style="color: cadetblue"></i>
 		</div>
-		<h4 class="uk-text-bold" ng-if="id_sub == '0'">Smartmatt</h4>
 		<div>
 			<div  class="uk-grid uk-grid-collapse" style="width: 100%;" ng-if="loadingModeWall == false">
 				<div class="uk-width-large-1-5 uk-width-medium-1-4 uk-width-1-3 uk-text-center uk-margin-bottom" dir-paginate="data in productList | itemsPerPage: numPage.tile" pagination-id="productList-page"  on-last-repeat>
@@ -123,7 +132,7 @@
 	</div>
 
 	<!-- Tile 2-->
-	<div style="margin-top: 2%;width: 90%;margin-left: auto;margin-right: auto;" ng-if="setParamsSplitMenu == '11'">
+	<div style="margin-top: 2%;width: 90%;margin-left: auto;margin-right: auto;" ng-if="dataProduct.id == '11'">
 		<div class="uk-text-center" ng-if="loadingModeWall == true">
 			<i class="uk-icon-spinner uk-icon-spin uk-icon-large" style="color: cadetblue"></i>
 		</div>
@@ -148,7 +157,7 @@
 	</div>
 
 	<!-- มุ้งลวด -->
-	<div ng-if="setParamsSplitMenu == '4'">
+	<div ng-if="dataProduct.id == '4'">
 		<div class="product-set-for-article" >
 			<h4 class="uk-text-bold" ng-if="id_sub == '0'">แบบจีบ</h4>
 			<!-- แบบจีบ -->
@@ -202,7 +211,7 @@
 	</div>
 
 	<!-- partition -->
-	<div ng-if="setParamsSplitMenu == '2'">
+	<div ng-if="dataProduct.id == '2'">
 		<div class="uk-panel uk-panel-box uk-panel-box-secondary set-product-partition " >
 			<h4 class="uk-text-bold" ng-if="id_sub == '0'">ฉากกั้นห้องแบบทึบ</h4>
 			<!-- partition1 -->
@@ -290,8 +299,16 @@
 	</div>
 	
 	<!-- Wallerpaper -->
-	<div ng-if="setParamsSplitMenu == '1' " >
+	<div ng-if="dataProduct.id == '1' " >
 		<div style="width: 80%;margin-left: auto;margin-right: auto;"  >
+			<div class="uk-button-dropdown uk-margin-bottom" data-uk-dropdown="{mode:'click'}" >
+				<button class="uk-button uk-button-amornpan" >เลือกแบบ <i class="uk-icon-caret-down"></i></button>
+		        <div class="uk-dropdown uk-dropdown-scrollable uk-dropdown-bottom uk-dropdown-close">
+		            <ul class="uk-nav uk-nav-dropdown">
+		                <li ng-repeat="dataSub in dataProduct.sub"><a ng-click="selectProductSub(dataProduct,dataSub)">{{dataSub.name}}</a></li>
+		            </ul>
+		        </div>
+		    </div>
 			<!-- detail wallpaper -->
 			<div class="uk-grid">
 				<div class="uk-width-1-1" ng-if="device == 'web'" style="margin-top: 30px;">
@@ -326,7 +343,7 @@
 
 				<div class="uk-text-center uk-margin-bottom" >
 					<div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}" >
-	                    <button class="uk-button" >เลือกประเภท <i class="uk-icon-caret-down"></i></button>
+	                    <button class="uk-button uk-button-amornpan" >เลือกประเภท <i class="uk-icon-caret-down"></i></button>
 	                    <span class="uk-text-small uk-text-muted">คลิก</span>
 	                    <div class="uk-dropdown uk-dropdown-scrollable uk-dropdown-bottom uk-dropdown-close">
 	                        <ul class="uk-nav uk-nav-dropdown">
@@ -366,7 +383,7 @@
 	</div>
 
 	<!-- ผ้าม่าน -->
-	<div ng-if="setParamsSplitMenu == '5' " >
+	<div ng-if="dataProduct.id == '5' " >
 		<div class="product-set-for-article" >
 			<!-- หลุยส์ -->
 			<div ng-if="id_sub == '0' || id_sub == '5-1'">
@@ -481,10 +498,10 @@
 	</div>
 
 	<!-- มู่ลี่ -->
-	<div ng-if="setParamsSplitMenu == '6' " >
+	<div ng-if="dataProduct.id == '6' " >
 		<div class="product-set-for-article"  >
 			<!-- ทั้งหมด -->
-			<div ng-if="id_sub == '0'">
+			<div>
 				<h4 class="uk-text-bold">ลักษณะทั่วไปของมู่ลี่</h4>
 				<div class="text-indent">
 					มู่ลี่เป็นม่านชนิดหนึ่งที่ใช้ทดแทนผ้าม่าน มู่ลี่จะสามารถปรับแสงได้โดยการพลิกใบมู่ลี่อีกทั้งมู่ลี่ยังสามารถเก็บขึ้นลงได้ตามความต้องการของผู้ใช้ วัสดุที่ทำมู่ลี่ได้มีหลายชนิด ดังนี้ 
@@ -512,46 +529,48 @@
 					 3.  ระบบโซ่วนหรือเชือกดึงที่มีผลต่อน้ำหนักการดึงอย่างมาก 
 				</div>
 			</div>
-			<!-- มู่ลี่พลาสติก -->
-			<div ng-if="id_sub == '6-1'">			
-				<div class="text-indent">
-					มู่ลี่พลาสติก  เป็นมู่ลี่สำเร็จรูปขายตามห้างสรรพสินค้าต่างๆเป็นมู่ลี่ที่มีราคาถูกที่สุดแต่การใช้งานไม่คงทนเนื่องจากไม่สามารถโดนความร้อนได้เพราะจะทำให้มู่ลี่งอ
-				</div>
-			</div>
-			<!-- มู่ลี่อลูมิเนียม -->
-			<div ng-if="id_sub == '6-2'">
-				<div class="text-indent">
-					มู่ลี่อลูมิเนียม  เป็นมู่ลี่ที่มีราคาไม่แพงสามารถใช้งานได้ดีในการพลิกใบเปิดปิดขึ้นลง แต่มีข้อเสียก็คือใบมู่ลี่ถ้าถูกชนแรงๆอาจมีโอกาสใบยับทำให้ไม่สวยงามได้ง่าย
-				</div>
-			</div>
-			<!-- ผ้าม่านหน้าม้า -->
-			<div ng-if="id_sub == '6-3'">	
-				<div class="text-indent">
-					มู่ลี่ไม้  เป็นสินค้าที่มีความนิยมสูงมากเนื่องจากไม้เป็นวัสดุที่เป็นธรรมชาติ เหมาะกับการใช้งานภายในบ้านและเข้ากับเฟอร์นิเจอร์ต่างๆได้เป็นอย่างดี ให้ความรู้สึกที่เป็นธรรมชาติและมีความหรูหราได้ในเวลาเดียวกัน  ทั้งนี้มู่ลี่ไม้ก็ยังมีประเภทต่างๆอีก ดังนี้<br>
-					• มู่ลี่ไม้ที่ทำจากไม้รามิน ซึ่งมีความแข็งแรงคงทนมีข้อเสียคือมีน้ำหนักมาก และราคาสูงเหมาะกับการติดตั้งในทิศตะวันตก <br>
-					• มู่ลี่ไม้ที่ทำจากไม้บาสบูด  เป็นมู่ลี่ไม้ที่เนียนสวย มีน้ำหนักเบาราคาไม่แพง ถ้าเลือกไม้บาสบูดที่มีคุณภาพดีมีความหนาเพียงพอจากโรงงานที่มีคุณภาพดีก็มีความทนทานพอสมควรและใช้งานได้ดีทีเดียว <br>
-					• มู่ลี่ไม้ที่ทำจากไม้ไผ่  เป็นมู่ลี่ไม้ที่ไม่ได้มีความนิยมมาก แต่มีลายที่ค่อนข้างเยอะแต่ก็เหมาะกับการใช้งานในบางกรณีเท่านั้น <br>
-					• มู่ลี่พลาสติก หรือมู่ลี่พีวีซี มู่ลี่ชนิดนี้เหมาะกับการใช้งานในห้องน้ำ ทำสีเลียนแบบไม้ ใช้ทดแทนไม่ที่อยู่ในห้องน้ำได้เป็นอย่างดี
-				</div>
-			</div>
 		</div>
 	</div>
 
 	<!-- ม่านม้วน -->
-	<div ng-if="setParamsSplitMenu == '7' " >
+	<div ng-if="dataProduct.id == '7' " >
 		<div class="product-set-for-article"  >
 			<!-- ทั้งหมด -->
-			<div ng-if="id_sub == '0'">
+			<div>
 				<h4 class="uk-text-bold">ลักษณะทั่วไปของม่านม้วน</h4>
 				<div class="text-indent">
 					ม่านม้วนเป็นผ้าม่านบังแสงแบบใหม่แบบหนึ่งที่มีความเรียบง่าย ลักษณะของตัวม่านเป็นแผ่นที่ทำมาจากผ้า ทำจากพีวีซี หรือเกรตเตอร์แล้วนำมาเคลือบให้เนื้อมีความคงรูปเหมาะที่จะเอามาม้วนเก็บไว้ในรางของม่านม้วน โดยปกติการทำงานของม่านม้วนจะเลื่อนขึ้นลงในแนวตั้งและเวลาบังแสงก็จะบังแสงได้หลายรูปแบบตามประเภทของม่านม้วน ม่านม้วนมีทั้งหมด 3 ประเภท  ดังนี้
 				</div>
 				<div>
      				1. แบบ  Block out  หรือม่านม้วนแบบทึบแสงจะมี 2 ประเภทหลักๆคือทึบแสงแบบใช้ผ้าทึบแสง หรือทึบแสงแบบใช้ผ้าธรรมดาแล้วมาเคลือบโฟมทึบแสง จะเป็นม่านม้วนที่มีคุณสมบัติช่วยลดความร้อนได้มากขึ้นกว่าม่านม้วนแบบใช้ผ้าทึบแสง และยังมีการใช้เทคโนโลยีอลูมิเนียมทึบแสง ตรงนี้จะยิ่งช่วยลดความร้อนได้ดียิ่งขึ้นไปอีก แต่ข้อเสียคือ มีราคาที่ค่อนข้างสูง <br>
+     				<!-- รูป block out -->
+     				<div class="uk-grid uk-margin-top">
+						<div class="uk-width-1-3">
+							<div ><img src="app/img/product/roll_curtain/block_out/1.jpg" alt=""></div>
+						</div>
+						<div class="uk-width-1-3">
+							<div ><img src="app/img/product/roll_curtain/block_out/2.jpg" alt=""></div>
+						</div>
+						<div class="uk-width-1-3">
+							<div ><img src="app/img/product/roll_curtain/block_out/3.jpg" alt=""></div>
+						</div>
+					</div>
  
 					2. แบบ Sunscreen  คือม่านม้วนที่สามารถมองเห็นด้านนอกโดยที่ด้านนอกมองเข้ามาด้านในไม่เห็นในเวลากลางวันหรืออาจจะเห็นลางๆ แต่ถ้าเป็นเวลากลางคืนด้านที่สว่างกว่าจะถูกมองเห็น ม่านม้วนSunscreen จะเหมาะกับออฟฟิต และบ้านที่มีการตกแต่งภายนอกสวย เนื่องจากม่านม้วน Sunscreen เป็นม่านที่สามารถปิดลงมาแล้วมองออกไปด้านนอกได้ ช่วยลดความร้อนและรังสียูวีที่เข้ามาในห้อง และช่วยลดอุณหภูมิภายในห้องได้ <br>
-					 
+					<!-- Sunscreen -->
+					<div class="uk-grid uk-margin-top uk-grid-collapse">
+						<div class="uk-width-1-1" style="padding: 16px">
+							<div ><img src="app/img/product/roll_curtain/sunscreen/1.jpg" alt=""></div>
+						</div>
+						
+					</div>
 					3. แบบ Dim  out หรือแบบไม่ทึบแสง เป็นม่านม้วนที่เวลาปิดลงมาแสงยังสามารถส่องผ่านเข้ามาในห้องได้บ้างแต่ไม่สามารถมองเห็นด้านนอกห้องได้ในขนาดที่ปิดม่านม้วนลงมา ม่านม้วนประเภทนี้เป็นม่านม้วนที่มีราคาถูกที่สุดในบรรดาม่านม้วนทั้ง 3 แบบ <br>
+					<!-- Dim out -->
+					<div class="uk-grid uk-margin-top uk-grid-collapse">
+						<div class="uk-width-1-1" style="padding: 16px">
+							<div ><img src="app/img/product/roll_curtain/dim_out/1.jpg" alt=""></div>
+						</div>
+					</div>
 				</div >
 				
 				<div class="uk-text-bold uk-margin-top"> วิธีการใช้งานของม่านม้วน ม่านม้วนมี 2 ระบบ ดังนี้</div>
@@ -579,58 +598,14 @@
 				<div class="uk-margin-top"><img src="app/img/product/roll_curtain/2.jpg" alt=""></div>
 				<div class="uk-text-center"><img src="app/img/product/roll_curtain/1.jpg" alt=""></div>
 			</div>
-
-			<!-- Block out -->
-			<div ng-if="id_sub == '7-1'">			
-				<div class="text-indent">
-					แบบ  Block out  หรือม่านม้วนแบบทึบแสงจะมี 2 ประเภทหลักๆคือทึบแสงแบบใช้ผ้าทึบแสง หรือทึบแสงแบบใช้ผ้าธรรมดาแล้วมาเคลือบโฟมทึบแสง จะเป็นม่านม้วนที่มีคุณสมบัติช่วยลดความร้อนได้มากขึ้นกว่าม่านม้วนแบบใช้ผ้าทึบแสง และยังมีการใช้เทคโนโลยีอลูมิเนียมทึบแสง ตรงนี้จะยิ่งช่วยลดความร้อนได้ดียิ่งขึ้นไปอีก แต่ข้อเสียคือ มีราคาที่ค่อนข้างสูง 
-				</div>
-				<div class="uk-grid uk-margin-top">
-					<div class="uk-width-1-3">
-						<div ><img src="app/img/product/roll_curtain/block_out/1.jpg" alt=""></div>
-					</div>
-					<div class="uk-width-1-3">
-						<div ><img src="app/img/product/roll_curtain/block_out/2.jpg" alt=""></div>
-					</div>
-					<div class="uk-width-1-3">
-						<div ><img src="app/img/product/roll_curtain/block_out/3.jpg" alt=""></div>
-					</div>
-				</div>
-				
-				
-				
-			</div>
-			<!-- Sunscreen -->
-			<div ng-if="id_sub == '7-2'">
-				<div class="text-indent">
-					แบบ Sunscreen  คือม่านม้วนที่สามารถมองเห็นด้านนอกโดยที่ด้านนอกมองเข้ามาด้านในไม่เห็นในเวลากลางวันหรืออาจจะเห็นลางๆ แต่ถ้าเป็นเวลากลางคืนด้านที่สว่างกว่าจะถูกมองเห็น ม่านม้วนSunscreen จะเหมาะกับออฟฟิต และบ้านที่มีการตกแต่งภายนอกสวย เนื่องจากม่านม้วน Sunscreen เป็นม่านที่สามารถปิดลงมาแล้วมองออกไปด้านนอกได้ ช่วยลดความร้อนและรังสียูวีที่เข้ามาในห้อง และช่วยลดอุณหภูมิภายในห้องได้
-				</div>
-				<div class="uk-grid uk-margin-top">
-					<div class="uk-width-1-1">
-						<div ><img src="app/img/product/roll_curtain/sunscreen/1.jpg" alt=""></div>
-					</div>
-					
-				</div>
-			</div>
-			<!-- Dim  out -->
-			<div ng-if="id_sub == '7-3'">	
-				<div class="text-indent">
-					แบบ Dim  out หรือแบบไม่ทึบแสง เป็นม่านม้วนที่เวลาปิดลงมาแสงยังสามารถส่องผ่านเข้ามาในห้องได้บ้างแต่ไม่สามารถมองเห็นด้านนอกห้องได้ในขนาดที่ปิดม่านม้วนลงมา ม่านม้วนประเภทนี้เป็นม่านม้วนที่มีราคาถูกที่สุดในบรรดาม่านม้วนทั้ง 3 แบบ
-				</div>
-				<div class="uk-grid uk-margin-top">
-					<div class="uk-width-1-1">
-						<div ><img src="app/img/product/roll_curtain/dim_out/1.jpg" alt=""></div>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 
 	<!-- ม่านมอเตอร์ -->
-	<div ng-if="setParamsSplitMenu == '8' " >
+	<div ng-if="dataProduct.id == '8' " >
 		<div class="product-set-for-article"  >
 			<!-- ทั้งหมด -->
-			<div ng-if="id_sub == '0'">
+			<div >
 				<h4 class="uk-text-bold">ลักษณะทั่วไปของม่านมอเตอร์</h4>
 				<div class="text-indent">
 					 ม่านมอเตอร์เป็นม่านที่ใช้ในการควบคุมโดยไฟฟ้าซึ่งจะบังคับให้ม่านดึงขึ้น ดึงลงและออกข้าง เปิดปิดผ้าม่านด้วยระบบไฟฟ้าที่มีทั้งระบบรีโมทและระบบสวิตส์ในส่วนของม่านมอเตอร์แบ่งออกเป็น  2  แบบใหญ่ๆ คือ 
@@ -657,29 +632,13 @@
 
 				</div>
 			</div>
-
-			<!-- มอเตอร์ม่านม้วน -->
-			<div ng-if="id_sub == '8-1'">			
-				<div class="text-indent">
-		 
-				</div>
-			</div>
-			<!-- มอเตอร์แบบท่อต่างๆ -->
-			<div ng-if="id_sub == '8-2'">
-				<div class="text-indent">
-					มอเตอร์แบบท่อต่างๆ มอเตอร์แบบนี้จะเป็นการบังคับผ้าม่านขึ้นลงในแนวตั้ง นิยมใช้กับม่านม้วนซึ่งม่านม้วนจะมีมอเตอร์ให้เลือกหลายออฟชั่นด้วยกัน ออฟชั่นที่นิยมมากจะมีมอเตอร์เกรดพรีเมียมของ  Somfy เป็นมอเตอร์ที่ได้รับความนิยมจากทั่วโลกมีมาตรฐานการทำงานที่สูง อีกออฟชั่นคือมอเตอร์เกรดเทียบเท่า โดย  icurtain  เลือกใช้มอเตอร์ของ biw  เป็นมอเตอร์ที่มีการทำงานต่อเนื่องและคงทนแข็งแรงสามารถรับน้ำหนักผ้าได้เยอะ มอเตอร์ม่านม้วนและมอเตอร์ผ้าม่านเป็นสินค้าที่มีราคาสูง ดังนั้นสิ่งสำคัญที่สุดคือการเลือกสเป็กของมอเตอร์และการวางแผนการใช้งานของมอเตอร์ให้เหมาะสมและเต็มประสิทธิภาพ ถ้าเราวางแผนการใช้งานของมอเตอร์ได้อย่างดีจะทำให้เราประหยัดค่ามอเตอร์ไปได้มาก อีกทั้งยังสามารถใช้งานได้ตรงตามความต้องการ บางครั้งความเข้าใจในเรื่องของมอเตอร์ถ้าไม่มากเพียงพอจะทำให้ต้นทุนค่ามอเตอร์สูงเป็นอย่างมาก
-					ประโยชน์ของม่านมอเตอร์
-				</div>
-			</div>
-			
 		</div>
 	</div>
 
 	<!-- ม่านไม้ไผ่ -->
-	<div ng-if="setParamsSplitMenu == '9' " >
+	<div ng-if="dataProduct.id == '9' " >
 		<div class="product-set-for-article"  >
-			<!-- ทั้งหมด -->
-			<div ng-if="id_sub == '0'">
+			<div>
 				<h4 class="uk-text-bold">ลักษณะของม่านไม้ไผ่</h4>
 				<div class="text-indent">
 					  ม่านไม้ไผ่เป็นม่านชนิดหนึ่งที่ทำมาจากไม้ไผ่ มีวิธีการใช้งาน  2  แบบ  คือ <br>
@@ -700,28 +659,14 @@
 				</div>
 			
 			</div>
-
-			<!-- แบบม้วน -->
-			<div ng-if="id_sub == '9-1'">			
-				<div class="text-indent">
-		 
-				</div>
-			</div>
-			<!-- แบบผับ -->
-			<div ng-if="id_sub == '9-2'">
-				<div class="text-indent">
-					
-				</div>
-			</div>
-			
 		</div>
 	</div>
 
 	<!-- ม่านปรับแสง -->
-	<div ng-if="setParamsSplitMenu == '10' " >
+	<div ng-if="dataProduct.id == '10' " >
 		<div class="product-set-for-article"  >
 			<!-- ทั้งหมด -->
-			<div ng-if="id_sub == '0'">
+			<div>
 				<h4 class="uk-text-bold">ลักษณะทั่วไปของม่านปรับแสง</h4>
 				<div class="text-indent">
 					  ม่านปรับแสงเป็นลักษณะม่านที่ใช้บังแสงในแนวตั้ง มีทั้งวัสดุที่ทำจากผ้ามาเคลือบโค้ดติ้ง  หรือวัสดุที่ทำจากพีวีซี ม่านปรับแสงเป็นม่านชนิดหนึ่งที่ได้รับความนิยมอย่างมาก นิยมติดตั้งที่ออฟฟิตเนื่องจากสามารถปรับใบให้มองเห็นด้านนอกได้ และสามารถเปิดปิดด้านข้างได้ แต่ทั้งนี้ม่านปรับแสงก็มีข้อเสียอยู่บ้างในเรื่องการใช้งานเมื่อใช้ไปนานๆอาจจะมีปัญหาในเรื่องของใบบางใบที่ไม่พลิกและ อาจจะมีปัญหาในเรื่องของการดูแลรักษาทำความสะอาด ม่านปรับแสงมี 3 ประเภทหลักๆ <br>
@@ -746,44 +691,19 @@
 				</div>
 			
 			</div>
-
-			<!-- Block  out -->
-			<div ng-if="id_sub == '10-1'">			
-				<div class="text-indent">
-		 			ม่านปรับแสงแบบ Block out คือม่านปรับแสงที่ผ้าทึบแสงแบบ 100%  แสงไม่สามารถผ่านเข้ามาในห้องในกรณีที่ปิดม่าน
-				</div>
-			</div>
-			<!-- Dim out -->
-			<div ng-if="id_sub == '10-2'">
-				<div class="text-indent">
-					ม่านปรับแสงแบบ  Dim out คือม่านปรับแสงที่ แสงสามารถผ่านเข้ามาในห้องได้ แต่ไม่สามารถมองเห็นด้านนอกห้องได้
-				</div>
-			</div>
-
-				<!-- Sunscreen -->
-			<div ng-if="id_sub == '10-3'">
-				<div class="text-indent">
-					เป็นม่านปรับแสงที่มองทะลุออกไปด้านนอกได้ โดยที่ด้านนอกมองไม่เห็นด้านใน ในเวลากลางวันและเวลากลางคืนด้านที่สว่างกว่าจะถูกมองเห็น
-				</div>
-			</div>
-			
-			
 		</div>
 	</div>
 
 	<!-- อุปกรณ์ราง -->
-	<div ng-if="setParamsSplitMenu == '12' " style="margin-top: 2%;width: 90%;margin: auto;">
+	<div ng-if="dataProduct.id == '12' " style="margin-top: 2%;width: 90%;margin: auto;">
 		<h4 class="uk-text-bold">อุปกรณ์ราง</h4>
-	<!-- 	<div class="uk-text-center">
-			<img src="app/img/product/rail/1-fix.jpg" alt="">
-		</div> -->
-		<div class="uk-grid uk-margin-top uk-grid-collapse">
+		<div class="uk-grid uk-margin-top uk-grid-collapse uk-margin-bottom">
 			<div class="uk-width-1-2"  dir-paginate="data in railList | itemsPerPage: 4" pagination-id="productList-rail" >
 				<!-- <img src="app/img/product/rail/1-1d.jpg" style="width: 60%"> -->
 				<img class="uk-animation-fade" ng-src="{{ data.img }}" >
 			</div>
 		</div>
-		<dir-pagination-controls  ng-if="loadingModeWall == false" pagination-id="productList-rail" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" ></dir-pagination-controls>
+		<dir-pagination-controls   pagination-id="productList-rail" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" ></dir-pagination-controls>
 		
 	</div>
 

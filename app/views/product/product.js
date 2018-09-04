@@ -14,27 +14,27 @@ angular
                 console.log("product");
 
 
-                $scope.subOpen = false ;
+                $scope.dataProduct = $state.params.data;
                 $rootScope.showFooter = false;
                 $scope.subMenu = [];
                 $scope.railList = [];
-                // var accordion = UIkit.accordion($('.uk-accordion'));
-                //console.log($state.params);
+                $scope.id_sub
+                console.log($state.params);
                 $scope.loadingModeWall = true ;
-                //console.log($state.params.id_sub);
+                
                 $scope.headerModeWallpaper = $translate.instant('recommended') ; //ชื่อแสดงประเภทวอลเปเปอร์
-
+              
                
-                $scope.checkOpen = $rootScope.checkOpen;
+              
                 $scope.nameProduct = $translate.instant('recommended product');
-                $scope.setParamsSplitMenu = 0 ;
+              
                 $scope.menu = []
              
                 $scope.productList = [] ;
                 // $scope.tileGuleList = [] ;
                 $scope.recommendedWallList = [] ;
-                $scope.id_sub = $state.params.id_sub ;
-                console.log($state.params);
+           
+                //console.log($state.params);
                 $scope.numPage = {
                     wall : null ,
                     tile : null ,
@@ -54,20 +54,17 @@ angular
 
                $scope.onload = function(){
 
-                     getMenu();
                      checkWith();
-                     getProductRail();
+                     getProductRail(); // ข้อมูลรางผ้าม่าน
 
-                     if($scope.id_sub == null){
-                        // console.log($scope.id_sub);
+                     if($scope.dataProduct == null){
+                        
                          getProductRecommended();
                          getRecommendedWallFirst();
-                         //console.log('1')
+                      
                      }
                      else{
-                          //console.log('2')
-                        $scope.checkOpen = $state.params.id ;
-                        $scope.selectProductSub($scope.id_sub);
+                        $scope.selectProductSub($scope.dataProduct);
                      }
 
                }
@@ -81,8 +78,8 @@ angular
                         }
                     }
                     // console.log($scope.railList);
-
                }
+
                 var checkWith = function(){
                     if (window.innerWidth > 1024) {
                         $scope.device = 'web' ;
@@ -104,9 +101,10 @@ angular
                       .then(function(response) {
                           //console.log(response.data); 
                           $scope.recommendedWallList = response.data ;
+                          $rootScope.showFooter = true;
                       },
                          function(error,status) {
-                            // $scope.data.error = { message: error, status: status};
+                          
                              console.log(error); 
                          }
                       );   
@@ -115,8 +113,7 @@ angular
                        $scope.loadingModeWall = true;
                        $serve.get('api/product/recommended/'+$scope.numPage.recommendedTile)
                            .then(function(response) {
-                            //console.log(response.data);
-                            //setProduct(response.data);
+                           
                             $scope.productList = response.data ;
                             $scope.loadingModeWall = false;
                             $rootScope.showFooter = true;
@@ -161,108 +158,42 @@ angular
                     component.update();
                });
 
-              
 
-               // โหลดข้อมูลเมนู
-               var getMenu = function(){
-                    $http.get('app/data/menu_product.json')
-                      .then(function(response) {
-                          //console.log(response.data);
-                          //$scope.imgPort = response.data ;
-                          $scope.menu = response.data ;
-
-                            var length = angular.copy($scope.menu);
-                            if($rootScope.checkOpen != null){
-                                $scope.subOpen = true ;
-                                for(var i=0;i<length.length;i++){
-                                    if(length[i].id == $scope.checkOpen){
-                                           $scope.subMenu = length[i].sub
-                                           break;
-                                    }
-                                }
-                            }
-
-                      },
-                         function(error,status) {
-                            // $scope.data.error = { message: error, status: status};
-                             console.log(error); 
-                         }
-                      ); 
-               }
-
-                // เลือกเมนูใหญ่
-                $scope.selectProduct = function(data){
-                    
-                    if($scope.checkOpen == data.id){
-                         $scope.subOpen = false ;
-                         $scope.checkOpen  = null;
-                    }
-                    else{
-                         $scope.subOpen = true ;
-                         $scope.checkOpen  = data.id;
-                         $rootScope.checkOpen = data.id;
-                         $scope.subMenu = data.sub
- 
-                    }
-                    
-                }
-
-
-                $scope.selectProductSub = function(data){
-                     console.log("in");
-                    
+                $scope.selectProductSub = function(data,data_id_sub){
+                     console.log(data_id_sub);
+                     console.log(data);
                      //$scope.reload.product = true ;
-                     
+                     if(data_id_sub == null || data_id_sub == undefined){
+                        $scope.id_sub = 0 ;
+                        $scope.nameProduct = data.name;   
+                     }
+                     else{
+                        $scope.id_sub = data_id_sub.id_sub ;
+                        $scope.nameProduct = data_id_sub.name;   
+                     }
+                     console.log($scope.id_sub);
                      $scope.productList = [] ;
-                     // $scope.tileGuleList = [] ;
                      $scope.recommendedWallList = [] ;
-
-                     var id = angular.copy($scope.checkOpen) ;
-                     var id_sub = data.id_sub ;
-                     $scope.setParamsSplitMenu = id ;
-                     
-                     //console.log($scope.setParamsSplitMenu);
-                     $scope.id_sub = id_sub ;
-                     $scope.nameProduct = data.name ;                   
+                                    
                     
 
-                     if(id == 1)
+                     if(data.id == 1)
                      {
                         $scope.loadingModeWall = true ;
                         $scope.headerModeWallpaper = $translate.instant('recommended') ;   
-                        getModeWall(id_sub);
+                        getModeWall($scope.id_sub);
                        
                      }
-                     else if(id == 3 || id == 11){
-                         // $scope.loadingModeWall = true ;
-                         // if(id_sub == '0'){
-                         //     $serve.get('api/product/'+id+'/3-3')
-                         //        .then(function(response) {
-
-                         //             $scope.tileGuleList  = response.data; 
-                         //             getProduct(id,id_sub);
-                         //      },
-                         //         function(error,status) {
-                         //            // $scope.data.error = { message: error, status: status};
-                         //             console.log(error); 
-                         //         }
-                         //      ); 
-                              
-                         // }
-                         // else{
-                         //   
-                         // }
-                        getProduct(id,id_sub);
+                     else if(data.id == 3 || data.id == 11){
+                         
+                        getProduct(data.id,$scope.id_sub);
                         
                      }
                      else{
                          $scope.productList = [] ;
-                       
+                         $rootScope.showFooter = true;
                     }
-                    console.log($scope.setParamsSplitMenu);
-                    console.log($scope.id_sub);
-                   
-                   
+ 
               }
 
               var getModeWall = function(id_sub){
@@ -293,6 +224,7 @@ angular
                                
                                 getRecommendedWall('0');  
                              }
+
                               
                              
                     },
@@ -311,6 +243,7 @@ angular
                           console.log(response.data); 
                           $scope.productList = response.data ;
                           $scope.loadingModeWall = false ;
+                          $rootScope.showFooter = true;
 
                       },
                          function(error,status) {

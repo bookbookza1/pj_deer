@@ -1,40 +1,139 @@
-<div class="uk-cover-background header-background" style=" background-image: url('app/img/all/header.jpg');" ng-init="onload()">
-	<!-- <img src="app/img/all/header.jpg" alt="" width="300"> -->
-	<div class="uk-grid uk-grid-collapse">
+<div class="header-background" ng-init="onload()">
+	<!-- สำหรับเว็บ -->
+	<div class="uk-grid uk-grid-collapse" ng-if="device == 'web' ">
 			<div class="uk-width-1-2">
-					<div class="header-logo shadow">
+					<div class="header-logo">
 						<div class="uk-cover-background" >
-							<img src="app/img/all/logo.png" alt="">
+							<img src="app/img/all/logo.png" alt="" style="width: 60%">
 						</div>
 					</div>
 			</div>
 			<div class="uk-width-1-2">
-					<nav class="uk-navbar-flip header-menu" style="margin-top: 15px;margin-right: 60px;" ng-if="device == 'web' ">
+					<nav class="uk-navbar-flip header-menu" >
 					    <ul class="uk-navbar-nav" ng-repeat="menu in sections">
-					        <li ui-sref-active="header-menu-active"><a ui-sref="{{ menu.link }}" ui-sref-opts="{reload: menu.link}">{{ menu.title | translate }}</a></li>
+					        <li ng-if="menu.sub == false" ui-sref-active="header-menu-active"><a class="main" ui-sref="{{ menu.link }}" ui-sref-opts="{reload: menu.link}">{{ menu.title | translate }}</a></li>
+					        <li ng-if="menu.sub == true" class="uk-parent" data-uk-dropdown ui-sref-active="header-menu-active">
+					        	<a class="main" ui-sref="{{ menu.link }}({data:null})" ui-sref-opts="{reload: menu.link}">{{ menu.title | translate }}</a>
+					        	<div class="uk-dropdown uk-dropdown-width-2">
+                                    <div class="uk-grid uk-dropdown-grid">
+                                        <div class="uk-width-1-2" ng-repeat="data in menu.item">
+                                            <ul class="uk-nav uk-nav-dropdown uk-panel">
+                                                <li ><a ui-sref="layout.product({data:data})" ui-sref-opts="{reload: true}">{{data.name}}</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+					        	
+					        </li>
 					    </ul>
 					</nav>
-					<div ng-if="device == 'device' ">
-						<div style="position: relative" data-uk-dropdown="{mode:'click'}">
-
-						    <!-- This is the element toggling the dropdown -->
-						    <div class="uk-text-right">
-						    	 <div class="uk-badge" style="background: none;color: #a8a8a8;margin-right: 15px;border: 1px solid #a8a8a8;margin-top: 15px;"><i class="material-icons">dehaze</i></div>
-
-						    </div>
-						  	<div class="uk-dropdown uk-dropdown-close" style="padding: 10px">
-						  		<ul class="uk-nav uk-nav-dropdown" style="margin:0" ng-repeat="menu in sections">
-                                    <li><a ui-sref="{{ menu.link }}" ui-sref-opts="{reload: menu.link }">{{ menu.title | translate }}</a></li>
-                                </ul>
-						  	</div>
-
-						    <!-- This is the dropdown -->
-						</div>
-						<div class="uk-text-bold uk-text-small uk-text-right" style="margin-right: 17px;margin-top: 2px;">MENU</div>
-					</div>
 			</div>
 	</div>
+	<!-- สำหรับมือถือ -->
+	<div ng-if="device == 'device'">
+		<div class="uk-text-center">
+			<div style="margin-top: 6px;" class="uk-text-large"><span class="uk-text-bold" style="color: #f58426">A</span>mornp<span class="uk-text-bold" style="color: #f58426">a</span>n Decor</div>
+			<div style="position: absolute;top: 0px;right: 0;">
+				<div data-uk-dropdown="{mode:'click'}" ng-click="setDropdown(dropdownOpen)">
+
+				    <!-- This is the element toggling the dropdown -->
+				    <div >
+				    	 <div class="uk-badge" style="background: #f58426;color: white;margin-right: 15px;margin-top: 6px;"><i class="material-icons" style="font-size: 24px">dehaze</i></div>
+				    </div>
+				  	<div class="dropdown-mennu-header uk-dropdown uk-dropdown-close uk-text-left uk-text-large" >
+				  		<ul class="uk-nav uk-nav-dropdown" style="margin:0" >
+				  			<li class="uk-text-bold" style="border-bottom: 1px solid gainsboro;">สินค้า</li>
+	                        <li ng-repeat="data in menu" style="border-bottom: 1px solid gainsboro;">
+	                        	<i class="material-icons" style="float: right;color: #b4b1b1;">keyboard_arrow_right</i>
+	                        	<a ui-sref="layout.product({data:data})" ui-sref-opts="{reload: true }">{{ data.name }}</a>
+	                        	
+	                        </li>
+	                      <!--   <li class="uk-nav-divider"></li> -->
+	                      <li class="uk-text-bold uk-text-center" style="background-color: black;color: white;border-radius: 4px">Menu</li>
+	                        <li ng-repeat="menu in sections">
+	                        	<i class="material-icons" style="float: left;margin-right: 10px;margin-top: 5px;color: #f58426">{{ menu.icon }}</i>
+	                        	<a ui-sref="{{ menu.link }}" ui-sref-opts="{reload: menu.link }">{{ menu.title | translate }}</a>
+	                        </li>
+	                    </ul>
+			  		</div>
+
+				    <!-- This is the dropdown -->
+				</div>
+				<!-- <div class="uk-text-bold uk-text-small uk-text-right" style="margin-right: 17px;margin-top: 2px;">MENU</div> -->
+			</div>
+			
+		</div>
+	</div>
 </div>
+
+<!-- slider -->
+<div ng-if="device == 'web'">
+	<figure class="uk-overlay">
+    	<img src="app/img/slideshow/bk2.jpg" >
+    	<figcaption class="uk-overlay-panel uk-overlay-background  uk-flex uk-flex-center uk-flex-middle uk-text-center">
+    		<div style="width: 50%;border: 10px solid " >
+    			<div class="uk-slidenav-position" data-uk-slideshow="{autoplay:true,autoplayInterval:5000,animation:'fade'}">
+					<ul class="uk-slideshow uk-overlay uk-overlay-active">
+					    <li >
+					        <img  src="app/img/slideshow/slide1.jpg">
+					        <!-- <figcaption class="uk-overlay-panel uk-flex uk-flex-center uk-flex-middle uk-text-center ">
+						        <div>
+						        	
+						        	<a class="uk-button uk-alert" ui-sref="layout.product" style="background: black;color: white;">SHOP NOW</a>
+						        </div>
+						    </figcaption> -->
+					    </li>
+					    <li >
+					        <img  src="app/img/slideshow/slide2.jpg">
+					    </li>
+					     <li >
+					        <img  src="app/img/slideshow/slide3.jpg">
+					    </li>
+					</ul>
+					 <a href="" class="uk-slidenav  uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
+			   		 <a href="" class="uk-slidenav  uk-slidenav-next" data-uk-slideshow-item="next"></a>
+
+			   		<ul class="uk-dotnav uk-dotnav-contrast uk-position-bottom uk-flex-center" >
+				        <li data-uk-slideshow-item="0"><a href=""></a></li>
+				        <li data-uk-slideshow-item="1"><a href=""></a></li>
+				    </ul>
+				</div>	
+    		</div>
+    		
+    	</figcaption>
+	</figure>
+</div>
+
+<div class="uk-slidenav-position" data-uk-slideshow="{autoplay:true,autoplayInterval:5000,animation:'fade'}" ng-if="device == 'device'">
+	<ul class="uk-slideshow uk-overlay uk-overlay-active">
+	    <li >
+	        <img  src="app/img/slideshow/slide1.jpg">
+	        <!-- <figcaption class="uk-overlay-panel uk-flex uk-flex-center uk-flex-middle uk-text-center ">
+		        <div>
+		        	
+		        	<a class="uk-button uk-alert" ui-sref="layout.product" style="background: black;color: white;">SHOP NOW</a>
+		        </div>
+		    </figcaption> -->
+	    </li>
+	    <li >
+	        <img  src="app/img/slideshow/slide2.jpg">
+	    </li>
+	     <li >
+	        <img  src="app/img/slideshow/slide3.jpg">
+	    </li>
+	</ul>
+	 <a href="" class="uk-slidenav  uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
+		 <a href="" class="uk-slidenav  uk-slidenav-next" data-uk-slideshow-item="next"></a>
+
+		<ul class="uk-dotnav uk-dotnav-contrast uk-position-bottom uk-flex-center" >
+        <li data-uk-slideshow-item="0"><a href=""></a></li>
+        <li data-uk-slideshow-item="1"><a href=""></a></li>
+    </ul>
+</div>	
+
+
+	
 
 
 

@@ -1,36 +1,4 @@
 <div ng-init="onload()">
-	<!-- slider -->
-	
-	<div class="uk-slidenav-position" data-uk-slideshow="{autoplay:true,autoplayInterval:9000,animation:'scale'}">
-		<ul class="uk-slideshow uk-overlay uk-overlay-active">
-		    <li >
-		        <img class="uk-thumbnail " src="app/img/slideshow/9-2.jpg">
-		        <!-- <figcaption class="uk-overlay-panel uk-flex uk-flex-center uk-flex-middle uk-text-center ">
-			        <div>
-			        	
-			        	<a class="uk-button uk-alert" ui-sref="layout.product" style="background: black;color: white;">SHOP NOW</a>
-			        </div>
-			    </figcaption> -->
-		    </li>
-		    <li >
-		        <img class="uk-thumbnail " src="app/img/slideshow/10-2.jpg">
-		       <!--  <figcaption class="uk-overlay-panel uk-flex uk-flex-center uk-flex-middle uk-text-center ">
-			        <div>
-			        	<H1>Pomotion Sale 20%</H1>
-			        	<a class="uk-button uk-alert" ui-sref="layout.product" style="background: black;color: white;">SHOP NOW</a>
-			        </div>
-			    </figcaption> -->
-		    </li>
-		</ul>
-		 <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
-   		 <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slideshow-item="next"></a>
-
-   		<ul class="uk-dotnav uk-dotnav-contrast uk-position-bottom uk-flex-center" >
-	        <li data-uk-slideshow-item="0"><a href=""></a></li>
-	        <li data-uk-slideshow-item="1"><a href=""></a></li>
-	    </ul>
-	</div>	
-		
 
 	<div>
 		<div data-uk-scrollspy="{cls:'uk-animation-fade',delay:300,repeat: true}">	
@@ -43,17 +11,31 @@
 		<div class="set-collections-show">
 			<div class="uk-grid" >
 				<div class="uk-width-1-3" ng-repeat="data in collectionsShow.imgSelect">
-					<a ng-click="collectionsShow.imgExample = data.img3">
+					<a ui-sref="layout.product_detail({data:data})">
             			<figure class="uk-overlay uk-overlay-hover shadow">
             				<img   ng-src="{{ data.img1 }}">		
             				<img   class="uk-overlay-fade uk-overlay-image uk-overlay-panel"  ng-src="{{data.img2}}"  />
             			</figure>
-            		</a>
+            		</a>	
+            		  <div class="uk-thumbnail-caption uk-text-center" style="padding: 10px"> 
+							<span>{{ data.name }}</span><br>
+							<span class="uk-text-small" style="color: #f58426"> {{ data.number }} </span> 
+					</div>	
 				</div>
 			</div>
 			<div class="uk-grid uk-margin-top" style="padding: 16px">
-				<div class="uk-width-1-1" >
-					<img ng-src="{{ collectionsShow.imgExample }}" alt="" class="shadow">
+				<div class="uk-width-1-1" >	
+					<div class="uk-slidenav-position" data-uk-slideshow="{kenburns:true,autoplay:true}">
+					    <ul class="uk-slideshow">
+					        <li ng-repeat="show in collectionsShow.imgSelect">
+					        	<img  ng-src="{{ show.img3 }}">
+					        	<div class="uk-overlay-panel uk-overlay-background uk-overlay-top uk-overlay-fade uk-text-bold">{{ show.name }} <span class="uk-text-small" style="color: #f58426">{{ show.number }}</span></div>
+					        </li>
+					    </ul>
+					    <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
+					    <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slideshow-item="next"></a>
+					   
+					</div>
 				</div>
 
 			</div>
@@ -227,7 +209,7 @@
 					    <iframe  class="set-video-product-detail"  src="https://www.youtube.com/embed/1ydkmj8chRo" ></iframe>
 					    
 					</div>
-					<div class="uk-text-center"><button ui-sref="layout.product({id:'3',id_sub:dataClickProduct3 })" class="uk-button shadow" style="color: white;background: orangered;">View Product</button></div>
+					<div class="uk-text-center"><button ui-sref="layout.product({data: dataSmartmatt})" class="uk-button uk-button-amornpan" >ชมสินค้า</button></div>
 					
 				</div>
 				<div ng-repeat="data in article.detail">

@@ -120,7 +120,7 @@ app
          .state('layout.product', {
             url: "/product",
             controller: 'productCtrl',
-            params : {  id:null , id_sub : null} ,
+            params : {  data:null} ,
             templateUrl: 'app/views/product/product.html',
              resolve: {
               deps: ['$ocLazyLoad', function($ocLazyLoad) {

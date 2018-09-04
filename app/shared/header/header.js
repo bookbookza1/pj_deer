@@ -10,10 +10,25 @@ angular
         function ($timeout,$scope, $window, $rootScope, $state,$http) {
 
                 //console.log("TEST");
-
+            $scope.dropdownOpen = false ;
             $scope.onload = function(){
                 checkWidth();
+                getTypeProduct();
               
+            }
+            var getTypeProduct = function(){
+                $http.get('app/data/menu_product.json')
+                      .then(function(response) {
+                          console.log(response.data);
+                        
+                      $scope.menu = response.data ;
+                      setMenu(response.data);
+                  },
+                     function(error,status) {
+                     
+                         console.log(error); 
+                     }
+                  ); 
             }
             var checkWidth = function(){
                 if (window.innerWidth >= 1024) {
@@ -49,44 +64,69 @@ angular
                     link : 'layout.product'
                 } 
             ]
-            
-            var menu_main = [
-                {
-                    title: 'home',
-                    link: 'layout.home',
-                    sub : false ,
-                },
-                 {
-                    title: 'product',
-                    sub : true ,
-                    item : product_submenu ,
-                    link: 'layout.product'
-                },
-                {
-                    title : 'about_us ',
-                    sub : false ,
-                    link: 'layout.article'
-                },
-                 {
-                    title: 'portfolio',
-                    sub : false ,
-                    link: 'layout.portfolio'
-                },
-                {
-                    title: 'contact',
-                    sub : false ,
-                    link: 'layout.contact'
-                },
-            ];
-
+            var setMenu = function(menu){
+                var menu_main = [
+                    {
+                        title: 'home',
+                        link: 'layout.home',
+                        icon : 'home',
+                        sub : false ,
+                    },
+                     {
+                        title: 'product',
+                        sub : true ,
+                        item : menu ,
+                        icon:'list',
+                        link: 'layout.product'
+                    },
+                    {
+                        title : 'about_us ',
+                        sub : false ,
+                        icon:'person',
+                        link: 'layout.article'
+                    },
+                     {
+                        title: 'portfolio',
+                        sub : false ,
+                        icon : 'collections',
+                        link: 'layout.portfolio'
+                    },
+                    {
+                        title: 'contact',
+                        sub : false ,
+                        icon : 'perm_phone_msg',
+                        link: 'layout.contact'
+                    },
+                ];
+                 var menu = angular.copy(menu_main);
+               $scope.sections = menu;
+            }
+          
+            $scope.$on('onLastRepeat', function (scope, element, attrs) {
+                   $(window).trigger("resize");
+                   
+            });
             
 
            
            
-           var menu = angular.copy(menu_main);
-           $scope.sections = menu;
-            //console.log( $scope.sections );
+          
+            
         
+
+           $scope.setDropdown = function(){
+                if($scope.dropdownOpen == false){
+                   $scope.dropdownOpen = true; 
+                   $("body").addClass("dropdownOpenOverflow");
+                }
+                else{
+                   $scope.dropdownOpen  = false ;
+                   $("body").removeClass("dropdownOpenOverflow");
+                }
+                
+
+           }
+           
            
         }
     ]);

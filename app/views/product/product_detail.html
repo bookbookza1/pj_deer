@@ -1,23 +1,4 @@
 <div ng-init="onload()">
-	<div style="padding: 6px;background-color: #f7f7f7">
-		  <div class="uk-grid uk-grid-collapse uk-text-center uk-text-bold">
-			<div class="uk-width-1-5 uk-width-medium-1-6 uk-width-large-1-6" ng-repeat="data in menu">
-				<div class="product-menu" ng-class="{'product-menu-active':checkOpen == data.id}">
-	    			<a ng-click="openSub(data)">{{ data.name}}</a>
-	    		</div>
-			</div>
-	    		
-		  </div>
-	</div>
-	<div style="padding: 6px;background-color: black;color: white;" ng-if="subOpen == true">
-		<div class="uk-grid uk-grid-collapse uk-text-center set-with-menu-sub-product">
-			<div class="uk-width-1-3 uk-width-large-1-4 uk-width-medium-1-4" ng-repeat="data in subMenu"  on-last-repeat>
-				<div class="product-menu-sub uk-animation-fade">
-	    			<a ng-click="selectProduct(data)">{{ data.name }}</a>
-	    		</div>
-			</div>
-	  	</div>
-	</div>
 
 	<div class="product-detail">
 		<div class="uk-grid uk-grid-collapse">
