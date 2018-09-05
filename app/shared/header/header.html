@@ -3,7 +3,7 @@
 	<div class="uk-grid uk-grid-collapse" ng-if="device == 'web' ">
 			<div class="uk-width-1-2">
 					<div class="header-logo">
-						<div class="uk-cover-background" >
+						<div>
 							<img src="app/img/all/logo.png" alt="" style="width: 60%">
 						</div>
 					</div>
@@ -33,6 +33,11 @@
 	<!-- สำหรับมือถือ -->
 	<div ng-if="device == 'device'">
 		<div class="uk-text-center">
+			<div style="position: absolute;top: 0px;left: -15px">
+				<div class="header-logo">
+					<img src="app/img/all/logo.png" alt="" style="width: 60%">
+				</div>
+			</div>
 			<div style="margin-top: 6px;" class="uk-text-large"><span class="uk-text-bold" style="color: #f58426">A</span>mornp<span class="uk-text-bold" style="color: #f58426">a</span>n Decor</div>
 			<div style="position: absolute;top: 0px;right: 0;">
 				<div data-uk-dropdown="{mode:'click'}" >

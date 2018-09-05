@@ -19,7 +19,7 @@ angular
             var getTypeProduct = function(){
                 $http.get('app/data/menu_product.json')
                       .then(function(response) {
-                          console.log(response.data);
+                          //console.log(response.data);
                         
                       $scope.menu = response.data ;
                       setMenu(response.data);
