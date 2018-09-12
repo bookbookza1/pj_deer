@@ -11,7 +11,7 @@ angular
         '$translate',
         function ($timeout,$scope, $window, $rootScope, $state,$http,$serve,$translate) {
 
-                console.log("product");
+                //console.log("product");
 
 
                 $scope.dataProduct = $state.params.data;
@@ -19,7 +19,7 @@ angular
                 $scope.subMenu = [];
                 $scope.railList = [];
                 $scope.id_sub
-                console.log($state.params);
+                //console.log($state.params);
                 $scope.loadingModeWall = true ;
                 
                 $scope.headerModeWallpaper = $translate.instant('recommended') ; //ชื่อแสดงประเภทวอลเปเปอร์
@@ -131,7 +131,7 @@ angular
 
                       $serve.get('api/product/'+id+'/'+id_sub_type)
                             .then(function(response) {
-                                console.log(response.data);
+                                //console.log(response.data);
 
                                 // if(id_sub_type == '3-3'){
                                 //       $scope.tileGuleList  = response.data; 
@@ -160,8 +160,8 @@ angular
 
 
                 $scope.selectProductSub = function(data,data_id_sub){
-                     console.log(data_id_sub);
-                     console.log(data);
+                     //console.log(data_id_sub);
+                     //console.log(data);
                      //$scope.reload.product = true ;
                      if(data_id_sub == null || data_id_sub == undefined){
                         $scope.id_sub = 0 ;
@@ -171,7 +171,7 @@ angular
                         $scope.id_sub = data_id_sub.id_sub ;
                         $scope.nameProduct = data_id_sub.name;   
                      }
-                     console.log($scope.id_sub);
+                     //console.log($scope.id_sub);
                      $scope.productList = [] ;
                      $scope.recommendedWallList = [] ;
                                     
@@ -240,7 +240,7 @@ angular
               var getRecommendedWall = function(id_sub_type){
                     $serve.get('api/product/wallpaper/recommended/'+id_sub_type+'/'+$scope.numPage.wall)
                       .then(function(response) {
-                          console.log(response.data); 
+                          //console.log(response.data); 
                           $scope.productList = response.data ;
                           $scope.loadingModeWall = false ;
                           $rootScope.showFooter = true;

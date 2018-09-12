@@ -10,7 +10,7 @@ angular
         '$http',
         function ($timeout,$scope, $window, $rootScope, $state,$serve,$http) {
 
-                console.log("portfolio");
+               
 
                 $scope.partitionList;
                 $scope.curtainList;
@@ -28,14 +28,6 @@ angular
                     checkWith();
                 }
 
-                for(var i=1;i<=10;i++){
-                    if(i == 5 || i == 7){
-                        //console.log(i);
-                    }
-                    else{
-                       console.log(i);
-                    }
-                }
 
                 var getData = function(){
                     getPartition();
@@ -127,7 +119,7 @@ angular
                     else{
                         $scope.device = 'device' ;
                     }
-                    console.log($scope.device);
+                    //console.log($scope.device);
                     
                 });
                 

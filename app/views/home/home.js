@@ -70,7 +70,7 @@
                 var getProduct = function(){
                     $serve.get('api/product/recommended/10')
                         .then(function(response) {
-                            console.log(response.data);
+                            //console.log(response.data);
                             //setProduct(response.data);
                              $scope.productList = response.data;
                             //setProduct(response.data);
@@ -96,7 +96,7 @@
                 var getHomeImgPort = function(){
                     $http.get('app/data/homeImgPort.json')
                       .then(function(response) {
-                         console.log(response.data);
+                         //console.log(response.data);
                           $scope.imgPort = response.data ;
 
                       },
@@ -112,10 +112,10 @@
 
                        $http.get('app/data/data_home_article.json')
                         .then(function(response) {
-                           console.log(response.data);
+                           //console.log(response.data);
                            $scope.articleData = response.data
                            $scope.article = response.data[0] ;
-                           console.log($scope.article);
+                           //console.log($scope.article);
                         },
                        function(error,status) {
                           // $scope.data.error = { message: error, status: status};
@@ -132,12 +132,12 @@
                     else{
                         $scope.device = 'device' ;
                     }
-                    console.log($scope.device);
+                    //console.log($scope.device);
                     
                 });
                 $scope.$on('onLastRepeat', function (scope, element, attrs) {
                        $(window).trigger("resize");
-                       console.log("resize");
+                       //console.log("resize");
                       
                 });
 

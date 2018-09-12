@@ -90,7 +90,7 @@ app
                     $rootScope.$broadcast('translateRefresh');
                 });
             });
-
+            FastClick.attach(document.body);
 
             //  $rootScope.$on("$locationChangeSuccess", function(){
             //       $timeout(function() {

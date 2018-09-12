@@ -11,10 +11,10 @@
         '$translate',
         function ($timeout,$scope, $window, $rootScope, $state,$http,$serve,$translate) {
 
-                console.log("product-detail");
+                //console.log("product-detail");
                //console.log($state.params);
                 $scope.productDetail = $state.params.data ;
-                console.log($scope.productDetail);
+                //console.log($scope.productDetail);
                 if($scope.productDetail == null){
                   $state.go('layout.product');
 

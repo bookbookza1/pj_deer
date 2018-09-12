@@ -55,8 +55,9 @@
 	                        	
 	                        </li>
 	                      <!--   <li class="uk-nav-divider"></li> -->
-	                      <li class="uk-text-bold uk-text-center" style="background-color: black;color: white;border-radius: 4px">Menu
-	                      	<i class="uk-icon-caret-up"></i></li>
+	                      <li class="uk-text-bold uk-text-center uk-margin-bottom uk-margin-top" style="background-color: black;color: white;border-radius: 4px;padding: 4px">Menu
+	                      	<i class="uk-icon-caret-up"></i>
+	                      </li>
 	                        <li ng-repeat="menu in sections">
 	                        	<i class="material-icons" style="float: left;margin-right: 10px;margin-top: 5px;color: #f58426">{{ menu.icon }}</i>
 	                        	<a ui-sref="{{ menu.link }}" ui-sref-opts="{reload: menu.link }">{{ menu.title | translate }}</a>

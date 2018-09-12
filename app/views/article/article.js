@@ -9,7 +9,7 @@ angular
         '$anchorScroll',
         function ($timeout,$scope, $window, $rootScope, $state,$anchorScroll) {
                 $anchorScroll();
-                console.log("article");
+                //console.log("article");
 
                 $scope.onload = function(){
                     checkWith();
@@ -31,11 +31,11 @@ angular
                     else{
                         $scope.device = 'device' ;
                     }
-                console.log($scope.device);
+                //console.log($scope.device);
                     
                 });
                 $scope.link = "app/views/article/article1.html" ;
-                console.log($scope.link);
+                //console.log($scope.link);
                 $scope.length = []
                 for(var i=0;i<8;i++){
                    $scope.length[i] = i ;
