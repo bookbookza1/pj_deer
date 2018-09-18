@@ -178,13 +178,13 @@
                   {img : 'app/img/product/asphalt/icon8.jpg',name: "ไม่ต้องใช้กาวในการติดตั้ง",delay:3200},
                   {img : 'app/img/product/asphalt/icon9.jpg',name: "กันสารเคมี",delay:3600},
                   {img : 'app/img/product/asphalt/icon10.jpg',name: "เสริมแผ่นรองเพื่อลดเสียง",delay:4000},
-                  {img : 'app/img/product/asphalt/icon11.jpg',name: "นำมารีไซเคิ้ลได้100%",delay:4400}
+                  {img : 'app/img/product/asphalt/icon11.jpg',name: "นำมารีไซเคิลได้100%",delay:4400}
                  
                 ] ;
 
                 $scope.dataSmartmatt ={
                     id: 3,
-                    name: "กระเบื้ยงยาง Smartmatt",
+                    name: "กระเบื้องยาง Smartmatt",
                     sub: [
                           {id_sub: "0", name: "ทั้งหมด"},
                           {id_sub: "3-1", name: "Wood Texture"},
