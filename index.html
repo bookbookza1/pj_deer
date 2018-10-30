@@ -124,10 +124,10 @@
     
 
           
-         <loading-model ng-if="loadingPage == true"></loading-model>
+         <!-- <loading-model ng-if="loadingPage == true"></loading-model> -->
     
        
-       <div ng-show="loadingPage == false">
+       <!-- <div ng-show="loadingPage == false">
             <div ui-view="header"></div>
             <div ui-view></div>
             <div ui-view="footer" ng-if="showFooter == true"></div>
@@ -138,8 +138,17 @@
                   <img src="app/img/promotion/3989.jpg" alt="">
               </div>
           </div>
-       </div>
-        
+       </div> -->
+        <div ui-view="header"></div>
+        <div ui-view></div>
+        <div ui-view="footer" ng-if="showFooter == true"></div>
+
+        <div id="popup-promotion" class="uk-modal ">
+              <div class="uk-modal-dialog uk-modal-dialog-lightbox promotion-center" >
+                  <a href="" class="uk-modal-close uk-close uk-close-alt "></a>
+                  <img src="app/img/promotion/3989.jpg" alt="">
+              </div>
+        </div>
            
         
          <script>

@@ -3,7 +3,7 @@
 		"id":1,
 		"name":"วอลเปเปอร์",
 		"sub" : [ 
-			{"id_sub" : "0","name":"ทั้งหมด"},
+			
 			{"id_sub" : "1-1","name":"วอลเปเปอร์"},
 			{"id_sub" : "1-2","name":"วอลเปเปอร์ปริ้น"}
 		]
@@ -23,7 +23,7 @@
 		"id":3,
 		"name":"กระเบื้องยาง Smartmatt",
 		"sub" : [ 
-			{"id_sub" : "0","name":"ทั้งหมด"},
+			
 			{"id_sub" : "3-1","name":"Wood Texture"},
 			{"id_sub" : "3-2","name":"Stone Texture"}
 		]

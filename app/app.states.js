@@ -117,18 +117,35 @@ app
              }
         })
         //product
+        //  .state('layout.product', {
+        //     url: "/product",
+        //     controller: 'productCtrl',
+        //     params : {  data:null} ,
+        //     templateUrl: 'app/views/product/product.html',
+        //      resolve: {
+        //       deps: ['$ocLazyLoad', function($ocLazyLoad) {
+        //           return $ocLazyLoad.load([
+        //             'app/views/product/product.js'
+        //           ],{ serie: true });
+        //       }]
+        //      },
+        //      data: {
+        //         pageTitle: 'product'
+        //      }
+        // })
          .state('layout.product', {
-            url: "/product",
-            controller: 'productCtrl',
-            params : {  data:null} ,
+            url: "/product/{id}/{sub_id}/{mode}",
+            controller: 'productTestCtrl',
+            //params : {  data:null} ,
             templateUrl: 'app/views/product/product.html',
              resolve: {
               deps: ['$ocLazyLoad', function($ocLazyLoad) {
                   return $ocLazyLoad.load([
-                    'app/views/product/product.js'
+                    'app/views/product/productTest.js'
                   ],{ serie: true });
               }]
              },
+            
              data: {
                 pageTitle: 'product'
              }

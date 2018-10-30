@@ -9,7 +9,7 @@
 					</div>
 			</div>
 			<div class="uk-width-1-2">
-					<nav class="uk-navbar-flip header-menu" >
+					<!-- <nav class="uk-navbar-flip header-menu" >
 					    <ul class="uk-navbar-nav" ng-repeat="menu in sections">
 					        <li ng-if="menu.sub == false" ui-sref-active="header-menu-active"><a class="main" ui-sref="{{ menu.link }}" ui-sref-opts="{reload: menu.link}">{{ menu.title | translate }}</a></li>
 					        <li ng-if="menu.sub == true" class="uk-parent" data-uk-dropdown ui-sref-active="header-menu-active">
@@ -18,7 +18,26 @@
                                     <div class="uk-grid uk-dropdown-grid">
                                         <div class="uk-width-1-2" ng-repeat="data in menu.item">
                                             <ul class="uk-nav uk-nav-dropdown uk-panel">
-                                                <li ><a ui-sref="layout.product({data:data})" ui-sref-opts="{reload: true}">{{data.name}}</a></li>
+                                                <li ><a ui-sref="layout.product({data:1})" ui-sref-opts="{reload: layout.product({data:data}) }">{{data.name}}</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+					        	
+					        </li>
+					    </ul>
+					</nav> -->
+					<nav class="uk-navbar-flip header-menu" >
+					    <ul class="uk-navbar-nav" ng-repeat="menu in sections">
+					        <li ng-if="menu.sub == false" ui-sref-active="header-menu-active"><a class="main" ui-sref="{{ menu.link }}" ui-sref-opts="{reload: menu.link}">{{ menu.title | translate }}</a></li>
+					        <li ng-if="menu.sub == true" class="uk-parent" data-uk-dropdown ui-sref-active="header-menu-active">
+					        	<a class="main">{{ menu.title | translate }}</a>
+					        	<div class="uk-dropdown uk-dropdown-width-2">
+                                    <div class="uk-grid uk-dropdown-grid uk-dropdown-close" >
+                                        <div class="uk-width-1-2" ng-repeat="data in menu.item">
+                                            <ul class="uk-nav uk-nav-dropdown uk-panel">
+                                                <li ><a ng-click="urlGo(data)">{{data.name}}</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -51,7 +70,7 @@
 				  			<li class="uk-text-bold" style="border-bottom: 1px solid gainsboro;">สินค้า</li>
 	                        <li ng-repeat="data in menu" style="border-bottom: 1px solid gainsboro;">
 	                        	<i class="material-icons" style="float: right;color: #b4b1b1;">keyboard_arrow_right</i>
-	                        	<a ui-sref="layout.product({data:data})" ui-sref-opts="{reload: true }">{{ data.name }}</a>
+	                        	<a ng-click="urlGo(data)">{{ data.name }}</a>
 	                        	
 	                        </li>
 	                      <!--   <li class="uk-nav-divider"></li> -->
@@ -60,7 +79,7 @@
 	                      </li>
 	                        <li ng-repeat="menu in sections">
 	                        	<i class="material-icons" style="float: left;margin-right: 10px;margin-top: 5px;color: #f58426">{{ menu.icon }}</i>
-	                        	<a ui-sref="{{ menu.link }}" ui-sref-opts="{reload: menu.link }">{{ menu.title | translate }}</a>
+	                        	<a ui-sref="{{ menu.link }}" ui-sref-opts="{reload: menu.link}">{{ menu.title | translate }}</a>
 	                        </li>
 	                    </ul>
 			  		</div>

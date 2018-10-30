@@ -7,7 +7,8 @@ angular
         '$rootScope',
         '$state',
         '$http',
-        function ($timeout,$scope, $window, $rootScope, $state,$http) {
+        '$location',
+        function ($timeout,$scope, $window, $rootScope, $state,$http,$location) {
 
                 //console.log("TEST");
             $scope.dropdownOpen = false ;
@@ -125,6 +126,11 @@ angular
                 }
                 
 
+           }
+
+           $scope.urlGo = function(data){
+                console.log(data);
+                $location.path('product/'+data.id+'/0/0');
            }
            
            

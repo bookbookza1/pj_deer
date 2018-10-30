@@ -10,7 +10,8 @@
         '$serve',
         '$translate',
         '$http',
-        function ($timeout,$scope, $window, $rootScope, $state,$http,$serve,$translate,$http) {
+        '$location',
+        function ($timeout,$scope, $window, $rootScope, $state,$http,$serve,$translate,$http,$location) {
 
                // $http.get('http://demo1.funsoffice.com/demo1_api/product')
                //  .then(function(response) {
@@ -190,6 +191,10 @@
                           {id_sub: "3-1", name: "Wood Texture"},
                           {id_sub: "3-2", name: "Stone Texture"}
                         ]
+                }
+
+                $scope.goUrlProduct = function(){
+                  $location.path('product/3/0/0');
                 }
 
 
