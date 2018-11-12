@@ -53,18 +53,13 @@ angular
                 
             });
 
-                var modal = UIkit.modal("#popup-promotion");
-                modal.show();  
+            var modal = UIkit.modal("#popup-promotion");
+            modal.show();  
 
-                $scope.sections = [];
+            $scope.sections = [];
 
 
-            var product_submenu = [ 
-                { 
-                    title: 'wallpaper' , 
-                    link : 'layout.product'
-                } 
-            ]
+           
             var setMenu = function(menu){
                 var menu_main = [
                     {
@@ -100,7 +95,7 @@ angular
                     },
                 ];
                  var menu = angular.copy(menu_main);
-               $scope.sections = menu;
+                 $scope.sections = menu;
             }
           
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
@@ -109,28 +104,28 @@ angular
             });
             
 
-           
-           
-          
-            
-        
-
-           $scope.setDropdown = function(){
-                if($scope.dropdownOpen == false){
-                   $scope.dropdownOpen = true; 
-                   $("body").addClass("dropdownOpenOverflow");
-                }
-                else{
-                   $scope.dropdownOpen  = false ;
-                   $("body").removeClass("dropdownOpenOverflow");
-                }
-                
-
-           }
+           // $scope.setDropdown = function(){
+           //      if($scope.dropdownOpen == false){
+           //         $scope.dropdownOpen = true; 
+           //         $("body").addClass("dropdownOpenOverflow");
+           //      }
+           //      else{
+           //         $scope.dropdownOpen  = false ;
+           //         $("body").removeClass("dropdownOpenOverflow");
+           //      }
+           // }
 
            $scope.urlGo = function(data){
                 console.log(data);
-                $location.path('product/'+data.id+'/0/0');
+                var sub_id = '0' ;
+
+                if(data.id == '1'){
+                  sub_id = '1-1'
+                }
+                else if(data.id == '3'){
+                   sub_id = '3-1'
+                }
+                $location.path('product/'+data.id+'/'+sub_id+'/0');
            }
            
            

@@ -1,4 +1,4 @@
-angular
+﻿angular
   .module('app')
   .controller('productTestCtrl', [
         '$timeout',
@@ -15,7 +15,7 @@ angular
 
                 //console.log("product");
 
-                console.log($stateParams);
+                //console.log($stateParams);
                 $scope.dataProduct ={
                   name : null,
                   id : $stateParams.id,
@@ -28,13 +28,16 @@ angular
 
 
                 $rootScope.showFooter = false;
-                $scope.subMenu = [];
+                
                 $scope.railList = [];
                 $scope.id_sub
                 //console.log($state.params);
                 $scope.loadingModeWall = true ;
                 
-                $scope.headerModeWallpaper = $translate.instant('recommended') ; //ชื่อแสดงประเภทวอลเปเปอร์
+                $scope.headerModeWallpaper ; 
+                if($scope.dataProduct.mode == '0'){
+                    $scope.headerModeWallpaper = 'แนะนำ'; 
+                }
               
                
               
@@ -44,7 +47,7 @@ angular
              
                 $scope.productList = [] ;
                 // $scope.tileGuleList = [] ;
-                $scope.recommendedWallList = [] ;
+               
            
                 //console.log($state.params);
                 $scope.numPage = {
@@ -55,13 +58,10 @@ angular
               $scope.$on('window_resize', function () {
                     if (window.innerWidth > 1024) {
                         $scope.device = 'web' ;
-
                     }
                     else{
                         $scope.device = 'device' ;
                     }
-                    //console.log($scope.device);
-                    
                 });
 
                $scope.onload = function(){
@@ -75,12 +75,16 @@ angular
                             //console.log(response.data);
                               
                             $scope.menu = response.data ;
-                            angular.forEach(response.data, function(value,index){
-                                if(value.id ==  $scope.dataProduct.id){
-                                  $scope.dataProduct.sub = value.sub;
-                                   $scope.dataProduct.name = value.name
+                            var arr = response.data ;
+                            for(var i =0;i<arr.length;i++){
+                                if(arr[i].id == $scope.dataProduct.id){
+                                     $scope.dataProduct.sub = arr[i].sub;
+                                     $scope.dataProduct.name = arr[i].name;
+                                     break;
                                 }
-                            })
+                                
+                            }
+                         
 
                             $scope.selectProductSub($scope.dataProduct, $scope.dataProduct.sub, $scope.dataProduct.sub_id);
                         },
@@ -106,14 +110,14 @@ angular
                 var checkWith = function(){
                     if (window.innerWidth > 1024) {
                         $scope.device = 'web' ;
-                        $scope.numPage.wall = 18;
+                        $scope.numPage.wall = 20;
                         $scope.numPage.tile = 20 ;
                         $scope.numPage.recommendedTile = 10 ;
 
                     }
                     else{
                         $scope.device = 'device' ;
-                        $scope.numPage.wall = 16;
+                        $scope.numPage.wall = 20;
                         $scope.numPage.tile = 12 ;
                         $scope.numPage.recommendedTile = 6 ;
                     }
@@ -129,14 +133,7 @@ angular
                             .then(function(response) {
                                 //console.log(response.data);
 
-                                // if(id_sub_type == '3-3'){
-                                //       $scope.tileGuleList  = response.data; 
-                                // } 
-                                // else{
-                                //      $scope.productList =  response.data; 
-                                // }
-                                $scope.productList =  response.data; 
-                                    
+                                 $scope.productList =  response.data; 
                                  $scope.loadingModeWall = false;           
                                  $rootScope.showFooter = true;
                           },
@@ -150,8 +147,6 @@ angular
 
                $scope.$on('onLastRepeat', function (scope, element, attrs) {
                     $(window).trigger("resize");  
-                    var component = UIkit.accordion($('.uk-accordion'),{showfirst:false,duration:500,easing:'swing'});
-                    component.update();
                });
 
 
@@ -172,19 +167,15 @@ angular
 
                      }
 
-                     //console.log($scope.id_sub);
                      $scope.productList = [] ;
-                     $scope.recommendedWallList = [] ;
-                                    
-                    
-
+                  
                      if(data.id == 1)
                      {
                         if($scope.id_sub == 0){
                             $scope.id_sub = '1-1';
                         }
                         $scope.loadingModeWall = true ;
-                        $scope.headerModeWallpaper = $translate.instant('recommended') ;   
+                        
                         getModeWall($scope.id_sub);  
                        
                      }
@@ -207,7 +198,7 @@ angular
                              var nameMode = '' ;
                              if(id_sub == "1-1"){
                                 angular.forEach(response.data, function(value,index){
-                                     if(value.id == 1){
+                                      if(value.id == 1){
                                         this.push(value);
                                       }
                                       if(value.id_category == $scope.dataProduct.mode){
@@ -244,7 +235,6 @@ angular
                              }
                              else{
                                 $scope.modeWallpaper = response.data ;
-                               
                                 getRecommendedWall('0');  
                              }
 
@@ -261,7 +251,7 @@ angular
 
               //wallpaper controller
               var getRecommendedWall = function(id_sub_type){
-                    $scope.headerModeWallpaper = '' ;
+                    //$scope.headerModeWallpaper = '' ;
                     $serve.get('api/product/wallpaper/recommended/'+id_sub_type+'/'+$scope.numPage.wall)
                       .then(function(response) {
                           //console.log(response.data); 
@@ -307,10 +297,10 @@ angular
                     }
                 }
 
-              $scope.urlGo = function(data,sub_id){
+              $scope.urlGo = function(id,sub_id){
                  // console.log(data);
                  // console.log(sub_id);
-                 $location.path('product/'+data.id+'/'+sub_id+'/0');
+                 $location.path('product/'+id+'/'+sub_id+'/0');
 
               }
 

@@ -1,97 +1,40 @@
 <div ng-init="onload()" >
-	<!-- menu -->
-	<!-- <div> 
-		<div style="padding: 6px;background-color: #f7f7f7">
-			<div class="uk-grid uk-grid-collapse uk-text-center uk-text-bold">
-				<div class="uk-width-1-5 uk-width-medium-1-6 uk-width-large-1-6" ng-repeat="data in menu">
-					<div class="product-menu" ng-class="{'product-menu-active':checkOpen == data.id}">
-		    			<a ng-click="selectProduct(data)">{{ data.name }}</a>
-		    		</div>
-				</div>
-		    		
-			  </div>
-		</div>
-		<div style="padding: 6px;background-color: black;color: white;" ng-if="subOpen == true">
-		  	<div class="uk-grid uk-grid-collapse uk-text-center set-with-menu-sub-product uk-animation-fade">
-				<div class="uk-width-1-3 uk-width-large-1-4  uk-width-medium-1-4" ng-repeat="data in subMenu"  on-last-repeat>
-					<div class="product-menu-sub uk-animation-fade">
-		    			<a ng-click="selectProductSub(data)">{{ data.name }}</a>
-		    		</div>
-				</div>
-		  	</div>
-
-		</div>
-	</div> -->
 	
 	<!-- Header Name -->
 	<div class="uk-text-center uk-text-bold uk-animation-fade" style="margin-top: 2%;"> 
 		<h1 ng-if="device == 'web'" class="uk-animation-fade" style="color: #c0bbbb;font-size: 38px">{{ dataProduct.name }} </h1>
 		<h2 ng-if="device == 'device'" class="uk-margin-top uk-animation-fade" style="color: #c0bbbb;">{{ dataProduct.name  }} </h2>
 	</div>
-	<hr>
+	
 
 
-	<!-- Recommended -->
-	<div ng-if="dataProduct == null " style="margin-top: 2%;width: 90%;margin-left: auto;margin-right: auto;">
-		<div class="uk-text-center" ng-if="loadingModeWall == true">
-			<i class="uk-icon-spinner uk-icon-spin uk-icon-large" style="color: cadetblue"></i>
-		</div>
-		<h4 class="uk-text-bold" >กระเบื้องยาง</h4>
-		<div  class="uk-grid uk-grid-collapse " style="width: 100%;"  ng-if="loadingModeWall == false">
-			<div class="uk-width-large-1-5 uk-width-medium-1-4 uk-width-1-3 uk-text-center uk-margin-bottom" ng-repeat="data in productList" on-last-repeat>
-				<div class="uk-thumbnail uk-padding-remove" style="border: none;">
-		    		<a ui-sref="layout.product_detail({data:data})">
-		    			<figure class="uk-overlay uk-overlay-hover">
-		    				<img  style="border-radius: 4px;width: 90%;"  ng-src="{{data.img1}}"  />
-		    				<img  style="border-radius: 4px;width: 90%;margin-left: 5%;" class="uk-overlay-fade uk-overlay-image uk-overlay-panel"  ng-src="{{data.img2}}"  />
-		    				<!-- <figcaption class="uk-overlay-panel uk-overlay-background uk-overlay-bottom uk-overlay-slide-bottom">คลิก</figcaption> -->
-		    			</figure>
-		    		</a>
-		             <div class="uk-thumbnail-caption uk-text-center set-text-device" >
-		             	<span >{{ data.type }}</span>
-						<span >{{ data.product_name }}</span><br>
-						<span class="uk-text-small" style="color: #ff5b5b">NO.{{ data.product_key }} </span>
-						<!-- <br> -->
-						
-					</div>
-				</div>	
-			</div>	
-		</div>
-		<hr>
-		<h4 class="uk-text-bold">วอลเปเปอร์</h4>
-		<div class="uk-grid" style="padding-left: 16px;padding-right: 16px" ng-if="loadingModeWall == false">	
-			<div class="uk-width-1-4 uk-width-medium-1-4 uk-width-large-1-6 uk-margin-bottom "  ng-repeat="data in recommendedWallList">
-				<div class="uk-thumbnail uk-padding-remove shadow uk-animation-fade" style="border: none;">
-					<a href="{{ data.img1 }}" data-uk-lightbox="{group:'data'}">
-						<figure class="uk-overlay uk-overlay-hover fix-overlay">
-		    				<img  class="uk-overlay-scale"  ng-src="{{ data.img1 }}">
-		    				<figcaption class="uk-overlay-panel uk-overlay-background uk-overlay-bottom uk-overlay-slide-bottom uk-text-center">คลิก</figcaption>
-		    			</figure>
-					</a>
-				</div>
-			</div>
-		</div>
-
-	</div>
+	
 
 	<!-- Tile -->
 	<div style="margin-top: 2%;width: 90%;margin-left: auto;margin-right: auto;" ng-if="dataProduct.id == '3'">
-		<div class="uk-button-dropdown uk-margin-bottom" data-uk-dropdown="{mode:'click'}" >
+		<!-- <div class="uk-button-dropdown uk-margin-bottom" data-uk-dropdown="{mode:'click'}" >
 			<button class="uk-button uk-button-amornpan" >เลือกแบบ <i class="uk-icon-caret-down"></i></button>
 	        <div class="uk-dropdown uk-dropdown-scrollable uk-dropdown-bottom uk-dropdown-close">
 	            <ul class="uk-nav uk-nav-dropdown">
 	                <li ng-repeat="dataSub in dataProduct.sub"><a ng-click="urlGo(dataProduct.id,dataSub.id_sub)">{{dataSub.name}}</a></li>
 	            </ul>
 	        </div>
-	    </div>
+	    </div> -->
+
+	    <ul class="uk-tab uk-margin-bottom" data-uk-tab="{connect:'#my-id'}">
+		     <li ng-repeat="dataSub in dataProduct.sub" ng-class="{'uk-active':dataProduct.sub_id == dataSub.id_sub}">
+		     	<a ng-click="urlGo(dataProduct.id,dataSub.id_sub)">{{dataSub.name}}</a>
+		     </li>
+		</ul>
+
 		<div class="uk-text-center" ng-if="loadingModeWall == true">
 			<i class="uk-icon-spinner uk-icon-spin uk-icon-large" style="color: cadetblue"></i>
 		</div>
 		<div>
-			<div  class="uk-grid uk-grid-collapse" style="width: 100%;" ng-if="loadingModeWall == false">
+			<div  class="uk-grid uk-grid-collapse" style="width: 100%;" >
 				<div class="uk-width-large-1-5 uk-width-medium-1-4 uk-width-1-3 uk-text-center uk-margin-bottom" dir-paginate="data in productList | itemsPerPage: numPage.tile" pagination-id="productList-page"  on-last-repeat>
 					<div class="uk-thumbnail uk-padding-remove uk-animation-fade" style="border: none;">
-			    		<a ui-sref="layout.product_detail({data:data})">
+			    		<a ui-sref="layout.product_detail({id_product:data.id})">
 			    			<figure class="uk-overlay uk-overlay-hover">
 			    				<img  style="border-radius: 4px;width: 90%;"  ng-src="{{data.img1}}"  />
 			    				<img  style="border-radius: 4px;width: 90%;margin-left: 5%;" class="uk-overlay-fade uk-overlay-image uk-overlay-panel"  ng-src="{{data.img2}}"  />
@@ -110,25 +53,7 @@
 				</div>	
 			</div>
 			<dir-pagination-controls  ng-if="loadingModeWall == false" pagination-id="productList-page" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" ></dir-pagination-controls>
-		</div>
-		<!-- <hr ng-if="id_sub == '0' ">
-		<h4 class="uk-text-bold" ng-if="id_sub == '0'">กระเบื้ยงปูนกาว</h4>
-		<div ng-if="id_sub == '0'   || id_sub == '3-3' ">
-			<div  class="uk-grid" ng-if="loadingModeWall == false">
-				<div class="uk-width-large-1-5 uk-width-medium-1-4 uk-width-1-3 uk-text-center uk-margin-bottom" dir-paginate="data in tileGuleList | itemsPerPage: numPage.tile" pagination-id="tileGule-page"  on-last-repeat>
-					<div class="uk-thumbnail uk-padding-remove shadow uk-animation-fade" style="border: none;">
-						<a href="{{ data.img1 }}" data-uk-lightbox="{group:'data'}">
-							<figure class="uk-overlay uk-overlay-hover fix-overlay">
-			    				<img  class="uk-overlay-scale"  ng-src="{{ data.img1 }}">
-			    				<figcaption class="uk-overlay-panel uk-overlay-background uk-overlay-bottom uk-overlay-slide-bottom uk-text-center">คลิก</figcaption>
-			    			</figure>
-						</a>
-					</div>
-				</div>	
-			</div>
-			<dir-pagination-controls  ng-if="loadingModeWall == false" pagination-id="tileGule-page" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" ></dir-pagination-controls>
-		</div> -->
-		
+		</div>		
 	</div>
 
 	<!-- Tile 2-->
@@ -302,66 +227,25 @@
 	<div ng-if="dataProduct.id == '1' " >
 		<div style="width: 90%;margin-left: auto;margin-right: auto;"  >
 			
-		<ul class="uk-tab" data-uk-tab="{connect:'#my-id'}">
-		    <!-- <li class="uk-active"><a href=""  ng-click="urlGo(1,1-1)">Wallpaper</a></li>
-		    <li><a href="" ng-click="urlGo(1,1-2)">Wallpaper Print</a></li> -->
+		<ul class="uk-tab uk-margin-bottom" data-uk-tab="{connect:'#my-id'}">
 		     <li ng-repeat="dataSub in dataProduct.sub" ng-class="{'uk-active':dataProduct.sub_id == dataSub.id_sub}">
 		     	<a ng-click="urlGo(dataProduct.id,dataSub.id_sub)">{{dataSub.name}}</a>
 		     </li>
 		</ul>
 
-		
-		<!-- <ul id="my-id" class="uk-switcher uk-margin">
-		    <li>11111</li>
-		    <li>22222</li>
-		</ul> -->
-		
-			<!-- <div class="uk-button-dropdown uk-margin-bottom" data-uk-dropdown="{mode:'click'}" >
-				<button class="uk-button uk-button-amornpan" >เลือกแบบ <i class="uk-icon-caret-down"></i></button>
-		        <div class="uk-dropdown uk-dropdown-scrollable uk-dropdown-bottom uk-dropdown-close">
-		            <ul class="uk-nav uk-nav-dropdown">
-		               
-		            </ul>
-		        </div>
-		    </div> -->
-
 			<!-- detail wallpaper -->
 			<div class="uk-grid">
-				<div class="uk-width-1-1" ng-if="device == 'web'" style="margin-top: 30px;">
-					<figure class="uk-overlay">
-					    <img src="app/img/abstract-architecture-art-221491.jpg"  alt="">
-					    <figcaption class="uk-overlay-panel uk-overlay-background uk-overlay-bottom">
-					    	<h3 >
-					    		การเลือกวอลเปเปอร์เปรียบเสมือนการเลือกเสื้อผ้าให้บ้าน ซึ่งเป็นสิ่งที่สะท้อนบุคลิกของคุณ
-					    	</h3>
-					    	<div style="font-size: 16px;text-indent: 2em;">
-					    		กรณีลูกค้าเป็นนักออกแบบ หรือเจ้าของโครงการที่มีลวดลายที่ต้องการอยู่แล้ว เราสามารถผลิตแบบดังกล่าวให้ออกมาเป็นชิ้นงานวอลเปเปอร์ติดผนังได้   หร้อมผ่านกระบวนการผลิตคุณภาพมาตราฐานอุตสาหกรรมที่คุณวางใจได้
-					    	</div>
-					    </figcaption>
-					</figure>
-				</div>
-				<div class="uk-width-1-1" ng-if="device == 'device'">
-					    	<h3 >
-					    		การเลือกวอลเปเปอร์เปรียบเสมือนการเลือกเสื้อผ้าให้บ้าน ซึ่งเป็นสิ่งที่สะท้อนบุคคลิกของคุณ
-					    	</h3>
-					    	<div style="font-size: 16px;text-indent: 2em;">
-					    		กรณีลูกค้าเป็นนักออกแบบ หรือเจ้าของโครงการที่มีลวดลายที่ต้องการอยู่แล้ว เราสามารถผลิตแบบดังกล่าวให้ออกมาเป็นชิ้นงานวอลเปเปอร์ติดผนังได้   หร้อมผ่านกระบวนการผลิตคุณภาพมาตราฐานอุตสาหกรรมที่คุณวางใจได้
-					    	</div>
-				</div>
+				
+				
 			</div>
-			<div class="uk-text-center uk-margin-top ">
-				<div class="uk-text-bold" ng-class="{'uk-text-large' : device == 'web'}">ชมลายตัวอย่าง</div>
-				<i class="material-icons" style="color: pink">arrow_downward</i>
-			</div>
+		
 
 			<div><!-- wallpaper product -->
-				
-
-				<div class="uk-text-center uk-margin-bottom" >
+				<div class="uk-text-right uk-margin-bottom" >
 					<div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}" >
 	                    <button class="uk-button uk-button-amornpan" >เลือกประเภท <i class="uk-icon-caret-down"></i></button>
-	                    <span class="uk-text-small uk-text-muted">คลิก</span>
-	                    <div class="uk-dropdown uk-dropdown-scrollable uk-dropdown-bottom uk-dropdown-close">
+	                    
+	                    <div class="uk-dropdown uk-dropdown-scrollable uk-dropdown-bottom uk-dropdown-close uk-text-left">
 	                        <ul class="uk-nav uk-nav-dropdown">
 	                            <li ng-repeat="data in modeWallpaper " on-last-repeat><a ng-click="urlGoWallMode(data.id_category)">{{ data.name }}</a></li>
 	                        </ul>
@@ -377,9 +261,9 @@
 					<div class="uk-text-center" ng-if="loadingModeWall == true">
 						<i class="uk-icon-spinner uk-icon-spin uk-icon-large" style="color: cadetblue"></i>
 					</div>
-					<div class="uk-grid" style="padding-left: 16px;padding-right: 16px" ng-if="loadingModeWall == false">
+					<div class="uk-grid" ng-if="loadingModeWall == false">
 						
-						<div class="uk-width-1-4 uk-width-medium-1-4 uk-width-large-1-6 uk-margin-bottom "  dir-paginate="dataWallpaper in productList | itemsPerPage: numPage.wall" pagination-id="wallpaperList-page">
+						<div class="uk-width-1-2 uk-width-medium-1-4  uk-margin-bottom "  dir-paginate="dataWallpaper in productList | itemsPerPage: numPage.wall" pagination-id="wallpaperList-page">
 							<div class="uk-thumbnail uk-padding-remove shadow uk-animation-fade" style="border: none;">
 								<a href="{{ dataWallpaper.img1 }}" data-uk-lightbox="{group:'dataWallpaper'}">
 									<figure class="uk-overlay uk-overlay-hover fix-overlay">
@@ -387,7 +271,11 @@
 					    				<figcaption class="uk-overlay-panel uk-overlay-background uk-overlay-bottom uk-overlay-slide-bottom uk-text-center">คลิก</figcaption>
 					    			</figure>
 								</a>
+								
 							</div>
+							<div class="uk-thumbnail-caption uk-text-center" style="padding: 10px" ng-if="dataProduct.sub_id == '1-1' "> 
+								<span class="uk-text-small" style="color: #f58426"> รหัส : {{ dataWallpaper.product_key }}</span> 
+							</div>	
 						</div>
 						
 					</div>

@@ -2,16 +2,33 @@
 
 	<!-- header -->
 	<div>
-		<div class="uk-text-center">
+		<div >
 			<h1 ng-if="device == 'web'" style="color: gray;">ผลงาน</h1>
 			<h2 ng-if="device == 'device'" style="color: gray">ผลงาน</h2>
 			
 		</div>
 	</div>
+	<hr style="border-top: 3px solid #ddd;">
 	<!-- content -->
+	<div style="margin-top: 5vh;margin-bottom: 5vh">
+		<div class="uk-grid-width-1-2 uk-grid-width-medium-1-4 uk-grid-width-large-1-4 uk-text-center" data-uk-grid="{gutter: 20}">
+	      	<div dir-paginate="data in port | itemsPerPage: 20" pagination-id="portList-page" on-last-repeat>
+	    		 <a href="{{ data.img }}" data-uk-lightbox="{group:'data'}" >
+	            		<img class="uk-padding-remove uk-thumbnail-small shadow" ng-src="{{ data.img }}">	    
+	        	</a>
+	    	</div>
+	    	<!-- <div ng-repeat="data in curtainList" on-last-repeat>
+	    		 <a href="{{ data.img }}" data-uk-lightbox="{group:'data'}" >
+	            		<img class="uk-padding-remove uk-thumbnail-small" ng-src="{{ data.img }}">
+	        	</a>
+	    	</div> -->
+		</div>
+	</div>
+		<dir-pagination-controls  pagination-id="portList-page" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" ng-click="resize()"></dir-pagination-controls >
+
 
 	<!-- partition -->
-	<div style="margin-top: 5vh;"> 
+	<!-- <div style="margin-top: 5vh;"> 
 		<div>
 			<div >
 				<h2  ng-if="device == 'web'" style="color: gray;line-height: 0px">ฉากกั้นห้อง</h2>
@@ -41,10 +58,10 @@
 			    </div> 
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<!-- curtain -->
-	<div style="margin-top: 10%;">
+	<!-- <div style="margin-top: 10%;">
 		<div >
 			<div>
 				<h2  ng-if="device == 'web'" style="color: gray;line-height: 0px">ม่าน/มู่ลี้</h2>
@@ -74,10 +91,10 @@
 			    </div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<!-- tile -->
-	<div style="margin-top: 10%;">
+	<!-- <div style="margin-top: 10%;">
 		<div >
 			<div >
 				<h2  ng-if="device == 'web'" style="color: gray;line-height: 0px">กระเบื้องยาง</h2>
@@ -107,10 +124,10 @@
 			  
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<!-- wallpaper -->
-	<div style="margin-top: 10%;">
+	<!-- <div style="margin-top: 10%;">
 		<div>
 			<div >
 				<h2  ng-if="device == 'web'" style="color: gray;line-height: 0px">วอลเปเปอร์</h2>
@@ -140,7 +157,7 @@
 			  
 			</div>
 		</div>
-	</div>
+	</div> -->
 	
 
 

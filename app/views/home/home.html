@@ -1,17 +1,98 @@
-<div ng-init="onload()">
+<div ng-init="onload()" class="home-for-web">
 
 	<div>
 		<div data-uk-scrollspy="{cls:'uk-animation-fade',delay:300,repeat: true}">	
+			<div class="uk-text-bold" style="padding: 16px;margin-top: 5vh">
+				<h1 class="header-product-home" style="color: #808080"><span style="color: #f58426">T</span>he Best W<span style="color: #f58426">a</span>llpaper</h1>
+				
+				<a ng-click="goUrlProduct(1)">
+					<div class="uk-float-right uk-text-muted" style="font-size: 12px;margin-top: -25px;">
+						<span> View All </span>
+					    <i class="material-icons" style="float: right;font-size: 18px;">arrow_right</i>
+					</div>
+				</a>
+				
+				<hr style="border-top: 3px solid #ddd;">
+			</div>	
+		</div>
+
+		<div>
+			<div class="uk-grid" style="padding-left: 16px;padding-right: 16px;">
+				<div class="uk-width-1-2 uk-width-medium-1-4 uk-margin-bottom" ng-repeat="data in productListWallpaper">
+					<a href="{{ data.img }}" data-uk-lightbox="{group:'data'}">
+						<figure class="uk-overlay uk-overlay-hover fix-overlay shadow">
+	        				<img   ng-src="{{ data.img }}">		
+	        				<figcaption class="uk-overlay-panel uk-overlay-background uk-overlay-bottom uk-overlay-slide-bottom uk-text-center">คลิก</figcaption>
+	        				<!-- <img   class="uk-overlay-fade uk-overlay-image uk-overlay-panel"  ng-src="{{data.img2}}"  /> -->
+	        			</figure>
+	        		</a>
+    			  	<div class="uk-thumbnail-caption uk-text-center" style="padding: 10px"> 
+						
+						<span class="uk-text-small" style="color: #f58426"> รหัส : {{ data.product_key }}</span> 
+					</div>	
+				</div>
+			</div>
+		</div>
+
+		<!-- <div data-uk-scrollspy="{cls:'uk-animation-fade',delay:300,repeat: true}">	
 			<div class="uk-text-center uk-text-bold" style="padding: 16px;margin-top: 5vh">
 				<h1 class="header-product-home" style="color: #808080">SUMMER 2018 COLLECTIONS</h1>
 				<hr style="margin-left: auto;margin-right: auto;width: 15%;border-top: 3px solid #ddd;">
+			</div>	
+		</div> -->
+
+		<div data-uk-scrollspy="{cls:'uk-animation-fade',delay:300,repeat: true}">	
+			<div class="uk-text-bold" style="padding: 16px;margin-top: 5vh">
+				<h1 class="header-product-home" style="color: #808080"><span style="color: #f58426">T</span>he Best W<span style="color: #f58426">a</span>llpaper P<span style="color: #f58426">r</span>int</h1>
+				
+				<a ng-click="goUrlProduct('1-2')">
+					<div class="uk-float-right uk-text-muted" style="font-size: 12px;margin-top: -25px;">
+						<span> View All </span>
+					    <i class="material-icons" style="float: right;font-size: 18px;">arrow_right</i>
+					</div>
+				</a>
+				
+				<hr style="border-top: 3px solid #ddd;">
+			</div>	
+		</div>
+
+		<div>
+			<div class="uk-grid" style="padding-left: 16px;padding-right: 16px;">
+				<div class="uk-width-1-2 uk-width-medium-1-4 uk-margin-bottom" ng-repeat="data in productListWallpaperPrint">
+					<a href="{{ data.img }}" data-uk-lightbox="{group:'data'}">
+						<figure class="uk-overlay uk-overlay-hover fix-overlay shadow">
+	        				<img   ng-src="{{ data.img }}">		
+	        				<figcaption class="uk-overlay-panel uk-overlay-background uk-overlay-bottom uk-overlay-slide-bottom uk-text-center">คลิก</figcaption>
+	        				<!-- <img   class="uk-overlay-fade uk-overlay-image uk-overlay-panel"  ng-src="{{data.img2}}"  /> -->
+	        			</figure>
+	        		</a>
+    			  	<!-- <div class="uk-thumbnail-caption uk-text-center" style="padding: 10px"> 
+						
+						<span class="uk-text-small" style="color: #f58426"> รหัส : {{ data.product_key }}</span> 
+					</div>	 -->
+				</div>
+			</div>
+		</div>
+
+
+
+		<div data-uk-scrollspy="{cls:'uk-animation-fade',delay:300,repeat: true}">	
+			<div class="uk-text-bold" style="padding: 16px;margin-top: 5vh">
+				<h1 class="header-product-home" style="color: #808080">กระเบื้อง <span style="color: #f58426">S</span>mart<span style="color: #f58426">m</span>att</h1>
+				<a ng-click="goUrlProduct(3)">
+					<div class="uk-float-right uk-text-muted" style="font-size: 12px;margin-top: -25px;">
+						<span> View All </span>
+					    <i class="material-icons" style="float: right;font-size: 18px;">arrow_right</i>
+					</div>
+				</a>
+				<hr style="border-top: 3px solid #ddd;">
 			</div>	
 		</div>
 
 		<div class="set-collections-show">
 			<div class="uk-grid" >
 				<div class="uk-width-1-3" ng-repeat="data in collectionsShow.imgSelect">
-					<a ui-sref="layout.product_detail({data:data})">
+					<a ui-sref="layout.product_detail({id_product:data.id})">
             			<figure class="uk-overlay uk-overlay-hover shadow">
             				<img   ng-src="{{ data.img1 }}">		
             				<img   class="uk-overlay-fade uk-overlay-image uk-overlay-panel"  ng-src="{{data.img2}}"  />
@@ -42,7 +123,7 @@
 		</div>
 		
 
-
+		<!-- ไม่เอา -->
 		<!-- <div data-uk-scrollspy="{cls:'uk-animation-fade',delay:300,repeat: true}" style="margin-bottom: 5%">
 			<div data-uk-slider="{infinite:false,autoplay:true,autoplayInterval:7000}" class="uk-slidenav-position">
 			    <div class="uk-slider-container uk-text-center">
@@ -90,14 +171,14 @@
 		<h3 style="color: #777;">ผลงานปี 2018</h3>
 	</div> -->
 
-	<div class="uk-text-center " style="margin-top: 3%">
+	<!-- <div class="uk-text-center " style="margin-top: 3%">
 		<hr style="margin-left: auto;margin-right: auto;width: 80%;border-top: 3px solid #ddd;">
 		<h1 ng-if="device == 'web'" class="uk-animation-shake uk-animation-hover header-article-home" style="margin-top: 3%;">ผลงานปี 2018</h1>
 		<h3 ng-if="device == 'device'" class="uk-animation-shake uk-animation-hover header-article-home" style="margin-top: 3%;">ผลงานปี 2018</h3>
 	</div>	
-	
+	 -->
 	<!-- port for device -->
-	<div  ng-if="device == 'device'" style="padding: 16px">
+	<!-- <div  ng-if="device == 'device'" style="padding: 16px">
 		<div class="uk-slidenav-position set-portfolio-home " data-uk-slideshow="{animation:'scroll',autoplay:true,autoplayInterval:9500}">
 			<ul class="uk-slideshow uk-text-center" >
 				<li ng-repeat="data in imgPort" on-last-repeat>
@@ -119,15 +200,12 @@
 	        <a href="#" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slideshow-item="next" style="color: #635c5c"></a>
 
 		</div>
-	</div>
+	</div> -->
 
 	<!-- port for web -->
-	<div style="width: 75vw;margin-left: auto;margin-right: auto;background-color: #f1f1f1;margin-top: 5vh;" class="shadow" ng-if="device == 'web'">
+<!-- 	<div style="width: 75vw;margin-left: auto;margin-right: auto;background-color: #f1f1f1;margin-top: 5vh;" class="shadow" ng-if="device == 'web'">
 		
-		<div class="uk-slidenav-position" data-uk-slideshow="{animation:'scroll',autoplay:true,autoplayInterval:9500}">
-			<!-- <div  class="uk-text-center uk-text-bold" style="padding: 16px;position: absolute;width: 100%;z-index: 1">
-				<h2 class="shadow" style="color: white; background: black; width: 15%;margin-left: -70px;transform: rotate(-35deg);border-radius: 4px;">ผลงานปี 2018</h2>
-			</div> -->
+		<div class="uk-slidenav-position" data-uk-slideshow="{animation:'scroll',autoplay:true,autoplayInterval:9500}">			
 			<ul class="uk-slideshow uk-text-center" >
 				<li ng-repeat="data in imgPort" on-last-repeat>
 					<div class="uk-grid uk-grid-collapse">
@@ -148,18 +226,18 @@
 	        <a href="#" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slideshow-item="next" style="color: #635c5c"></a>
 
 		</div>
-	</div>
+	</div> -->
 
 	
 	<!-- ความรู้ทั่วไป -->
 	<div class="uk-panel uk-panel-box " style="width: 90%;margin-left: auto;margin-right: auto;background-color: white;margin-top: 5%">
-		<div class="uk-text-center " style="margin-top: 3%">
+		<!-- <div class="uk-text-center " style="margin-top: 3%">
 			<h1 ng-if="device == 'web'" class="uk-animation-shake uk-animation-hover header-article-home">ความรู้ทั่วไป</h1>
 			<h3 ng-if="device == 'device'" class="uk-animation-shake uk-animation-hover header-article-home">ความรู้ทั่วไป</h3>
-		</div>
+		</div> -->
 		
 		<div class="uk-grid uk-grid-collapse" style="margin-top: 5%;">
-			<div class="uk-width-1-1 title-article-home" ng-if="device == 'device'">
+			<!-- <div class="uk-width-1-1 title-article-home" ng-if="device == 'device'">
 				<div class="uk-grid uk-text-center">
 					<div style="margin-bottom: 10%;margin-right: auto;margin-left: auto;">
 						<div class="uk-width-1-1" style="margin-top: 10%" ng-repeat="data in articleData" >
@@ -169,14 +247,21 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="uk-text-center" ng-class="{'uk-width-2-3': device == 'web','uk-width-1-1' : device == 'device'}">
+			</div> -->
+			<!-- <div class="uk-text-center " ng-class="{'uk-width-2-3': device == 'web','uk-width-1-1' : device == 'device'}">
+				<div >
+					<img class="shadow " ng-src="{{ article.img }}"  alt="" style="width: 80%;border-radius: 6px;">
+				</div>
+			</div> -->
+
+			<div class="uk-text-center uk-width-1-1" >
+				<h3  style="margin: 0" class="uk-margin-bottom">{{ article.header }}</h3>
 				<div >
 					<img class="shadow " ng-src="{{ article.img }}"  alt="" style="width: 80%;border-radius: 6px;">
 				</div>
 			</div>
 
-			<div class="uk-width-large-1-3 title-article-home" ng-if="device == 'web'">
+			<!-- <div class="uk-width-large-1-3 title-article-home" ng-if="device == 'web'">
 				<div class="uk-grid uk-text-center" style="margin-right: 10%">
 					<div >
 						<div class="uk-width-1-1" style="margin-top: 10%" ng-repeat="data in articleData" >
@@ -186,18 +271,18 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 		<div class="uk-panel uk-panel-box set-detail-article-home">
 			<div >
-				<h3  style="margin: 0">{{ article.header }}</h3>
+				
 				<span class="uk-text-muted uk-text-small">{{ article.date }} , ข้อมูลและภาพจาก : <a>{{ article.meta }}</a> , <a> {{ article.metaImg }} </a> </span><br>
 				<hr>
 				
-				<div ng-if="article.id == 1"ss>
+				<div >
 					<div class="uk-text-center"><h4>คุณสมบัติกระเบื้อง</h4></div>
 					<div class="uk-grid uk-grid-collapse uk-margin-top">
-						<div class="uk-width-1-3 uk-text-center" ng-repeat="dataSmart in imgIconDetail" on-last-repeat >
+						<div class="uk-width-1-3 uk-text-center" ng-repeat="dataSmart in imgIconDetail" on-last-repeat>
 							<div class="silder-left-icon-img"  data-uk-scrollspy="{cls:'uk-animation-scale-down',delay: {{dataSmart.delay}},repeat:true}">
 									<img  ng-src=" {{ dataSmart.img }}"  class="set-icon-prodcut-detail-img">
 									<div>{{ dataSmart.name }}</div>
@@ -206,10 +291,10 @@
 					</div>
 					<div style="padding: 16px" class="uk-text-center">
 						<img src="app/img/product/asphalt/product-detail.jpg" alt="">
-					    <iframe  class="set-video-product-detail"  src="https://www.youtube.com/embed/1ydkmj8chRo" ></iframe>
+					    <iframe  class="set-video-product-detail"  src="https://www.youtube.com/embed/1ydkmj8chRo" style="width: 90%;"></iframe>
 					    
 					</div>
-					<div class="uk-text-center"><button ng-click="goUrlProduct()" class="uk-button uk-button-amornpan" >ชมสินค้า</button></div>
+					<!-- <div class="uk-text-center"><button ng-click="goUrlProduct()" class="uk-button uk-button-amornpan" >ชมสินค้า</button></div> -->
 					
 				</div>
 				<div ng-repeat="data in article.detail">

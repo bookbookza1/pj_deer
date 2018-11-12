@@ -9,31 +9,31 @@ angular
         function ($timeout,$scope, $window, $rootScope, $state) {
 
                 //console.log("footer");
-                $scope.$on('window_resize', function () {
-                    if (window.innerWidth > 1024) {
-                        $scope.device = 'web' ;
+                // $scope.$on('window_resize', function () {
+                //     if (window.innerWidth > 1024) {
+                //         $scope.device = 'web' ;
 
-                    }
-                    else{
-                        $scope.device = 'device' ;
-                    }
-                    //console.log($scope.device);
+                //     }
+                //     else{
+                //         $scope.device = 'device' ;
+                //     }
                     
-                });
+                    
+                // });
 
                $scope.onload = function(){
  
-                     checkWith();
+                     //checkWith();
                }
-                var checkWith = function(){
-                      if (window.innerWidth > 1024) {
-                        $scope.device = 'web' ;
+                // var checkWith = function(){
+                //       if (window.innerWidth > 1024) {
+                //         $scope.device = 'web' ;
 
-                      }
-                      else{
-                          $scope.device = 'device' ;
-                      }
-                }
+                //       }
+                //       else{
+                //           $scope.device = 'device' ;
+                //       }
+                // }
            
         }
     ]);

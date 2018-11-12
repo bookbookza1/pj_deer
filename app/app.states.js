@@ -134,10 +134,10 @@ app
         //      }
         // })
          .state('layout.product', {
-            url: "/product/{id}/{sub_id}/{mode}",
+            url: "/product/:id/:sub_id/:mode",
             controller: 'productTestCtrl',
             //params : {  data:null} ,
-            templateUrl: 'app/views/product/product.html',
+            templateUrl: 'app/views/product/productTest.html',
              resolve: {
               deps: ['$ocLazyLoad', function($ocLazyLoad) {
                   return $ocLazyLoad.load([
@@ -153,8 +153,8 @@ app
 
           //product detail
          .state('layout.product_detail', {
-            url: "/product_detail",
-            params : { data : null} ,
+            url: "/product_detail/:id_product",
+            //params : { data : null} ,
             controller: 'product_detailCtrl',
             templateUrl: 'app/views/product/product_detail.html',
              resolve: {

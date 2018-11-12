@@ -73,13 +73,29 @@
 
 .dropdown-mennu-header{
   padding: 10px;
-  top: 35px;
+  top: 39px !important;
   right: 0px;
   width: 100vw;
   left: auto !important;
-  height: auto;
+  height: calc(100vh - 44px);
+  overflow: auto;
 }
 
+.header-for-mobile{
+    position: fixed;
+    z-index: 1;
+    height: 44px;
+    width: 100%;
+    background: white;
+    border-bottom: 1px solid #ede5e5;
+}
+
+.dotnav-mobile .uk-dotnav > * > * {
+ 
+  width: 12px;
+  height: 12px;
+
+}
 
 
 /*home*/
@@ -99,6 +115,15 @@
   
 }
 
+.home-for-web{
+    width: 100%;
+}
+@media only screen and (min-width:1024px) {
+  .home-for-web {
+    width: 80%;
+    margin: auto;
+  }
+}
 @media only screen and (min-width:760px) {
   .set-portfolio-home {
      width: 70%;
@@ -304,15 +329,13 @@
 
 /*header*/
 .header-background{
-  width: 100%;
-  height: 6vw;
- 
+  width: 100%; 
 }
-@media only screen and (max-width:760px) {
+/*@media only screen and (max-width:760px) {
   .header-background {
      height: 10vw;
   }
-}
+}*/
 
 .header-logo{
   background-color: white;
@@ -646,7 +669,13 @@
   }
 }  
 
-
+/*tab*/
+.uk-tab>li.uk-active>a{
+  color: #f58324 ;
+}
+.uk-tab>li>a {
+  color: black ;
+}
 
 
 /* The typing effect */

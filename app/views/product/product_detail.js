@@ -9,16 +9,39 @@
         '$http',
         '$serve',
         '$translate',
-        function ($timeout,$scope, $window, $rootScope, $state,$http,$serve,$translate) {
+        '$stateParams',
+        '$location',
+        function ($timeout,$scope, $window, $rootScope, $state,$http,$serve,$translate,$stateParams,$location) {
 
                 //console.log("product-detail");
-               //console.log($state.params);
-                $scope.productDetail = $state.params.data ;
-                //console.log($scope.productDetail);
-                if($scope.productDetail == null){
-                  $state.go('layout.product');
+                //console.log($stateParams);
+                var id = null ;
+                id = $stateParams.id_product ;
+                $scope.showMsgNull = false ;
+                $serve.get('api/product/tile/'+id)
+                      .then(function(response) {
+                          //console.log(response.data);
 
-                }
+                          if(response.data.length == 0){
+                            $scope.productDetail = "NO DATA";
+                            $scope.showMsgNull = true
+                          }
+                          else{
+                             $scope.productDetail = response.data[0] ;
+                          }
+                         
+                          //console.log($scope.productDetail);
+                      },
+                         function(error,status) {
+                            // $scope.data.error = { message: error, status: status};
+                             console.log(error); 
+                         }
+                      ); 
+                
+                //console.log($scope.productDetail);
+                // if($scope.productDetail == null){
+                //   $state.go('layout.product',{id:3 ,sub_id: 0 ,mode:0});
+                // }
   
                 $scope.device;
              
@@ -30,7 +53,7 @@
                       else{
                           $scope.device = 'device' ;
                       }
-                      console.log($scope.device);
+                      //console.log($scope.device);
                       
                 });
 
@@ -89,7 +112,9 @@
                  
                 ] ;
 
-               //console.log($scope.imgIconDetail);
+             
+
+             
   
         }
     ]);

@@ -8,7 +8,7 @@ angular
         '$state',
         function ($timeout,$scope, $window, $rootScope, $state) {
 
-                console.log("Contact");
+                //console.log("Contact");
                 
                  $scope.onload = function(){
                     checkWith();

@@ -50,19 +50,18 @@
 			</div>
 	</div>
 	<!-- สำหรับมือถือ -->
-	<div ng-if="device == 'device'">
-		<div class="uk-text-center">
-			<div style="position: absolute;top: 0px;left: -15px">
-				<div class="header-logo">
-					<img src="app/img/all/logo.png" alt="" style="width: 60%">
-				</div>
+	<div ng-if="device == 'device'" class="header-for-mobile">
+		<div class="uk-grid uk-grid-collapse">
+			<div class="uk-width-1-4">
+				<img src="app/img/logo/logo_icon.png" alt="" width="44" style="padding: 6px;margin-left: 8px;">
 			</div>
-			<div style="margin-top: 6px;" class="uk-text-large"><span class="uk-text-bold" style="color: #f58426">A</span>mornp<span class="uk-text-bold" style="color: #f58426">a</span>n Decor</div>
-			<div style="position: absolute;top: 0px;right: 0;">
+			<div class="uk-width-2-4 uk-text-center uk-text-large" style="line-height: 40px;">
+				<span class="uk-text-bold" style="color: #f58426">A</span>mornp<span class="uk-text-bold" style="color: #f58426">a</span>n Decor
+			</div>
+			<div class="uk-width-1-4 uk-text-right">
 				<div data-uk-dropdown="{mode:'click'}" >
-
-				    <!-- This is the element toggling the dropdown -->
-				    <div >
+					<!-- This is the element toggling the dropdown -->
+				    <div > 
 				    	 <div class="uk-badge" style="background: #f58426;color: white;margin-right: 15px;margin-top: 6px;"><i class="material-icons" style="font-size: 24px">dehaze</i></div>
 				    </div>
 				  	<div class="dropdown-mennu-header uk-dropdown uk-dropdown-close uk-text-left uk-text-large" >
@@ -73,8 +72,44 @@
 	                        	<a ng-click="urlGo(data)">{{ data.name }}</a>
 	                        	
 	                        </li>
-	                      <!--   <li class="uk-nav-divider"></li> -->
+	                        
 	                      <li class="uk-text-bold uk-text-center uk-margin-bottom uk-margin-top" style="background-color: black;color: white;border-radius: 4px;padding: 4px">Menu
+	                      	<i class="uk-icon-caret-up"></i>
+	                      </li>
+	                        <li ng-repeat="menu in sections" ng-if="menu.title != 'product' ">
+	                        	<i class="material-icons" style="float: left;margin-right: 10px;margin-top: 5px;color: #f58426">{{ menu.icon }}</i>
+	                        	<a ui-sref="{{ menu.link }}" ui-sref-opts="{reload: menu.link}">{{ menu.title | translate }}</a>
+	                        </li>
+	                    </ul>
+			  		</div>
+				</div>
+				<!-- <div class="uk-text-bold uk-text-small uk-text-right" style="margin-right: 17px;margin-top: 2px;">MENU</div>  -->
+			</div>
+		</div>
+		<!-- <div class="uk-text-center">
+			<div class="uk-float-left">
+				<div >
+					<img src="app/img/logo/logo_icon.png" alt="" >
+				</div>
+			</div>
+			<div style="padding-top: 8px;" class="uk-text-large"><span class="uk-text-bold" style="color: #f58426">A</span>mornp<span class="uk-text-bold" style="color: #f58426">a</span>n Decor</div>
+			<div style="position: absolute;top: 0px;right: 0;">
+				<div data-uk-dropdown="{mode:'click'}" >
+
+				   
+				    <div > <!-- This is the element toggling the dropdown -->
+				    	<!--  <div class="uk-badge" style="background: #f58426;color: white;margin-right: 15px;margin-top: 6px;"><i class="material-icons" style="font-size: 24px">dehaze</i></div>
+				    </div>
+				  	<div class="dropdown-mennu-header uk-dropdown uk-dropdown-close uk-text-left uk-text-large" >
+				  		<ul class="uk-nav uk-nav-dropdown" style="margin:0" >
+				  			<li class="uk-text-bold" style="border-bottom: 1px solid gainsboro;">สินค้า</li>
+	                        <li ng-repeat="data in menu" style="border-bottom: 1px solid gainsboro;">
+	                        	<i class="material-icons" style="float: right;color: #b4b1b1;">keyboard_arrow_right</i>
+	                        	<a ng-click="urlGo(data)">{{ data.name }}</a>
+	                        	
+	                        </li> -->
+	                      <!--   <li class="uk-nav-divider"></li> -->
+	                     <!--  <li class="uk-text-bold uk-text-center uk-margin-bottom uk-margin-top" style="background-color: black;color: white;border-radius: 4px;padding: 4px">Menu
 	                      	<i class="uk-icon-caret-up"></i>
 	                      </li>
 	                        <li ng-repeat="menu in sections">
@@ -82,14 +117,14 @@
 	                        	<a ui-sref="{{ menu.link }}" ui-sref-opts="{reload: menu.link}">{{ menu.title | translate }}</a>
 	                        </li>
 	                    </ul>
-			  		</div>
+			  		</div> -->
 
 				    <!-- This is the dropdown -->
-				</div>
+			<!-- 	</div> -->
 				<!-- <div class="uk-text-bold uk-text-small uk-text-right" style="margin-right: 17px;margin-top: 2px;">MENU</div> -->
-			</div>
+			<!-- </div> -->
 			
-		</div>
+		<!-- </div> --> 
 	</div>
 </div>
 
@@ -123,6 +158,7 @@
 			   		<ul class="uk-dotnav uk-dotnav-contrast uk-position-bottom uk-flex-center" >
 				        <li data-uk-slideshow-item="0"><a href=""></a></li>
 				        <li data-uk-slideshow-item="1"><a href=""></a></li>
+
 				    </ul>
 				</div>	
     		</div>
@@ -131,7 +167,8 @@
 	</figure>
 </div>
 
-<div class="uk-slidenav-position" data-uk-slideshow="{autoplay:true,autoplayInterval:5000,animation:'fade'}" ng-if="device == 'device'">
+<!-- สำหรับ มือถือ -->
+<div class="uk-slidenav-position dotnav-mobile" data-uk-slideshow="{autoplay:true,autoplayInterval:5000,animation:'fade'}" ng-if="device == 'device'">
 	<ul class="uk-slideshow uk-overlay uk-overlay-active">
 	    <li >
 	        <img  src="app/img/slideshow/slide1.jpg">
@@ -152,9 +189,10 @@
 	 <a href="" class="uk-slidenav  uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
 		 <a href="" class="uk-slidenav  uk-slidenav-next" data-uk-slideshow-item="next"></a>
 
-		<ul class="uk-dotnav uk-dotnav-contrast uk-position-bottom uk-flex-center" >
+	<ul class="uk-dotnav uk-dotnav-contrast uk-position-bottom uk-flex-center" >
         <li data-uk-slideshow-item="0"><a href=""></a></li>
         <li data-uk-slideshow-item="1"><a href=""></a></li>
+        <li data-uk-slideshow-item="2"><a href=""></a></li>
     </ul>
 </div>	
 
