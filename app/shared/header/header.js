@@ -79,7 +79,7 @@ angular
                         title : 'about_us ',
                         sub : false ,
                         icon:'person',
-                        link: 'layout.article'
+                        link: 'layout.about_us'
                     },
                      {
                         title: 'portfolio',

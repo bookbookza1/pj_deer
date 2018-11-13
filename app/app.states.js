@@ -205,6 +205,23 @@ app
                 pageTitle: 'article'
              }
         })
+         // about us
+          .state('layout.about_us', {
+            url: "/about_us",
+            controller: 'about_usCtrl',
+            templateUrl: 'app/views/about_us/about_us.html',
+             resolve: {
+              deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                  return $ocLazyLoad.load([
+                    'app/views/about_us/about_us.js'
+                   
+                  ],{ serie: true });
+              }]
+             },
+             data: {
+                pageTitle: 'about_us'
+             }
+        })
 
 
         .state('layout.admin', {
