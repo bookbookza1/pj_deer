@@ -52,7 +52,7 @@
 					</div>	
 				</div>	
 			</div>
-			<dir-pagination-controls  ng-if="loadingModeWall == false" pagination-id="productList-page" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" ></dir-pagination-controls>
+			<dir-pagination-controls  ng-if="loadingModeWall == false" pagination-id="productList-page" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 		</div>		
 	</div>
 
@@ -65,7 +65,7 @@
 		<h4 class="uk-text-bold" ng-if="id_sub == '0'">กระเบื้องปูนกาว</h4>
 		<div ng-if="id_sub == '0'">
 			<div  class="uk-grid" ng-if="loadingModeWall == false">
-				<div class="uk-width-large-1-5 uk-width-medium-1-4 uk-width-1-3 uk-text-center uk-margin-bottom" dir-paginate="data in productList | itemsPerPage: numPage.tile" pagination-id="tileGule-page"  on-last-repeat>
+				<div class="uk-width-large-1-4 uk-width-medium-1-4 uk-width-1-2 uk-text-center uk-margin-bottom" dir-paginate="data in productList | itemsPerPage: numPage.tile" pagination-id="tileGule-page"  on-last-repeat>
 					<div class="uk-thumbnail uk-padding-remove shadow uk-animation-fade" style="border: none;">
 						<a href="{{ data.img1 }}" data-uk-lightbox="{group:'data'}">
 							<figure class="uk-overlay uk-overlay-hover fix-overlay">
@@ -76,7 +76,7 @@
 					</div>
 				</div>	
 			</div>
-			<dir-pagination-controls  ng-if="loadingModeWall == false" pagination-id="tileGule-page" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" ></dir-pagination-controls>
+			<dir-pagination-controls  ng-if="loadingModeWall == false" pagination-id="tileGule-page" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 		</div>
 		
 	</div>
@@ -243,7 +243,7 @@
 			<div><!-- wallpaper product -->
 				<div class="uk-text-right uk-margin-bottom" >
 					<div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}" >
-	                    <button class="uk-button uk-button-amornpan" >เลือกประเภท <i class="uk-icon-caret-down"></i></button>
+	                    <button class="uk-button uk-button-amornpan box_shadow" >เลือกประเภท <i class="uk-icon-caret-down"></i></button>
 	                    
 	                    <div class="uk-dropdown uk-dropdown-scrollable uk-dropdown-bottom uk-dropdown-close uk-text-left">
 	                        <ul class="uk-nav uk-nav-dropdown">
@@ -279,7 +279,7 @@
 						</div>
 						
 					</div>
-					<dir-pagination-controls  ng-if="loadingModeWall == false" pagination-id="wallpaperList-page" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" ></dir-pagination-controls>
+					<dir-pagination-controls  ng-if="loadingModeWall == false" pagination-id="wallpaperList-page" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 					
 				</div>
 			</div>
@@ -602,12 +602,16 @@
 	<div ng-if="dataProduct.id == '12' " style="margin-top: 2%;width: 90%;margin: auto;">
 		<h4 class="uk-text-bold">อุปกรณ์ราง</h4>
 		<div class="uk-grid uk-margin-top uk-grid-collapse uk-margin-bottom">
-			<div class="uk-width-1-2"  dir-paginate="data in railList | itemsPerPage: 4" pagination-id="productList-rail" >
+			<div class="uk-width-1-2"  dir-paginate="data in railList | itemsPerPage: 20" pagination-id="productList-rail" >
 				<!-- <img src="app/img/product/rail/1-1d.jpg" style="width: 60%"> -->
-				<img class="uk-animation-fade" ng-src="{{ data.img }}" >
+				<div style="padding: 8px">
+					<img class="uk-animation-fade shadow" ng-src="{{ data.img }}" >
+				</div>
+				
 			</div>
+
 		</div>
-		<dir-pagination-controls   pagination-id="productList-rail" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" ></dir-pagination-controls>
+		<dir-pagination-controls   pagination-id="productList-rail" max-size="5" boundary-links="false" template-url="app/templates/dirPagination.tpl.html" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 		
 	</div>
 

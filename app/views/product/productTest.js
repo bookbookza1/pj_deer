@@ -310,6 +310,11 @@
                   $location.path('product/1/'+$scope.id_sub+'/'+id_category);
               }
                   
+              $scope.pageChanged = function(){
+                  $("html, body").animate({
+                     scrollTop: 0
+                  }, 200);
+              }
               
                
   

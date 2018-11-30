@@ -138,9 +138,32 @@
               </div>
           </div>
        </div> -->
+       <div class="winter-is-coming uk-animation-fade" style="position: fixed;" ng-if="showSnow" >
+  
+              <div class="snow snow--near"></div>
+              <div class="snow snow--near snow--alt"></div>
+              
+              <div class="snow snow--mid"></div>
+              <div class="snow snow--mid snow--alt"></div>
+              
+              <div class="snow snow--far"></div>
+              <div class="snow snow--far snow--alt"></div>
+        </div>
+       
+            <!--  <div><img src="app/img/theme_christmas/bellpng.png" style="width: 40%; height: 47%; margin-top: 7px;margin-left: -15px; transform: rotate(-30deg);" /></div> -->
+         <img src="app/img/theme_christmas/bell2.png"  class="theme_deer"  style="z-index: 1000; position: fixed;top: 0px;" ng-class="{'theme_deer_device': sizeIndex == 'device'}"/>
+        
         <div ui-view="header"></div>
         <div ui-view></div>
-        <div ui-view="footer" ng-if="showFooter == true"></div>
+        <div ui-view="footer" ng-if="showFooter == true">
+            
+        </div>
+
+          <div style="z-index: 1000; position: fixed;bottom: 0px;">
+            <!--  <div><img src="app/img/theme_christmas/bellpng.png" style="width: 40%; height: 47%; margin-top: 7px;margin-left: -15px; transform: rotate(-30deg);" /></div> -->
+             <div style="text-align: right;width: 100vw"><img src="app/img/theme_christmas/tree.png"  class=""  style="width: 15%" /></div>
+         </div>
+        
 
         <div id="popup-promotion" class="uk-modal ">
               <div class="uk-modal-dialog uk-modal-dialog-lightbox promotion-center" >

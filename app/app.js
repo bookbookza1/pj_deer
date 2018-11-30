@@ -25,14 +25,37 @@ app
         '$translate',
         '$anchorScroll',
         '$timeout',
-            function ($rootScope, $state, $stateParams,$templateCache,$window,$translate,$anchorScroll,$timeout) {
+        '$interval',
+            function ($rootScope, $state, $stateParams,$templateCache,$window,$translate,$anchorScroll,$timeout,$interval) {
              $templateCache.removeAll();
+             $rootScope.showSnow = true ;
+            
+
+             $interval(function(){
+                if( $rootScope.showSnow == true ){
+                     $rootScope.showSnow = false ;
+                   
+                }
+                else{
+                   $rootScope.showSnow = true ;
+                 
+                }
+                console.log($rootScope.showSnow);
+             },10000);
             //console.log("test");
              $rootScope.language = 'th' ;
              $rootScope.showFooter = true;
              //$state.reload();
              $rootScope.loadingPage = false ;
              $rootScope.checkOpen = null ;
+
+               if(window.innerWidth > 1024) {
+                        $rootScope.sizeIndex = 'web' ;
+                }
+                else{
+                    $rootScope.sizeIndex = 'device' ;
+                }
+
              $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {              
                 //$rest.api.cancelRequest();
                 $templateCache.removeAll();
