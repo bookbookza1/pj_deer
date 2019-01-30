@@ -31,17 +31,18 @@ app
              $rootScope.showSnow = true ;
             
 
-             $interval(function(){
-                if( $rootScope.showSnow == true ){
-                     $rootScope.showSnow = false ;
+             // $interval(function(){
+             //    if( $rootScope.showSnow == true ){
+             //         $rootScope.showSnow = false ;
                    
-                }
-                else{
-                   $rootScope.showSnow = true ;
+             //    }
+             //    else{
+             //       $rootScope.showSnow = true ;
                  
-                }
-                console.log($rootScope.showSnow);
-             },10000);
+             //    }
+             //    console.log($rootScope.showSnow);
+             // },10000);
+             
             //console.log("test");
              $rootScope.language = 'th' ;
              $rootScope.showFooter = true;
